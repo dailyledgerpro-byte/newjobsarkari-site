@@ -9,8 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
       - name: Deploy to Firebase
-        run: firebase deploy --only hosting --token "${{ secrets.FIREBASE_TOKEN }}" --project newjobsarkari
+        run: firebase deploy --only hosting --token "${{ secrets.FIREBASE_TOKEN }}" --project newjobsarkari --non-interactive
