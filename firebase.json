@@ -4,6 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
+    "site": "newjobsarkari",
     "public": "public",
     "ignore": [
       "firebase.json",
