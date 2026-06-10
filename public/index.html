@@ -398,7 +398,7 @@ async function fetchAll(){
   const CACHE_TTL=5*60*1000;
   try{const c=sessionStorage.getItem(CACHE_KEY);if(c){const{data,ts}=JSON.parse(c);if(Date.now()-ts<CACHE_TTL&&data.length>0)return data;}}catch(e){}
   const COLS=['ssc_jobs','rsmssb_jobs','rssb_jobs'];
-  const results=await Promise.allSettled(COLS.map(col=>getDocs(query(collection(db,col),limit(60))).then(snap=>{const arr=[];snap.forEach(d=>arr.push({_id:d.id,_col:col,...d.data()}));return arr;})));
+  const results=await Promise.allSettled(COLS.map(col=>getDocs(query(collection(db,col),limit(10))).then(snap=>{const arr=[];snap.forEach(d=>arr.push({_id:d.id,_col:col,...d.data()}));return arr;})));
   let all=[];
   results.forEach(r=>{if(r.status==='fulfilled')all=all.concat(r.value);});
   all.sort((a,b)=>{const ta=a.published_at?.toDate?.().getTime()||a.published_at?.seconds*1000||0;const tb=b.published_at?.toDate?.().getTime()||b.published_at?.seconds*1000||0;return tb-ta;});
@@ -411,7 +411,7 @@ async function fetchAll(){
   try{
     const all=await fetchAll();
     const grid=document.getElementById('latestJobsGrid');
-    const jobs=all.slice(0,12);
+    const jobs=all.slice(0,5);
     if(!jobs.length){grid.innerHTML='<div class="empty-state"><i class="fas fa-inbox"></i><p>कोई नौकरी उपलब्ध नहीं</p></div>';return;}
     grid.innerHTML=jobs.map(j=>renderCard(j)).join('');
   }catch(err){console.error(err);}
