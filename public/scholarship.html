@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>राजस्थान छात्रवृत्ति | Laxmi Job Alert</title>
+<meta name="description" content="राजस्थान की सभी छात्रवृत्ति योजनाओं की नवीनतम सूचनाएं — मुख्यमंत्री उच्च शिक्षा, सामाजिक न्याय, स्कूटी योजना, पालनहार और अधिक।">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://*.googleapis.com https://www.gstatic.com wss://*.googleapis.com https://firestore.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://firebaseinstallations.googleapis.com https://*.firebasestorage.app https://*.firebaseio.com wss://*.firebaseio.com; frame-src 'none'; object-src 'none'; base-uri 'self'">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --green:#059669;--green-dark:#065f46;--green-light:#ecfdf5;
+  --blue:#1d4ed8;--blue-dark:#1e3a8a;
+  --red:#dc2626;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;
+  --gray-400:#94a3b8;--gray-600:#475569;--text:#0f172a;
+  --font-hi:'Noto Sans Devanagari',sans-serif;
+  --font-en:'Inter',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-en);background:#f0f4ff;color:var(--text);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes rippleOut{0%{transform:scale(0);opacity:.45}100%{transform:scale(5);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);animation:rippleOut .7s linear forwards;pointer-events:none;}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#065f46 0%,#059669 60%,#10b981 100%);position:sticky;top:0;z-index:200;box-shadow:0 2px 20px rgba(6,95,70,.4);}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:38px;height:38px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:var(--green);flex-shrink:0;}
+.logo-main{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px;}
+.logo-sub{font-size:10px;color:rgba(255,255,255,.75);font-family:var(--font-hi);}
+.nav{display:flex;gap:4px;align-items:center;}
+.nav a{color:rgba(255,255,255,.85);font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:8px;transition:background .2s;display:flex;align-items:center;gap:5px;white-space:nowrap;}
+.nav a:hover,.nav a.active{background:rgba(255,255,255,.18);color:#fff;}
+.nav a i{font-size:11px;}
+.hamburger{display:none;color:#fff;font-size:20px;cursor:pointer;padding:6px;}
+@media(max-width:900px){
+  .nav{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(6,95,70,.97);flex-direction:column;justify-content:flex-start;align-items:stretch;padding:20px;gap:4px;z-index:199;overflow-y:auto;}
+  .nav.open{display:flex;}
+  .nav a{font-size:15px;padding:12px 16px;border-radius:10px;}
+  .hamburger{display:block;}
+}
+
+/* PAGE TITLE BAR */
+.page-bar{background:#fff;border-bottom:1.5px solid #d1fae5;padding:16px 20px;}
+.page-bar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.page-bar-title{font-size:18px;font-weight:900;color:var(--text);font-family:var(--font-hi);display:flex;align-items:center;gap:8px;}
+.page-bar-count{font-size:13px;color:var(--gray-400);font-family:var(--font-hi);}
+
+/* CARDS SECTION */
+.cards-section{max-width:1100px;margin:0 auto;padding:20px 16px 60px;}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;}
+
+/* LOADING / EMPTY */
+.sch-loading{text-align:center;padding:60px 20px;color:var(--gray-600);}
+.sch-loading i{font-size:36px;color:var(--green);animation:spin 1s linear infinite;display:block;margin-bottom:16px;}
+.sch-empty{text-align:center;padding:60px 20px;}
+.sch-empty i{font-size:48px;color:#d1fae5;display:block;margin-bottom:16px;}
+.sch-empty h3{font-size:20px;color:#374151;margin-bottom:8px;font-family:var(--font-hi);}
+.sch-empty p{color:var(--gray-600);font-size:14px;font-family:var(--font-hi);}
+.reload-btn{margin-top:16px;padding:10px 24px;background:var(--green);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-family:var(--font-hi);}
+
+/* CARD */
+.sch-card{background:#fff;border-radius:18px;box-shadow:0 2px 16px rgba(16,185,129,.08);border:1.5px solid #e8f5e9;overflow:hidden;transition:transform .2s,box-shadow .2s;animation:cardIn .45s ease both;}
+.sch-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(16,185,129,.16);}
+.card-top{padding:16px 16px 12px;}
+
+/* NOTICE BADGE */
+.notice-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:50px;font-size:11.5px;font-weight:700;margin-bottom:10px;}
+.nb-new{background:#dcfce7;color:#166534;}
+.nb-ext{background:#fef3c7;color:#92400e;}
+.nb-list{background:#dbeafe;color:#1e40af;}
+.nb-pay{background:#f0fdf4;color:#065f46;border:1px solid #86efac;}
+.nb-cor{background:#fff7ed;color:#9a3412;}
+.nb-res{background:#faf5ff;color:#6b21a8;}
+.nb-gen{background:#f1f5f9;color:#475569;}
+.card-new-badge{background:#ef4444;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:50px;letter-spacing:.5px;}
+
+.scheme-name{font-size:15.5px;font-weight:800;color:var(--text);line-height:1.4;margin-bottom:6px;font-family:var(--font-hi);}
+.dept-name{font-size:12px;color:var(--gray-600);margin-bottom:12px;display:flex;align-items:center;gap:5px;}
+.dept-name i{color:var(--green);}
+
+/* INFO GRID */
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+.info-item{background:var(--gray-50);border-radius:10px;padding:8px 10px;}
+.info-label{font-size:10px;color:var(--gray-400);font-weight:600;margin-bottom:3px;}
+.info-value{font-size:12.5px;font-weight:700;color:var(--text);}
+.info-value.green{color:#059669;}
+.info-value.red{color:var(--red);}
+.info-value.blue{color:#2563eb;}
+
+/* KEY POINTS */
+.key-points{margin-bottom:12px;}
+.key-point{font-size:12.5px;color:#374151;padding:3px 0;display:flex;gap:6px;align-items:flex-start;font-family:var(--font-hi);}
+.key-point::before{content:'•';color:var(--green);font-weight:900;flex-shrink:0;}
+
+/* TAGS */
+.card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+.tag{background:#ecfdf5;color:#065f46;font-size:11px;font-weight:600;padding:3px 10px;border-radius:50px;}
+.portal-tag{font-size:10.5px;color:var(--gray-400);font-weight:600;margin-top:6px;}
+
+/* BUTTON */
+.btn-detail{background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;border-radius:12px;padding:11px 20px;font-size:14px;font-weight:700;cursor:pointer;width:100%;font-family:var(--font-hi);display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s;position:relative;overflow:hidden;}
+.btn-detail:hover{opacity:.9;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">LJ</div>
+      <div>
+        <div class="logo-main">Laxmi Job Alert</div>
+        <div class="logo-sub">राजस्थान छात्रवृत्ति अलर्ट</div>
+      </div>
+    </a>
+    <nav class="nav" id="mainNav">
+      <a href="/"><i class="fas fa-home"></i> होम</a>
+      <a href="sarkari-jobs.html?src=ssc"><i class="fas fa-landmark"></i> SSC</a>
+      <a href="sarkari-jobs.html?src=rsmssb"><i class="fas fa-star-of-david"></i> RSMSSB</a>
+      <a href="sarkari-jobs.html?src=rssb"><i class="fas fa-shield-alt"></i> RSSB</a>
+      <a href="sarkari-jobs.html?type=RESULT"><i class="fas fa-trophy"></i> रिजल्ट</a>
+      <a href="scholarship.html" class="active"><i class="fas fa-graduation-cap"></i> छात्रवृत्ति</a>
+    </nav>
+    <button class="hamburger" id="hamburger" onclick="document.getElementById('mainNav').classList.toggle('open')">
+      <i class="fas fa-bars" id="hamburgerIcon"></i>
+    </button>
+  </div>
+</header>
+
+<!-- PAGE TITLE BAR -->
+<div class="page-bar">
+  <div class="page-bar-inner">
+    <div class="page-bar-title">🎓 राजस्थान छात्रवृत्ति सूचनाएं</div>
+    <div class="page-bar-count" id="pageBarCount"></div>
+  </div>
+</div>
+
+<!-- NOTICES CONTAINER -->
+<div class="cards-section">
+  <div id="noticesContainer">
+    <div class="sch-loading">
+      <i class="fas fa-circle-notch"></i>
+      <p style="font-family:var(--font-hi);">छात्रवृत्ति सूचनाएं लोड हो रही हैं...</p>
+    </div>
+  </div>
+</div>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getFirestore, collection, getDocs, query, limit }
+  from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey:'AIzaSyD6fwR3EsspTbw7YJPQiSEGChdLBcOCEU8',
+  authDomain:'newjobsarkari.firebaseapp.com',
+  projectId:'newjobsarkari',
+  storageBucket:'newjobsarkari.firebasestorage.app',
+  messagingSenderId:'489662168900',
+  appId:'1:489662168900:web:b214ef3f1269ef3a9de111',
+};
+const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
+const db=getFirestore(app);
+
+// CACHE
+const CACHE_KEY='lja_scholarship_cache';
+const CACHE_TTL=5*60*1000;
+function readCache(){try{const r=sessionStorage.getItem(CACHE_KEY);if(!r)return null;const{data,ts}=JSON.parse(r);if(Date.now()-ts<CACHE_TTL&&Array.isArray(data)&&data.length>0)return data;}catch(e){}return null;}
+function writeCache(data){try{sessionStorage.setItem(CACHE_KEY,JSON.stringify({data,ts:Date.now()}));}catch(e){}}
+function withTimeout(p,ms){return Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),ms))]);}
+
+async function fetchNotices(){
+  const snap=await withTimeout(getDocs(query(collection(db,'scholarship_notices'),limit(100))),8000);
+  const arr=[];
+  snap.forEach(d=>{const data=d.data();if(data.published_at?.seconds)data.published_at={seconds:data.published_at.seconds};arr.push({id:d.id,...data});});
+  return arr;
+}
+
+async function loadNotices(){
+  const container=document.getElementById('noticesContainer');
+  const cached=readCache();
+  if(cached){
+    renderNotices(cached);
+    fetchNotices().then(notices=>{if(notices.length>0){notices.sort((a,b)=>(b.published_at?.seconds||0)-(a.published_at?.seconds||0));writeCache(notices);renderNotices(notices);}}).catch(()=>{});
+    return;
+  }
+  async function tryLoad(attempt){
+    try{
+      let notices=await fetchNotices();
+      notices.sort((a,b)=>(b.published_at?.seconds||0)-(a.published_at?.seconds||0));
+      if(notices.length===0){if(attempt<2){setTimeout(()=>tryLoad(attempt+1),3000);return;}container.innerHTML=`<div class="sch-empty"><i class="fas fa-folder-open"></i><h3>अभी कोई सूचना नहीं है</h3><p>Bot चलाने पर यहाँ सूचनाएं दिखेंगी।</p><button class="reload-btn" onclick="location.reload()">🔄 दोबारा लोड करें</button></div>`;return;}
+      writeCache(notices);renderNotices(notices);
+    }catch(err){
+      if(attempt<2){setTimeout(()=>tryLoad(attempt+1),4000);container.innerHTML=`<div class="sch-loading"><i class="fas fa-circle-notch"></i><p style="font-family:var(--font-hi)">दोबारा कोशिश हो रही है...</p></div>`;}
+      else container.innerHTML=`<div class="sch-empty"><i class="fas fa-triangle-exclamation"></i><h3>लोड नहीं हुआ</h3><p>इंटरनेट चेक करें।</p><button class="reload-btn" onclick="location.reload()">🔄 दोबारा लोड करें</button></div>`;
+    }
+  }
+  tryLoad(1);
+}
+
+function renderNotices(notices){
+  const container=document.getElementById('noticesContainer');
+  document.getElementById('pageBarCount').textContent=notices.length?`${notices.length} सूचनाएं`:'';
+  if(!notices.length){container.innerHTML=`<div class="sch-empty"><i class="fas fa-search"></i><h3>कोई सूचना नहीं मिली</h3></div>`;return;}
+  container.innerHTML=`<div class="cards-grid">${notices.map((n,i)=>buildCard(n,i)).join('')}</div>`;
+  initReveal();
+}
+
+const TYPE_CONFIG={
+  NEW_APPLICATION:{icon:'📝',cls:'nb-new',label:'नया आवेदन',btn:'<i class="fas fa-pen-to-square"></i> आवेदन / पूरी जानकारी'},
+  DATE_EXTENSION:{icon:'📅',cls:'nb-ext',label:'तारीख विस्तार',btn:'<i class="fas fa-calendar-days"></i> नई तिथि देखें'},
+  SHORTLIST:{icon:'📋',cls:'nb-list',label:'शॉर्टलिस्ट जारी',btn:'<i class="fas fa-list"></i> सूची देखें'},
+  PAYMENT:{icon:'💰',cls:'nb-pay',label:'राशि जारी',btn:'<i class="fas fa-indian-rupee-sign"></i> भुगतान विवरण'},
+  CORRECTION:{icon:'✏️',cls:'nb-cor',label:'संशोधन विंडो',btn:'<i class="fas fa-pen"></i> संशोधन करें'},
+  RESULT:{icon:'🏆',cls:'nb-res',label:'अंतिम परिणाम',btn:'<i class="fas fa-trophy"></i> परिणाम देखें'},
+  GENERAL:{icon:'📢',cls:'nb-gen',label:'सामान्य सूचना',btn:'<i class="fas fa-circle-info"></i> पूरी जानकारी'},
+};
+
+function buildCard(n,idx){
+  const ntype=n.notice_type||'GENERAL';
+  const tConf=TYPE_CONFIG[ntype]||TYPE_CONFIG['GENERAL'];
+  const scheme=n.scheme_name||'छात्रवृत्ति सूचना';
+  const dept=n.department||n.portal_label||'राजस्थान सरकार';
+  const isNew=isRecent(n.published_at);
+  const tags=Array.isArray(n.tags)?n.tags:[];
+  let infoHtml='';
+  if(ntype==='NEW_APPLICATION'){infoHtml=`<div class="info-grid"><div class="info-item"><div class="info-label">📅 आवेदन शुरू</div><div class="info-value blue">${esc(n.form_start_date||'—')}</div></div><div class="info-item"><div class="info-label">⏰ अंतिम तिथि</div><div class="info-value red">${esc(n.last_date||'—')}</div></div><div class="info-item"><div class="info-label">💰 राशि</div><div class="info-value green">${esc(n.scholarship_amount||'—')}</div></div></div>${n.eligibility?`<div style="font-size:12px;color:#374151;background:#f8fafc;border-radius:8px;padding:8px 10px;margin-bottom:10px;"><b>पात्रता:</b> ${esc(n.eligibility.length>80?n.eligibility.slice(0,80)+'…':n.eligibility)}</div>`:''}`;
+  }else if(ntype==='DATE_EXTENSION'){infoHtml=`<div class="info-grid"><div class="info-item"><div class="info-label">📅 पुरानी तिथि</div><div class="info-value">${esc(n.old_last_date||'—')}</div></div><div class="info-item"><div class="info-label">✅ नई तिथि</div><div class="info-value green">${esc(n.new_last_date||'—')}</div></div><div class="info-item"><div class="info-label">🎓 वर्ष</div><div class="info-value">${esc(n.academic_year||'—')}</div></div></div>`;
+  }else if(ntype==='SHORTLIST'){infoHtml=`<div class="info-grid"><div class="info-item"><div class="info-label">👥 चयनित</div><div class="info-value blue">${esc(String(n.total_selected||'—'))}</div></div><div class="info-item"><div class="info-label">📋 प्रकार</div><div class="info-value">${esc(n.list_type||'—')}</div></div><div class="info-item"><div class="info-label">⚠️ आपत्ति</div><div class="info-value red">${esc(n.objection_last_date||'—')}</div></div></div>`;
+  }else if(ntype==='PAYMENT'){infoHtml=`<div class="info-grid"><div class="info-item"><div class="info-label">💰 राशि/छात्र</div><div class="info-value green">${esc(n.amount_per_student||'—')}</div></div><div class="info-item"><div class="info-label">👥 लाभार्थी</div><div class="info-value blue">${esc(String(n.total_beneficiaries||'—'))}</div></div><div class="info-item"><div class="info-label">📅 तिथि</div><div class="info-value">${esc(n.payment_date||'—')}</div></div></div>`;
+  }else if(ntype==='CORRECTION'){infoHtml=`<div class="info-grid"><div class="info-item"><div class="info-label">📅 शुरू</div><div class="info-value blue">${esc(n.correction_start_date||'—')}</div></div><div class="info-item"><div class="info-label">⏰ अंत</div><div class="info-value red">${esc(n.correction_end_date||'—')}</div></div><div class="info-item"><div class="info-label">🎓 वर्ष</div><div class="info-value">${esc(n.academic_year||'—')}</div></div></div>`;
+  }else if(ntype==='RESULT'){infoHtml=`<div class="info-grid"><div class="info-item"><div class="info-label">📅 परिणाम तिथि</div><div class="info-value blue">${esc(n.result_date||'—')}</div></div><div class="info-item"><div class="info-label">✅ स्वीकृत</div><div class="info-value green">${esc(String(n.total_awarded||'—'))}</div></div><div class="info-item"><div class="info-label">🎓 वर्ष</div><div class="info-value">${esc(n.academic_year||'—')}</div></div></div>`;
+  }else if(ntype==='GENERAL'&&Array.isArray(n.key_points)&&n.key_points.length>0){infoHtml=`<div class="key-points">${n.key_points.slice(0,3).map(p=>`<div class="key-point">${esc(p)}</div>`).join('')}</div>`;}
+  const summary=n.ai_summary?n.ai_summary.slice(0,120)+(n.ai_summary.length>120?'…':''):'';
+  const catBadge=n.category?`<span style="font-size:11px;background:#eff6ff;color:#1e40af;padding:2px 8px;border-radius:50px;font-weight:600;margin-left:6px;">${esc(n.category)}</span>`:'';
+  const portalTag=n.portal_label?`<div class="portal-tag"><i class="fas fa-globe" style="margin-right:3px;"></i>${esc(n.portal_label)}</div>`:'';
+  const tagsHtml=tags.slice(0,4).map(t=>`<span class="tag">${esc(t)}</span>`).join('');
+  return `
+  <div class="sch-card reveal" style="animation-delay:${idx*0.06}s">
+    <div class="card-top">
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
+        <span class="notice-badge ${tConf.cls}">${tConf.icon} ${esc(n.notice_label||tConf.label)}</span>
+        ${isNew?'<span class="card-new-badge">NEW</span>':''}${catBadge}
+      </div>
+      <div class="scheme-name">${esc(scheme)}</div>
+      <div class="dept-name"><i class="fas fa-building"></i>${esc(dept)}</div>
+      ${infoHtml}
+      ${summary?`<div style="font-size:12.5px;color:#475569;line-height:1.65;margin:8px 0;padding:8px 10px;background:#f8fafc;border-radius:8px;border-left:3px solid #10b981;font-family:var(--font-hi);">${esc(summary)}</div>`:''}
+      ${portalTag}
+      <div class="card-tags">${tagsHtml}</div>
+    </div>
+    <div style="padding:12px 16px;">
+      <button class="btn-detail" onclick="addRipple(event,this);goDetail('${esc(n.id)}')">
+        <i class="fas fa-book-open"></i> अधिक देखें — पूरी जानकारी
+      </button>
+    </div>
+  </div>`;
+}
+
+window.goDetail=function(docId){location.href='scholarship-detail.html#'+encodeURIComponent(docId);};
+function isRecent(pa){if(!pa)return false;const ts=pa.seconds?pa.seconds*1000:new Date(pa).getTime();return(Date.now()-ts)<7*24*3600*1000;}
+function esc(s){const v=String(s||'');const c=(v==='Not Available'||v==='NA'||v==='N/A')?'उपलब्ध नहीं':v;return c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;');}
+function initReveal(){const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.08});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));}
+
+loadNotices();
+</script>
+
+<script>
+function addRipple(e,el){const r=document.createElement('span');r.className='ripple';const rect=el.getBoundingClientRect();const sz=Math.max(rect.width,rect.height)*2;r.style.cssText=`width:${sz}px;height:${sz}px;left:${e.clientX-rect.left-sz/2}px;top:${e.clientY-rect.top-sz/2}px`;el.appendChild(r);setTimeout(()=>r.remove(),700);}
+document.getElementById('hamburger').addEventListener('click',()=>{const open=document.getElementById('mainNav').classList.contains('open');document.getElementById('hamburgerIcon').className=open?'fas fa-bars':'fas fa-times';});
+</script>
+</body>
+</html>

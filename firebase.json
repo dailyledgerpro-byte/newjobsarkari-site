@@ -1,0 +1,26 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects": [
+      { "source": "/ssc",         "destination": "/sarkari-jobs.html?src=ssc",    "type": 301 },
+      { "source": "/rssb",        "destination": "/sarkari-jobs.html?src=rssb",   "type": 301 },
+      { "source": "/rsmssb",      "destination": "/sarkari-jobs.html?src=rsmssb", "type": 301 },
+      { "source": "/scholarship", "destination": "/scholarship.html",              "type": 301 }
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

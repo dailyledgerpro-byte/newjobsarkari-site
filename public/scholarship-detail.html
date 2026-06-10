@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>छात्रवृत्ति विवरण | Laxmi Job Alert</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://*.googleapis.com https://www.gstatic.com wss://*.googleapis.com https://firestore.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://firebaseinstallations.googleapis.com https://*.firebasestorage.app https://*.firebaseio.com wss://*.firebaseio.com; frame-src 'none'; object-src 'none'; base-uri 'self'">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Hind','Noto Sans Devanagari',sans-serif;background:#f0fdf4;color:#0f172a;overflow-x:hidden;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* WHATSAPP */
+.wa-float{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:#25d366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;z-index:500;box-shadow:0 6px 20px rgba(37,211,102,.45);animation:floatB 3s ease-in-out infinite;text-decoration:none;}
+
+/* HEADER */
+.site-header{background:linear-gradient(135deg,#065f46 0%,#059669 60%,#10b981 100%);position:sticky;top:0;z-index:200;box-shadow:0 2px 20px rgba(6,95,70,.4);}
+.header-inner{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:58px;}
+.logo-link{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-box{width:36px;height:36px;border-radius:9px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#059669;}
+.logo-title{font-size:15px;font-weight:800;color:#fff;}
+.logo-sub{font-size:10px;color:rgba(255,255,255,.75);}
+.back-btn{display:flex;align-items:center;gap:7px;color:#fff;text-decoration:none;font-size:13.5px;font-weight:700;background:rgba(255,255,255,.18);padding:7px 16px;border-radius:10px;transition:background .2s;}
+.back-btn:hover{background:rgba(255,255,255,.28);}
+
+/* BREADCRUMB */
+.breadcrumb{background:#fff;border-bottom:1px solid #d1fae5;padding:10px 20px;}
+.breadcrumb-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:6px;font-size:12.5px;color:#64748b;flex-wrap:wrap;}
+.breadcrumb a{color:#059669;text-decoration:none;font-weight:600;}
+.breadcrumb a:hover{text-decoration:underline;}
+.breadcrumb-sep{color:#cbd5e1;}
+
+/* LOADING / ERROR */
+.center-state{text-align:center;padding:80px 20px;max-width:500px;margin:0 auto;}
+.center-state i{font-size:48px;margin-bottom:16px;display:block;}
+.center-state h2{font-size:20px;margin-bottom:10px;color:#374151;}
+.center-state p{color:#64748b;font-size:14px;margin-bottom:20px;}
+.spin{animation:spin 1s linear infinite;}
+
+/* MAIN WRAPPER */
+.detail-wrapper{max-width:860px;margin:28px auto;padding:0 16px 60px;}
+
+/* NOTICE HEADER CARD */
+.notice-header{background:linear-gradient(135deg,#065f46 0%,#059669 70%,#10b981 100%);border-radius:20px;padding:28px 28px 24px;color:#fff;margin-bottom:20px;animation:fadeUp .4s ease both;position:relative;overflow:hidden;}
+.notice-header::before{content:'🎓';position:absolute;right:20px;top:16px;font-size:64px;opacity:.12;}
+.notice-type-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:50px;padding:5px 16px;font-size:12px;font-weight:700;margin-bottom:14px;}
+.new-pill{background:#ef4444;border:none;margin-left:8px;font-size:11px;padding:3px 10px;}
+.notice-title{font-size:clamp(18px,3vw,26px);font-weight:900;line-height:1.35;margin-bottom:10px;}
+.notice-dept{font-size:13px;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.notice-portal{font-size:12px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:5px;}
+
+/* ACTION BUTTONS */
+.action-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;animation:fadeUp .45s .05s ease both;}
+.btn-pdf{background:#fff;color:#059669;border:2px solid #059669;border-radius:14px;padding:13px 20px;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:all .2s;font-family:inherit;}
+.btn-pdf:hover{background:#059669;color:#fff;}
+.btn-web{background:#059669;color:#fff;border:2px solid #059669;border-radius:14px;padding:13px 20px;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:all .2s;font-family:inherit;}
+.btn-web:hover{background:#047857;border-color:#047857;}
+@media(max-width:480px){.action-btns{grid-template-columns:1fr;}}
+
+/* DETAIL SECTION */
+.detail-section{background:#fff;border-radius:18px;border:1.5px solid #d1fae5;margin-bottom:16px;overflow:hidden;animation:fadeUp .5s .1s ease both;}
+.section-header{background:linear-gradient(90deg,#ecfdf5,#f0fdf4);padding:14px 20px;border-bottom:1px solid #d1fae5;display:flex;align-items:center;gap:10px;}
+.section-header i{color:#059669;font-size:16px;width:20px;text-align:center;}
+.section-title{font-size:15px;font-weight:800;color:#065f46;}
+.section-body{padding:18px 20px;}
+
+/* INFO GRID */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
+.info-card{background:#f8fafc;border-radius:12px;padding:12px 14px;border:1px solid #e2e8f0;}
+.info-card-label{font-size:11px;color:#94a3b8;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px;}
+.info-card-value{font-size:14px;font-weight:800;color:#0f172a;line-height:1.4;}
+.info-card-value.green{color:#059669;}
+.info-card-value.red{color:#dc2626;}
+.info-card-value.blue{color:#2563eb;}
+.info-card-value.orange{color:#d97706;}
+
+/* SUMMARY BOX */
+.summary-box{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border-radius:14px;padding:18px 20px;border-left:4px solid #10b981;line-height:1.8;font-size:14.5px;color:#1e3a2f;}
+
+/* LIST ITEMS */
+.detail-list{list-style:none;}
+.detail-list li{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #f1f5f9;font-size:14px;color:#374151;align-items:flex-start;}
+.detail-list li:last-child{border-bottom:none;}
+.detail-list li::before{content:'✓';color:#10b981;font-weight:900;flex-shrink:0;margin-top:1px;}
+
+/* KEY POINTS */
+.key-point-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:14px;color:#374151;align-items:flex-start;}
+.key-point-item:last-child{border-bottom:none;}
+.key-point-item::before{content:'•';color:#059669;font-size:18px;font-weight:900;flex-shrink:0;line-height:1.2;}
+
+/* PORTAL INFO */
+.portal-info-box{background:#fffbeb;border-radius:12px;padding:14px 16px;border:1px solid #fde68a;display:flex;align-items:flex-start;gap:12px;}
+.portal-info-box i{color:#d97706;font-size:20px;flex-shrink:0;margin-top:2px;}
+.portal-info-text{font-size:13px;color:#92400e;line-height:1.6;}
+.portal-info-text b{color:#78350f;}
+
+/* TAGS */
+.tags-wrap{display:flex;flex-wrap:wrap;gap:7px;}
+.tag{background:#ecfdf5;color:#065f46;font-size:12px;font-weight:700;padding:4px 12px;border-radius:50px;border:1px solid #bbf7d0;}
+
+/* SHARE */
+.share-section{background:#fff;border-radius:18px;border:1.5px solid #d1fae5;padding:18px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;gap:12px;animation:fadeUp .55s .15s ease both;}
+.share-title{font-size:14px;font-weight:700;color:#374151;}
+.share-btns{display:flex;gap:8px;}
+.share-btn{padding:8px 16px;border-radius:10px;border:none;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit;transition:opacity .2s;}
+.share-btn:hover{opacity:.85;}
+.share-wa{background:#25d366;color:#fff;}
+.share-copy{background:#e2e8f0;color:#374151;}
+</style>
+</head>
+<body>
+
+<a href="https://wa.me/916350270167" target="_blank" class="wa-float">💬</a>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo-link">
+      <div class="logo-box">LJ</div>
+      <div>
+        <div class="logo-title">Laxmi Job Alert</div>
+        <div class="logo-sub">राजस्थान छात्रवृत्ति अलर्ट</div>
+      </div>
+    </a>
+    <a href="scholarship.html" class="back-btn">
+      <i class="fas fa-arrow-left"></i> वापस जाएं
+    </a>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="/">होम</a>
+    <span class="breadcrumb-sep">›</span>
+    <a href="scholarship.html">छात्रवृत्ति</a>
+    <span class="breadcrumb-sep">›</span>
+    <span id="breadcrumbTitle">विवरण</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="detail-wrapper" id="detailWrapper">
+  <div class="center-state">
+    <i class="fa-solid fa-circle-notch spin" style="color:#10b981;"></i>
+    <h2>लोड हो रहा है...</h2>
+    <p>छात्रवृत्ति की जानकारी लाई जा रही है</p>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey           : 'AIzaSyD6fwR3EsspTbw7YJPQiSEGChdLBcOCEU8',
+  authDomain       : 'newjobsarkari.firebaseapp.com',
+  projectId        : 'newjobsarkari',
+  storageBucket    : 'newjobsarkari.firebasestorage.app',
+  messagingSenderId: '489662168900',
+  appId            : '1:489662168900:web:b214ef3f1269ef3a9de111',
+};
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+const TYPE_CONFIG = {
+  'NEW_APPLICATION': { icon:'📝', label:'नया आवेदन',      color:'#16a34a' },
+  'DATE_EXTENSION':  { icon:'📅', label:'तारीख विस्तार',  color:'#d97706' },
+  'SHORTLIST':       { icon:'📋', label:'शॉर्टलिस्ट जारी', color:'#2563eb' },
+  'PAYMENT':         { icon:'💰', label:'राशि जारी',       color:'#065f46' },
+  'CORRECTION':      { icon:'✏️', label:'संशोधन विंडो',   color:'#c2410c' },
+  'RESULT':          { icon:'🏆', label:'अंतिम परिणाम',    color:'#7c3aed' },
+  'GENERAL':         { icon:'📢', label:'सामान्य सूचना',  color:'#475569' },
+};
+
+function esc(s) {
+  const v = String(s||'');
+  const c = (v==='Not Available'||v==='NA'||v==='N/A'||v==='उपलब्ध नहीं') ? null : v;
+  if (!c) return '<span style="color:#94a3b8;font-weight:500;">उपलब्ध नहीं</span>';
+  return c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function rawVal(s) {
+  const v = String(s||'');
+  return (v==='Not Available'||v==='NA'||v==='N/A'||v==='उपलब्ध नहीं') ? '' : v;
+}
+
+function isRecent(publishedAt) {
+  if (!publishedAt) return false;
+  const ts = publishedAt.seconds ? publishedAt.seconds*1000 : new Date(publishedAt).getTime();
+  return (Date.now()-ts) < 7*24*3600*1000;
+}
+
+function buildInfoCard(label, value, colorClass='') {
+  const v = rawVal(value);
+  const disp = v ? `<div class="info-card-value ${colorClass}">${v}</div>`
+                 : `<div class="info-card-value" style="color:#94a3b8;">उपलब्ध नहीं</div>`;
+  return `<div class="info-card"><div class="info-card-label">${label}</div>${disp}</div>`;
+}
+
+function renderDetail(n, docId) {
+  const wrapper = document.getElementById('detailWrapper');
+  const ntype   = n.notice_type || 'GENERAL';
+  const tConf   = TYPE_CONFIG[ntype] || TYPE_CONFIG['GENERAL'];
+  const scheme  = n.scheme_name || 'छात्रवृत्ति सूचना';
+  const dept    = n.department  || n.portal_label || 'राजस्थान सरकार';
+  const isNew   = isRecent(n.published_at);
+
+  // Breadcrumb
+  document.title = scheme + ' | Laxmi Job Alert';
+  document.getElementById('breadcrumbTitle').textContent = scheme.length > 40 ? scheme.slice(0,40)+'…' : scheme;
+
+  // PDF & Website links
+  const pdfUrl  = rawVal(n.official_pdf  || n.list_link || n.result_link || '');
+  const webUrl  = rawVal(n.apply_link || n.status_check_link || n.correction_link || n.portal_link || '');
+  const officialSite = n.source ? 'https://' + n.source : '';
+
+  const btnPdf  = pdfUrl  ? `<a href="${pdfUrl}"  target="_blank" class="btn-pdf"><i class="fa-solid fa-file-pdf"></i> PDF डाउनलोड / देखें</a>`
+                           : `<span class="btn-pdf" style="opacity:.5;cursor:not-allowed;"><i class="fa-solid fa-file-pdf"></i> PDF उपलब्ध नहीं</span>`;
+  const btnWeb  = (webUrl||officialSite)
+                ? `<a href="${webUrl||officialSite}" target="_blank" class="btn-web"><i class="fa-solid fa-globe"></i> आधिकारिक वेबसाइट</a>`
+                : `<span class="btn-web" style="opacity:.5;cursor:not-allowed;"><i class="fa-solid fa-globe"></i> वेबसाइट उपलब्ध नहीं</span>`;
+
+  // Type-specific info grid
+  let infoGridHtml = '';
+  if (ntype === 'NEW_APPLICATION') {
+    infoGridHtml = `
+      <div class="info-grid">
+        ${buildInfoCard('📅 आवेदन शुरू',   n.form_start_date,       '')}
+        ${buildInfoCard('⏰ अंतिम तिथि',    n.last_date,             'red')}
+        ${buildInfoCard('📋 दस्तावेज तिथि', n.document_last_date,    'orange')}
+        ${buildInfoCard('💰 छात्रवृत्ति राशि',n.scholarship_amount,  'green')}
+        ${buildInfoCard('🎓 शैक्षणिक वर्ष', n.academic_year,         '')}
+        ${buildInfoCard('🌐 आवेदन पोर्टल',  n.apply_portal,          '')}
+      </div>`;
+  } else if (ntype === 'DATE_EXTENSION') {
+    infoGridHtml = `
+      <div class="info-grid">
+        ${buildInfoCard('📅 पुरानी तिथि',   n.old_last_date,   '')}
+        ${buildInfoCard('✅ नई तिथि',        n.new_last_date,   'green')}
+        ${buildInfoCard('🎓 शैक्षणिक वर्ष', n.academic_year,   '')}
+      </div>`;
+  } else if (ntype === 'SHORTLIST') {
+    infoGridHtml = `
+      <div class="info-grid">
+        ${buildInfoCard('👥 चयनित संख्या',  n.total_selected,    'blue')}
+        ${buildInfoCard('📋 सूची प्रकार',   n.list_type,         '')}
+        ${buildInfoCard('⚠️ आपत्ति तिथि',  n.objection_last_date,'red')}
+        ${buildInfoCard('🎓 शैक्षणिक वर्ष', n.academic_year,     '')}
+        ${buildInfoCard('📌 अगला चरण',      n.next_step,         'orange')}
+      </div>`;
+  } else if (ntype === 'PAYMENT') {
+    infoGridHtml = `
+      <div class="info-grid">
+        ${buildInfoCard('💰 राशि प्रति छात्र', n.amount_per_student,   'green')}
+        ${buildInfoCard('👥 लाभार्थी',          n.total_beneficiaries,  'blue')}
+        ${buildInfoCard('📅 भुगतान तिथि',        n.payment_date,         '')}
+        ${buildInfoCard('💳 भुगतान माध्यम',      n.payment_mode,         '')}
+        ${buildInfoCard('💵 कुल राशि',           n.total_amount,         'green')}
+        ${buildInfoCard('🎓 शैक्षणिक वर्ष',     n.academic_year,        '')}
+      </div>`;
+  } else if (ntype === 'CORRECTION') {
+    infoGridHtml = `
+      <div class="info-grid">
+        ${buildInfoCard('📅 संशोधन शुरू',    n.correction_start_date,'blue')}
+        ${buildInfoCard('⏰ संशोधन अंत',      n.correction_end_date,  'red')}
+        ${buildInfoCard('🎓 शैक्षणिक वर्ष',  n.academic_year,        '')}
+      </div>`;
+  } else if (ntype === 'RESULT') {
+    infoGridHtml = `
+      <div class="info-grid">
+        ${buildInfoCard('📅 परिणाम तिथि',    n.result_date,    'blue')}
+        ${buildInfoCard('✅ स्वीकृत संख्या',  n.total_awarded,  'green')}
+        ${buildInfoCard('📌 अगला चरण',        n.next_step,      'orange')}
+        ${buildInfoCard('🎓 शैक्षणिक वर्ष',  n.academic_year,  '')}
+      </div>`;
+  } else if (ntype === 'GENERAL') {
+    const deadline = rawVal(n.deadline);
+    if (deadline) {
+      infoGridHtml = `<div class="info-grid">${buildInfoCard('⏰ अंतिम तिथि', n.deadline, 'red')}${buildInfoCard('📅 सूचना तिथि', n.notice_date, '')}</div>`;
+    }
+  }
+
+  // Documents list
+  const docsHtml = Array.isArray(n.required_documents) && n.required_documents.length > 0
+    ? `<div class="detail-section">
+        <div class="section-header"><i class="fa-solid fa-folder-open"></i><span class="section-title">आवश्यक दस्तावेज़</span></div>
+        <div class="section-body">
+          <ul class="detail-list">
+            ${n.required_documents.map(d=>`<li>${d}</li>`).join('')}
+          </ul>
+        </div>
+      </div>` : '';
+
+  // Key points
+  const keyHtml = Array.isArray(n.key_points) && n.key_points.length > 0
+    ? `<div class="detail-section">
+        <div class="section-header"><i class="fa-solid fa-list-check"></i><span class="section-title">मुख्य बिंदु</span></div>
+        <div class="section-body">
+          ${n.key_points.map(p=>`<div class="key-point-item">${p}</div>`).join('')}
+        </div>
+      </div>` : '';
+
+  // Eligibility
+  const eligHtml = rawVal(n.eligibility)
+    ? `<div class="detail-section">
+        <div class="section-header"><i class="fa-solid fa-user-check"></i><span class="section-title">पात्रता / योग्यता</span></div>
+        <div class="section-body"><p style="font-size:14.5px;line-height:1.8;color:#374151;">${esc(n.eligibility)}</p></div>
+      </div>` : '';
+
+  // Correction info
+  const corrHtml = rawVal(n.what_can_be_corrected)
+    ? `<div class="detail-section">
+        <div class="section-header"><i class="fa-solid fa-pen"></i><span class="section-title">क्या सुधार सकते हैं?</span></div>
+        <div class="section-body"><p style="font-size:14.5px;line-height:1.8;color:#374151;">${esc(n.what_can_be_corrected)}</p></div>
+      </div>` : '';
+
+  // Extension reason
+  const extHtml = rawVal(n.extension_reason)
+    ? `<div class="detail-section">
+        <div class="section-header"><i class="fa-solid fa-circle-info"></i><span class="section-title">तारीख विस्तार का कारण</span></div>
+        <div class="section-body"><p style="font-size:14.5px;line-height:1.8;color:#374151;">${esc(n.extension_reason)}</p></div>
+      </div>` : '';
+
+  // Action required
+  const actionHtml = rawVal(n.action_required)
+    ? `<div class="detail-section">
+        <div class="section-header"><i class="fa-solid fa-bolt"></i><span class="section-title">क्या करें?</span></div>
+        <div class="section-body"><p style="font-size:14.5px;line-height:1.8;color:#374151;">${esc(n.action_required)}</p></div>
+      </div>` : '';
+
+  // Tags
+  const tags = Array.isArray(n.tags) ? n.tags : [];
+  const tagsHtml = tags.length > 0
+    ? `<div class="detail-section">
+        <div class="section-header"><i class="fa-solid fa-tags"></i><span class="section-title">श्रेणियाँ</span></div>
+        <div class="section-body"><div class="tags-wrap">${tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>
+      </div>` : '';
+
+  // Share
+  const shareUrl = encodeURIComponent(location.href);
+  const shareText = encodeURIComponent(`🎓 ${scheme}\n\n${n.ai_summary ? n.ai_summary.slice(0,100)+'...' : ''}\n\nLaxmi Job Alert पर देखें:`);
+
+  wrapper.innerHTML = `
+
+    <!-- NOTICE HEADER -->
+    <div class="notice-header">
+      <div>
+        <span class="notice-type-pill">${tConf.icon} ${n.notice_label || tConf.label}</span>
+        ${isNew ? '<span class="notice-type-pill new-pill">🆕 नई सूचना</span>' : ''}
+      </div>
+      <div class="notice-title">${scheme}</div>
+      <div class="notice-dept"><i class="fa-solid fa-building"></i>${dept}</div>
+      ${n.category ? `<div class="notice-portal"><i class="fa-solid fa-users"></i>लाभार्थी: ${n.category}</div>` : ''}
+      ${n.portal_label ? `<div class="notice-portal" style="margin-top:4px;"><i class="fa-solid fa-globe"></i>पोर्टल: ${n.portal_label}</div>` : ''}
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-btns">
+      ${btnPdf}
+      ${btnWeb}
+    </div>
+
+    <!-- AI SUMMARY -->
+    ${rawVal(n.ai_summary) ? `
+    <div class="detail-section">
+      <div class="section-header"><i class="fa-solid fa-circle-info"></i><span class="section-title">सारांश — एक नज़र में</span></div>
+      <div class="section-body">
+        <div class="summary-box">${esc(n.ai_summary)}</div>
+      </div>
+    </div>` : ''}
+
+    <!-- INFO GRID -->
+    ${infoGridHtml ? `
+    <div class="detail-section">
+      <div class="section-header"><i class="fa-solid fa-table-cells"></i><span class="section-title">महत्वपूर्ण तिथियाँ व जानकारी</span></div>
+      <div class="section-body">${infoGridHtml}</div>
+    </div>` : ''}
+
+    <!-- ELIGIBILITY -->
+    ${eligHtml}
+
+    <!-- DOCUMENTS -->
+    ${docsHtml}
+
+    <!-- KEY POINTS -->
+    ${keyHtml}
+
+    <!-- CORRECTION / EXTENSION / ACTION -->
+    ${corrHtml}${extHtml}${actionHtml}
+
+    <!-- PORTAL INFO -->
+    <div class="detail-section">
+      <div class="section-header"><i class="fa-solid fa-triangle-exclamation"></i><span class="section-title">महत्वपूर्ण सूचना</span></div>
+      <div class="section-body">
+        <div class="portal-info-box">
+          <i class="fa-solid fa-circle-info"></i>
+          <div class="portal-info-text">
+            यह जानकारी <b>${n.source || 'राजस्थान सरकार की आधिकारिक वेबसाइट'}</b> से ली गई है।
+            आवेदन करने से पहले कृपया आधिकारिक वेबसाइट पर जाकर सभी जानकारी स्वयं verify करें।
+            तारीखें बदल सकती हैं — अंतिम जानकारी के लिए आधिकारिक पोर्टल देखें।
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAGS -->
+    ${tagsHtml}
+
+    <!-- SHARE -->
+    <div class="share-section">
+      <div class="share-title"><i class="fa-solid fa-share-nodes" style="color:#059669;margin-right:6px;"></i>यह जानकारी दूसरों के साथ शेयर करें</div>
+      <div class="share-btns">
+        <button class="share-btn share-wa" onclick="window.open('https://wa.me/?text=${shareText}%20'+encodeURIComponent(location.href),'_blank')">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </button>
+        <button class="share-btn share-copy" onclick="navigator.clipboard.writeText(location.href);this.textContent='✅ Copied!'">
+          <i class="fa-solid fa-copy"></i> Link Copy
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+async function loadDetail() {
+  const wrapper = document.getElementById('detailWrapper');
+  const hash    = decodeURIComponent(location.hash.replace('#',''));
+
+  if (!hash) {
+    wrapper.innerHTML = `
+      <div class="center-state">
+        <i class="fa-solid fa-folder-open" style="color:#d1fae5;"></i>
+        <h2>सूचना नहीं मिली</h2>
+        <p>गलत लिंक है। वापस जाएं।</p>
+        <a href="scholarship.html" style="display:inline-block;margin-top:16px;background:#059669;color:#fff;padding:10px 24px;border-radius:10px;text-decoration:none;font-weight:700;">← वापस जाएं</a>
+      </div>`;
+    return;
+  }
+
+  try {
+    const docRef  = doc(db, 'scholarship_notices', hash);
+    const docSnap = await getDoc(docRef);
+
+    if (!docSnap.exists()) {
+      wrapper.innerHTML = `
+        <div class="center-state">
+          <i class="fa-solid fa-face-sad-cry" style="color:#d1fae5;"></i>
+          <h2>सूचना नहीं मिली</h2>
+          <p>यह छात्रवृत्ति सूचना उपलब्ध नहीं है।</p>
+          <a href="scholarship.html" style="display:inline-block;margin-top:16px;background:#059669;color:#fff;padding:10px 24px;border-radius:10px;text-decoration:none;font-weight:700;">← सभी सूचनाएं देखें</a>
+        </div>`;
+      return;
+    }
+
+    renderDetail(docSnap.data(), hash);
+  } catch(err) {
+    console.error(err);
+    wrapper.innerHTML = `
+      <div class="center-state">
+        <i class="fa-solid fa-triangle-exclamation" style="color:#fca5a5;"></i>
+        <h2>लोड नहीं हुआ</h2>
+        <p>इंटरनेट चेक करें और दोबारा try करें।</p>
+        <button onclick="location.reload()" style="margin-top:16px;background:#059669;color:#fff;border:none;padding:10px 24px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:700;">🔄 Refresh</button>
+      </div>`;
+  }
+}
+
+loadDetail();
+</script>
+</body>
+</html>

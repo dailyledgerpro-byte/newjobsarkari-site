@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — Laxmi Job Alert</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;
+  --green:#16a34a;--green-light:#f0fdf4;
+  --red:#dc2626;--red-light:#fee2e2;
+  --orange:#ea580c;--purple:#7c3aed;
+  --gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;
+  --gray-400:#94a3b8;--gray-600:#475569;--gray-800:#1e293b;
+  --text:#0f172a;--radius:12px;
+  --shadow:0 4px 20px rgba(0,0,0,.08);
+  --font-hi:'Noto Sans Devanagari',sans-serif;
+  --font-en:'Inter',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:15px;scroll-behavior:smooth;}
+body{font-family:var(--font-en);background:var(--gray-50);color:var(--text);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;font-family:inherit;}
+input,select,textarea{font-family:var(--font-hi);outline:none;}
+
+/* ══ LOGIN ══ */
+#loginScreen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 60%,#1d4ed8 100%);
+  padding:20px;
+}
+.login-card{
+  background:#fff;border-radius:20px;padding:40px 36px;
+  width:100%;max-width:420px;box-shadow:0 24px 64px rgba(0,0,0,.35);
+}
+.login-logo{text-align:center;margin-bottom:28px;}
+.login-logo-icon{
+  width:68px;height:68px;border-radius:18px;
+  background:linear-gradient(135deg,#1e3a8a,#1d4ed8);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:30px;font-weight:900;color:#fff;margin-bottom:14px;
+}
+.login-logo h1{font-size:21px;font-weight:800;color:var(--text);}
+.login-logo p{font-size:13px;color:var(--gray-400);font-family:var(--font-hi);margin-top:4px;}
+.form-group{margin-bottom:18px;}
+.form-label{display:block;font-size:12px;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px;}
+.form-input{
+  width:100%;padding:13px 15px;border:1.5px solid var(--gray-200);
+  border-radius:10px;font-size:14px;color:var(--text);background:#fff;
+  transition:border-color .2s;font-family:var(--font-en);
+}
+.form-input:focus{border-color:var(--blue);}
+.login-btn{
+  width:100%;padding:14px;border-radius:10px;
+  background:linear-gradient(135deg,#1e3a8a,#1d4ed8);
+  color:#fff;font-size:15px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:opacity .2s;margin-top:4px;
+}
+.login-btn:hover{opacity:.9;}
+.login-err{
+  background:var(--red-light);color:#991b1b;padding:10px 14px;
+  border-radius:8px;font-size:13px;margin-top:12px;
+  display:none;font-family:var(--font-hi);
+}
+
+/* ══ ADMIN LAYOUT ══ */
+#adminApp{display:none;min-height:100vh;flex-direction:column;}
+
+/* Header */
+.adm-header{
+  background:linear-gradient(135deg,#1e3a8a,#1d4ed8);
+  padding:0 20px;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(30,58,138,.4);
+  flex-shrink:0;
+}
+.adm-logo{display:flex;align-items:center;gap:10px;color:#fff;}
+.adm-logo-icon{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;}
+.adm-logo-text{font-size:15px;font-weight:800;}
+.adm-logo-sub{font-size:10px;opacity:.7;font-family:var(--font-hi);}
+.adm-header-right{display:flex;align-items:center;gap:8px;}
+.adm-user{font-size:12px;color:rgba(255,255,255,.7);font-family:var(--font-hi);}
+.adm-hbtn{
+  background:rgba(255,255,255,.15);color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+  padding:6px 13px;border-radius:8px;font-size:12px;font-weight:700;
+  display:flex;align-items:center;gap:5px;transition:background .2s;
+}
+.adm-hbtn:hover{background:rgba(255,255,255,.25);}
+
+/* Body */
+.adm-body{display:flex;flex:1;min-height:calc(100vh - 56px);}
+
+/* Sidebar */
+.adm-sidebar{
+  width:230px;background:#fff;border-right:1px solid var(--gray-200);
+  padding:16px 0;flex-shrink:0;
+  position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;
+}
+.sidebar-section-title{
+  font-size:10.5px;font-weight:800;color:var(--gray-400);
+  text-transform:uppercase;letter-spacing:.8px;
+  padding:10px 20px 6px;
+}
+.adm-nav-item{
+  display:flex;align-items:center;gap:10px;padding:10px 20px;
+  font-size:13px;font-weight:600;color:var(--gray-600);cursor:pointer;
+  transition:all .2s;border-left:3px solid transparent;
+  font-family:var(--font-hi);
+}
+.adm-nav-item:hover{background:var(--blue-light);color:var(--blue);}
+.adm-nav-item.active{background:var(--blue-light);color:var(--blue);border-left-color:var(--blue);}
+.adm-nav-item i{width:18px;text-align:center;font-size:13px;flex-shrink:0;}
+.adm-nav-divider{height:1px;background:var(--gray-100);margin:10px 16px;}
+
+/* Write Post Button — special */
+.nav-write-btn{
+  margin:12px 14px;padding:11px 14px;border-radius:10px;
+  background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;
+  display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;
+  font-family:var(--font-hi);transition:opacity .2s;
+}
+.nav-write-btn:hover{opacity:.9;}
+
+/* Main Content */
+.adm-main{flex:1;padding:24px;overflow-y:auto;min-width:0;}
+
+/* ══ DASHBOARD ══ */
+.adm-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
+.adm-stat{
+  background:#fff;border-radius:var(--radius);padding:18px 20px;
+  border:1.5px solid var(--gray-200);display:flex;align-items:center;gap:14px;
+  transition:box-shadow .2s;
+}
+.adm-stat:hover{box-shadow:var(--shadow);}
+.adm-stat-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.adm-stat-val{font-size:24px;font-weight:900;color:var(--text);line-height:1.1;}
+.adm-stat-label{font-size:11px;color:var(--gray-400);font-family:var(--font-hi);font-weight:600;margin-top:2px;}
+
+/* Page header */
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.page-title{font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px;font-family:var(--font-hi);}
+
+/* Toolbar */
+.adm-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+.adm-search{
+  display:flex;align-items:center;gap:8px;background:#fff;
+  border:1.5px solid var(--gray-200);border-radius:10px;
+  padding:8px 14px;flex:1;max-width:320px;
+}
+.adm-search input{border:none;outline:none;font-size:13px;width:100%;font-family:var(--font-hi);background:transparent;}
+.adm-search i{color:var(--gray-400);font-size:13px;}
+.adm-filter-select{
+  padding:9px 12px;border:1.5px solid var(--gray-200);border-radius:10px;
+  font-size:13px;background:#fff;color:var(--text);cursor:pointer;
+  font-family:var(--font-hi);
+}
+
+/* Buttons */
+.btn{
+  padding:9px 18px;border-radius:9px;font-size:13px;font-weight:700;
+  display:inline-flex;align-items:center;gap:6px;transition:all .2s;cursor:pointer;border:none;
+  font-family:var(--font-hi);
+}
+.btn-primary{background:var(--blue);color:#fff;}
+.btn-primary:hover{background:var(--blue-dark);}
+.btn-success{background:var(--green);color:#fff;}
+.btn-success:hover{background:#15803d;}
+.btn-danger{background:var(--red);color:#fff;}
+.btn-danger:hover{background:#b91c1c;}
+.btn-ghost{background:var(--gray-100);color:var(--gray-600);border:1.5px solid var(--gray-200);}
+.btn-ghost:hover{background:var(--gray-200);}
+.btn-warning{background:#f59e0b;color:#fff;}
+.btn-warning:hover{background:#d97706;}
+.btn-sm{padding:6px 12px;font-size:12px;}
+.btn-lg{padding:12px 28px;font-size:14px;}
+
+/* Table */
+.adm-table-wrap{background:#fff;border-radius:var(--radius);border:1.5px solid var(--gray-200);overflow:hidden;}
+.adm-table{width:100%;border-collapse:collapse;font-size:13px;}
+.adm-table thead tr{background:var(--gray-50);border-bottom:1.5px solid var(--gray-200);}
+.adm-table thead th{padding:12px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;}
+.adm-table tbody tr{border-bottom:1px solid var(--gray-100);transition:background .15s;}
+.adm-table tbody tr:last-child{border-bottom:none;}
+.adm-table tbody tr:hover{background:var(--gray-50);}
+.adm-table td{padding:11px 14px;vertical-align:middle;}
+.job-title-cell{font-weight:700;color:var(--text);font-family:var(--font-hi);line-height:1.4;max-width:260px;}
+.job-dept-cell{font-size:12px;color:var(--gray-600);margin-top:2px;font-family:var(--font-hi);}
+.actions-cell{display:flex;gap:6px;align-items:center;}
+
+/* Badges */
+.src-badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;}
+.src-ssc{background:#dbeafe;color:#1d4ed8;}
+.src-rsmssb{background:#faf5ff;color:#7c3aed;}
+.src-rssb{background:#f0fdf4;color:#16a34a;}
+.src-scholarship{background:#fff7ed;color:#ea580c;}
+.type-badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;font-family:var(--font-hi);white-space:nowrap;}
+.type-REC{background:#dbeafe;color:#1d4ed8;}
+.type-EXAM{background:#fef3c7;color:#92400e;}
+.type-RES{background:#dcfce7;color:#15803d;}
+.type-ADM{background:#fae8ff;color:#7c3aed;}
+.type-AK{background:#fee2e2;color:#991b1b;}
+.type-COR{background:#fef9c3;color:#ca8a04;}
+.type-OTH{background:#f1f5f9;color:#475569;}
+.status-published{background:#dcfce7;color:#15803d;display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;}
+.status-draft{background:#fef3c7;color:#92400e;display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;}
+
+/* Pagination */
+.pagination{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-top:1px solid var(--gray-100);font-size:13px;color:var(--gray-600);flex-wrap:wrap;gap:10px;}
+.pag-btns{display:flex;gap:6px;}
+.pag-btn{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--gray-200);background:#fff;color:var(--gray-600);transition:all .2s;}
+.pag-btn:hover:not(:disabled){border-color:var(--blue);color:var(--blue);}
+.pag-btn:disabled{opacity:.4;cursor:default;}
+.pag-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+
+/* ══ POST EDITOR — WordPress जैसा ══ */
+#sec-editor{display:none;}
+.editor-layout{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;}
+.editor-left{}
+.editor-right{}
+
+/* Editor Card */
+.ed-card{
+  background:#fff;border-radius:var(--radius);
+  border:1.5px solid var(--gray-200);margin-bottom:16px;
+  overflow:hidden;
+}
+.ed-card-header{
+  padding:14px 18px;background:var(--gray-50);
+  border-bottom:1px solid var(--gray-200);
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:800;color:var(--text);
+  font-family:var(--font-hi);
+}
+.ed-card-header i{color:var(--blue);font-size:14px;}
+.ed-card-body{padding:18px;}
+
+/* Title Input */
+.post-title-input{
+  width:100%;border:none;outline:none;
+  font-size:22px;font-weight:800;
+  color:var(--text);font-family:var(--font-hi);
+  padding:16px 18px;
+  border-bottom:2px solid var(--gray-200);
+  transition:border-color .2s;background:transparent;
+}
+.post-title-input:focus{border-bottom-color:var(--blue);}
+.post-title-input::placeholder{color:var(--gray-400);}
+
+/* Rich Text Toolbar */
+.rich-toolbar{
+  display:flex;gap:4px;padding:10px 14px;
+  background:var(--gray-50);border-bottom:1px solid var(--gray-200);
+  flex-wrap:wrap;
+}
+.rich-btn{
+  padding:5px 10px;border-radius:7px;font-size:12px;font-weight:700;
+  background:#fff;border:1.5px solid var(--gray-200);color:var(--gray-600);
+  transition:all .2s;cursor:pointer;display:flex;align-items:center;gap:4px;
+}
+.rich-btn:hover{border-color:var(--blue);color:var(--blue);}
+.rich-content{
+  width:100%;min-height:180px;border:none;outline:none;
+  padding:16px;font-size:14px;line-height:1.8;
+  font-family:var(--font-hi);color:var(--text);
+  resize:vertical;
+}
+.rich-content:focus{outline:none;}
+
+/* Form Fields */
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.field-grid.cols3{grid-template-columns:1fr 1fr 1fr;}
+.field-grid.cols1{grid-template-columns:1fr;}
+.field-group{display:flex;flex-direction:column;gap:5px;}
+.field-label{font-size:11.5px;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.3px;display:flex;align-items:center;gap:4px;}
+.field-label .req{color:var(--red);}
+.field-input,.field-select,.field-textarea{
+  padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:9px;
+  font-size:13px;color:var(--text);background:#fff;transition:border-color .2s;
+  font-family:var(--font-hi);width:100%;
+}
+.field-input:focus,.field-select:focus,.field-textarea:focus{border-color:var(--blue);}
+.field-textarea{resize:vertical;min-height:80px;}
+.field-hint{font-size:11px;color:var(--gray-400);margin-top:3px;font-family:var(--font-hi);}
+
+/* Dynamic fields section */
+.dynamic-section{display:none;}
+.dynamic-section.show{display:block;}
+
+/* Dates Table */
+.dates-table{width:100%;border-collapse:collapse;font-size:13px;}
+.dates-table td{padding:8px 10px;border:1px solid var(--gray-200);}
+.dates-table td:first-child{font-weight:700;color:var(--gray-600);font-family:var(--font-hi);white-space:nowrap;width:40%;background:var(--gray-50);}
+.dates-table input{width:100%;border:none;outline:none;font-size:13px;font-family:var(--font-hi);background:transparent;}
+
+/* Tags Input */
+.tags-wrap{display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px;border:1.5px solid var(--gray-200);border-radius:9px;background:#fff;min-height:42px;cursor:text;}
+.tags-wrap:focus-within{border-color:var(--blue);}
+.tag-chip{background:var(--blue-light);color:var(--blue);padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px;font-family:var(--font-hi);}
+.tag-chip button{background:none;border:none;color:var(--blue);cursor:pointer;font-size:13px;padding:0;line-height:1;display:flex;align-items:center;}
+.tags-input{border:none;outline:none;font-size:13px;font-family:var(--font-hi);min-width:80px;flex:1;}
+
+/* Publish Box */
+.publish-box{background:#fff;border-radius:var(--radius);border:1.5px solid var(--gray-200);overflow:hidden;margin-bottom:16px;}
+.publish-box-header{padding:13px 16px;background:var(--blue-dark);color:#fff;font-size:13px;font-weight:800;font-family:var(--font-hi);display:flex;align-items:center;gap:8px;}
+.publish-box-body{padding:14px 16px;display:flex;flex-direction:column;gap:10px;}
+.publish-status-row{display:flex;align-items:center;justify-content:space-between;font-size:13px;}
+.publish-status-label{font-weight:600;color:var(--gray-600);font-family:var(--font-hi);}
+.publish-btns{display:flex;gap:8px;margin-top:4px;}
+.publish-btns .btn{flex:1;justify-content:center;}
+
+/* Sidebar card */
+.sidebar-card{background:#fff;border-radius:var(--radius);border:1.5px solid var(--gray-200);margin-bottom:16px;overflow:hidden;}
+.sidebar-card-header{padding:12px 16px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);font-size:13px;font-weight:800;display:flex;align-items:center;gap:7px;font-family:var(--font-hi);}
+.sidebar-card-body{padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
+
+/* Documents/Process list */
+.list-item-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;}
+.list-item-input{flex:1;padding:8px 10px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:13px;font-family:var(--font-hi);outline:none;}
+.list-item-input:focus{border-color:var(--blue);}
+.list-remove-btn{width:30px;height:30px;border-radius:7px;background:var(--red-light);color:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;}
+.add-list-btn{font-size:12px;font-weight:700;color:var(--blue);background:none;border:1.5px dashed var(--blue);border-radius:8px;padding:6px 12px;cursor:pointer;width:100%;margin-top:4px;font-family:var(--font-hi);transition:background .2s;}
+.add-list-btn:hover{background:var(--blue-light);}
+
+/* ══ DELETE MODAL ══ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:300;padding:20px;backdrop-filter:blur(3px);}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.modal-header{padding:18px 22px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;}
+.modal-title{font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px;font-family:var(--font-hi);}
+.modal-close{width:32px;height:32px;border-radius:8px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gray-600);cursor:pointer;transition:background .2s;}
+.modal-close:hover{background:var(--gray-200);}
+.modal-body{padding:22px;}
+.modal-footer{padding:14px 22px;border-top:1px solid var(--gray-100);display:flex;justify-content:flex-end;gap:10px;}
+.confirm-card{text-align:center;padding:8px 0;}
+.confirm-icon{font-size:52px;margin-bottom:12px;}
+.confirm-title{font-size:17px;font-weight:800;margin-bottom:8px;font-family:var(--font-hi);}
+.confirm-sub{font-size:13px;color:var(--gray-600);font-family:var(--font-hi);line-height:1.6;}
+
+/* Toast */
+.toast-adm{
+  position:fixed;bottom:24px;right:24px;
+  background:#1e293b;color:#fff;padding:13px 20px;border-radius:12px;
+  font-size:13px;font-weight:600;font-family:var(--font-hi);
+  display:none;align-items:center;gap:8px;z-index:999;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:320px;
+}
+.toast-adm.show{display:flex;}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.toast-adm.show{animation:slideUp .3s ease;}
+
+/* Loading */
+.loading-overlay{position:fixed;inset:0;background:rgba(255,255,255,.85);display:none;align-items:center;justify-content:center;z-index:400;flex-direction:column;gap:14px;backdrop-filter:blur(2px);}
+.loading-overlay.show{display:flex;}
+.spinner{width:40px;height:40px;border:3px solid var(--gray-200);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:14px;color:var(--gray-600);font-family:var(--font-hi);}
+
+/* Empty */
+.empty-state{text-align:center;padding:52px 20px;color:var(--gray-400);}
+.empty-state i{font-size:42px;color:var(--gray-200);display:block;margin-bottom:14px;}
+.empty-state p{font-size:14px;font-family:var(--font-hi);}
+
+/* Responsive */
+@media(max-width:1100px){.editor-layout{grid-template-columns:1fr;}}
+@media(max-width:900px){
+  .adm-sidebar{display:none;}
+  .adm-stats{grid-template-columns:repeat(2,1fr);}
+  .field-grid{grid-template-columns:1fr;}
+  .field-grid.cols3{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .adm-stats{grid-template-columns:1fr 1fr;}
+  .field-grid.cols3{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text" id="loadingText">लोड हो रहा है...</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-adm" id="toastAdm"></div>
+
+<!-- ══ DELETE MODAL ══ -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fas fa-trash-alt" style="color:var(--red);"></i> Post Delete करें</div>
+      <button class="modal-close" onclick="closeModal('deleteModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="confirm-card">
+        <div class="confirm-icon">⚠️</div>
+        <div class="confirm-title">क्या आप sure हैं?</div>
+        <div class="confirm-sub" id="deleteConfirmText">यह post permanently delete हो जाएगी।</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('deleteModal')">रद्द करें</button>
+      <button class="btn btn-danger" onclick="confirmDelete()"><i class="fas fa-trash-alt"></i> हाँ, Delete करें</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LOGIN ══ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-icon">LJ</div>
+      <h1>Laxmi Job Alert</h1>
+      <p>Admin Panel — सुरक्षित लॉगिन</p>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-input" id="loginEmail" placeholder="admin@example.com" autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-input" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="login-btn" onclick="doLogin()"><i class="fas fa-lock"></i> Admin Panel खोलें</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- ══ ADMIN APP ══ -->
+<div id="adminApp">
+
+  <!-- Header -->
+  <header class="adm-header">
+    <div class="adm-logo">
+      <div class="adm-logo-icon">LJ</div>
+      <div>
+        <div class="adm-logo-text">Admin Panel</div>
+        <div class="adm-logo-sub">Laxmi Job Alert</div>
+      </div>
+    </div>
+    <div class="adm-header-right">
+      <span class="adm-user" id="adminUserEmail"></span>
+      <a href="/" target="_blank" class="adm-hbtn"><i class="fas fa-external-link-alt"></i> साइट देखें</a>
+      <button class="adm-hbtn" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> लॉगआउट</button>
+    </div>
+  </header>
+
+  <div class="adm-body">
+
+    <!-- Sidebar -->
+    <aside class="adm-sidebar">
+      <!-- Write Post Button -->
+      <button class="nav-write-btn" onclick="openEditor(null,null)">
+        <i class="fas fa-plus-circle"></i> ✍️ नई Post लिखें
+      </button>
+
+      <div class="adm-nav-divider"></div>
+      <div class="sidebar-section-title">मेनू</div>
+
+      <div class="adm-nav-item active" onclick="showSection('dashboard')" id="nav-dashboard">
+        <i class="fas fa-tachometer-alt"></i> डैशबोर्ड
+      </div>
+      <div class="adm-nav-item" onclick="showSection('ssc')" id="nav-ssc">
+        <i class="fas fa-landmark"></i> SSC Jobs
+      </div>
+      <div class="adm-nav-item" onclick="showSection('rsmssb')" id="nav-rsmssb">
+        <i class="fas fa-star-of-david"></i> RSMSSB Jobs
+      </div>
+      <div class="adm-nav-item" onclick="showSection('rssb')" id="nav-rssb">
+        <i class="fas fa-shield-alt"></i> RSSB Jobs
+      </div>
+      <div class="adm-nav-item" onclick="showSection('scholarship')" id="nav-scholarship">
+        <i class="fas fa-graduation-cap"></i> Scholarship
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="adm-main" id="admMain">
+
+      <!-- ══ DASHBOARD ══ -->
+      <div id="sec-dashboard">
+        <div class="page-header">
+          <div class="page-title">📊 डैशबोर्ड</div>
+          <button class="btn btn-success" onclick="openEditor(null,null)"><i class="fas fa-plus"></i> नई Post लिखें</button>
+        </div>
+        <div class="adm-stats">
+          <div class="adm-stat">
+            <div class="adm-stat-icon" style="background:#dbeafe;">🏛️</div>
+            <div><div class="adm-stat-val" id="stSSC">—</div><div class="adm-stat-label">SSC Jobs</div></div>
+          </div>
+          <div class="adm-stat">
+            <div class="adm-stat-icon" style="background:#faf5ff;">⭐</div>
+            <div><div class="adm-stat-val" id="stRSMSSB">—</div><div class="adm-stat-label">RSMSSB Jobs</div></div>
+          </div>
+          <div class="adm-stat">
+            <div class="adm-stat-icon" style="background:#f0fdf4;">🛡️</div>
+            <div><div class="adm-stat-val" id="stRSSB">—</div><div class="adm-stat-label">RSSB Jobs</div></div>
+          </div>
+          <div class="adm-stat">
+            <div class="adm-stat-icon" style="background:#fff7ed;">🎓</div>
+            <div><div class="adm-stat-val" id="stSchol">—</div><div class="adm-stat-label">Scholarship</div></div>
+          </div>
+        </div>
+        <div class="adm-table-wrap">
+          <div style="padding:14px 18px;background:var(--gray-50);border-bottom:1.5px solid var(--gray-200);font-size:14px;font-weight:800;font-family:var(--font-hi);">🔥 हाल में जोड़े गए</div>
+          <table class="adm-table">
+            <thead><tr><th>Post नाम</th><th>विभाग</th><th>Source</th><th>Type</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="dashRecentTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ COLLECTION TABLE ══ -->
+      <div id="sec-collection" style="display:none;">
+        <div class="page-header">
+          <div class="page-title" id="colTitle">SSC Jobs</div>
+          <button class="btn btn-success" onclick="openEditor(null,_currentCol)"><i class="fas fa-plus"></i> नई Post लिखें</button>
+        </div>
+        <div class="adm-toolbar">
+          <div class="adm-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="tableSearch" placeholder="खोजें..." oninput="filterTable()">
+          </div>
+          <select class="adm-filter-select" id="typeFilter" onchange="filterTable()">
+            <option value="">सभी प्रकार</option>
+            <option value="RECRUITMENT">नई भर्ती</option>
+            <option value="EXAM_SCHEDULE">परीक्षा तिथि</option>
+            <option value="RESULT">रिजल्ट</option>
+            <option value="ADMIT_CARD">एडमिट कार्ड</option>
+            <option value="ANSWER_KEY">आंसर की</option>
+            <option value="CORRECTION">सुधार</option>
+          </select>
+        </div>
+        <div class="adm-table-wrap">
+          <table class="adm-table">
+            <thead>
+              <tr>
+                <th style="width:38%">Post नाम / विभाग</th>
+                <th>Type</th>
+                <th>पद</th>
+                <th>अंतिम तिथि</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="colTbody"></tbody>
+          </table>
+          <div class="pagination" id="colPagination"></div>
+        </div>
+      </div>
+
+      <!-- ══ POST EDITOR — WordPress जैसा ══ -->
+      <div id="sec-editor">
+
+        <!-- Editor Header -->
+        <div class="page-header" style="margin-bottom:20px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <button class="btn btn-ghost btn-sm" onclick="backToList()" id="editorBackBtn">
+              <i class="fas fa-arrow-left"></i> वापस जाएं
+            </button>
+            <div class="page-title" id="editorTitle">✍️ नई Post लिखें</div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-warning" onclick="saveDraft()"><i class="fas fa-save"></i> Draft Save</button>
+            <button class="btn btn-success btn-lg" onclick="publishPost()"><i class="fas fa-rocket"></i> Publish करें</button>
+          </div>
+        </div>
+
+        <div class="editor-layout">
+
+          <!-- ══ LEFT: MAIN CONTENT ══ -->
+          <div class="editor-left">
+
+            <!-- Title -->
+            <div class="ed-card">
+              <input type="text" class="post-title-input" id="edTitle"
+                     placeholder="Post का Title यहाँ लिखें... (e.g. SSC CGL Recruitment 2025)">
+              <div style="padding:12px 16px;background:var(--gray-50);border-top:1px solid var(--gray-100);display:flex;gap:16px;font-size:12px;color:var(--gray-400);">
+                <span><b style="color:var(--gray-600);">Collection:</b> <span id="edColDisplay">—</span></span>
+                <span><b style="color:var(--gray-600);">Type:</b> <span id="edTypeDisplay">—</span></span>
+              </div>
+            </div>
+
+            <!-- AI Summary / मुख्य जानकारी -->
+            <div class="ed-card">
+              <div class="ed-card-header"><i class="fas fa-align-left"></i> मुख्य जानकारी (AI Summary / विवरण)</div>
+              <div class="rich-toolbar">
+                <button class="rich-btn" onclick="insertFormat('bold')" title="Bold"><i class="fas fa-bold"></i></button>
+                <button class="rich-btn" onclick="insertFormat('italic')" title="Italic"><i class="fas fa-italic"></i></button>
+                <button class="rich-btn" onclick="insertFormat('ul')" title="Bullet List"><i class="fas fa-list-ul"></i> List</button>
+                <button class="rich-btn" onclick="insertFormat('link')" title="Link जोड़ें"><i class="fas fa-link"></i> Link</button>
+                <button class="rich-btn" onclick="insertFormat('clear')" title="Format हटाएं"><i class="fas fa-eraser"></i></button>
+              </div>
+              <div id="edDescription" class="rich-content" contenteditable="true"
+                   placeholder="यहाँ विस्तार से लिखें — योग्यता, प्रक्रिया, महत्वपूर्ण बातें..."></div>
+            </div>
+
+            <!-- ══ RECRUITMENT FIELDS ══ -->
+            <div id="fields-RECRUITMENT" class="dynamic-section">
+
+              <!-- Important Dates -->
+              <div class="ed-card">
+                <div class="ed-card-header"><i class="fas fa-calendar-alt"></i> महत्वपूर्ण तिथियां</div>
+                <div class="ed-card-body">
+                  <table class="dates-table" style="border:1px solid var(--gray-200);border-radius:8px;overflow:hidden;">
+                    <tr><td>फॉर्म शुरू तिथि</td><td><input type="text" id="fFormStart" placeholder="DD-MM-YYYY"></td></tr>
+                    <tr><td>अंतिम तिथि <span style="color:var(--red);">*</span></td><td><input type="text" id="fLastDate" placeholder="DD-MM-YYYY"></td></tr>
+                    <tr><td>परीक्षा तिथि</td><td><input type="text" id="fExamDate" placeholder="DD-MM-YYYY या उपलब्ध नहीं"></td></tr>
+                    <tr><td>Admit Card</td><td><input type="text" id="fAdmitDate" placeholder="DD-MM-YYYY या उपलब्ध नहीं"></td></tr>
+                    <tr><td>Result तिथि</td><td><input type="text" id="fResultDate" placeholder="DD-MM-YYYY या उपलब्ध नहीं"></td></tr>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Posts & Fee -->
+              <div class="ed-card">
+                <div class="ed-card-header"><i class="fas fa-users"></i> पद संख्या और आवेदन शुल्क</div>
+                <div class="ed-card-body">
+                  <div class="field-grid" style="margin-bottom:14px;">
+                    <div class="field-group">
+                      <label class="field-label">कुल पद (Total Posts)</label>
+                      <input type="text" class="field-input" id="fPosts" placeholder="e.g. 1200">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">आवेदन मोड</label>
+                      <select class="field-select" id="fAppMode">
+                        <option value="ऑनलाइन">ऑनलाइन</option>
+                        <option value="ऑफलाइन">ऑफलाइन</option>
+                        <option value="उपलब्ध नहीं">उपलब्ध नहीं</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="field-grid cols3">
+                    <div class="field-group">
+                      <label class="field-label">General / OBC फीस</label>
+                      <input type="text" class="field-input" id="fFeeGen" placeholder="e.g. ₹100">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">SC / ST फीस</label>
+                      <input type="text" class="field-input" id="fFeeSCST" placeholder="e.g. शून्य / ₹50">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">महिला फीस</label>
+                      <input type="text" class="field-input" id="fFeeWomen" placeholder="e.g. शून्य / ₹50">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Age & Qualification -->
+              <div class="ed-card">
+                <div class="ed-card-header"><i class="fas fa-graduation-cap"></i> आयु सीमा और योग्यता</div>
+                <div class="ed-card-body">
+                  <div class="field-grid" style="margin-bottom:14px;">
+                    <div class="field-group">
+                      <label class="field-label">न्यूनतम आयु (Min Age)</label>
+                      <input type="text" class="field-input" id="fAgeMin" placeholder="e.g. 18">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">अधिकतम आयु (Max Age)</label>
+                      <input type="text" class="field-input" id="fAgeMax" placeholder="e.g. 27">
+                    </div>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label">शैक्षणिक योग्यता (Qualification) <span class="req">*</span></label>
+                    <textarea class="field-textarea" id="fQual" placeholder="e.g. किसी मान्यता प्राप्त विश्वविद्यालय से स्नातक / 12वीं पास..."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Selection Process -->
+              <div class="ed-card">
+                <div class="ed-card-header"><i class="fas fa-list-ol"></i> चयन प्रक्रिया (Selection Process)</div>
+                <div class="ed-card-body">
+                  <div id="selectionList"></div>
+                  <button class="add-list-btn" onclick="addListItem('selectionList','selection')"><i class="fas fa-plus"></i> चरण जोड़ें</button>
+                </div>
+              </div>
+
+              <!-- Documents -->
+              <div class="ed-card">
+                <div class="ed-card-header"><i class="fas fa-file-alt"></i> जरूरी दस्तावेज</div>
+                <div class="ed-card-body">
+                  <div id="documentsList"></div>
+                  <button class="add-list-btn" onclick="addListItem('documentsList','documents')"><i class="fas fa-plus"></i> दस्तावेज जोड़ें</button>
+                </div>
+              </div>
+
+              <!-- Apply Link -->
+              <div class="ed-card">
+                <div class="ed-card-header"><i class="fas fa-link"></i> आवेदन लिंक</div>
+                <div class="ed-card-body">
+                  <div class="field-group">
+                    <label class="field-label">Apply करने का लिंक</label>
+                    <input type="url" class="field-input" id="fApplyLink" placeholder="https://ssc.gov.in/..." style="font-family:var(--font-en);">
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /RECRUITMENT -->
+
+            <!-- ══ EXAM_SCHEDULE FIELDS ══ -->
+            <div id="fields-EXAM_SCHEDULE" class="dynamic-section">
+              <div class="ed-card">
+                <div class="ed-card-header"><i class="fas fa-calendar-days"></i> परीक्षा की जानकारी</div>
+                <div class="ed-card-body">
+                  <div class="field-grid" style="margin-bottom:14px;">
+                    <div class="field-group">
+                      <label class="field-label">परीक्षा शुरू तिथि</label>
+                      <input type="text" class="field-input" id="fExamStart" placeholder="DD-MM-YYYY">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">परीक्षा समाप्त तिथि</label>
+                      <input type="text" class="field-input" id="fExamEnd" placeholder="DD-MM-YYYY">
+                    </div>
+                  </div>
+                  <div class="field-grid" style="margin-bottom:14px;">
+                    <div class="field-group">
+                      <label class="field-label">परीक्षा का समय (Shift)</label>
+                      <input type="text" class="field-input" id="fExamShift" placeholder="e.g. 9:00 AM - 12:00 PM">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">Schedule Link</label>
+                      <input type="url" class="field-input" id="fScheduleLink" placeholder="https://..." style="font-family:var(--font-en);">
+                    </div>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label">परीक्षा केंद्र / शहर जानकारी</label>
+                    <textarea class="field-textarea" id="fExamCity" placeholder="परीक्षा केंद्रों की जानकारी..."></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ══ ADMIT_CARD FIELDS ══ -->
+            <div id="fields-ADMIT_CARD" class="dynamic-section">
+              <div class="ed-card">
+                <div class="ed-card-header"><i class="fas fa-id-card"></i> Admit Card जानकारी</div>
+                <div class="ed-card-body">
+                  <div class="field-grid" style="margin-bottom:14px;">
+                    <div class="field-group">
+                      <label class="field-label">परीक्षा तिथि</label>
+                      <input type="text" class="field-input" id="fACExamDate" placeholder="DD-MM-YYYY">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">Admit Card उपलब्ध से</label>
+                      <input type="text" class="field-input" id="fACAvailFrom" placeholder="DD-MM-YYYY">
+                    </div>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label">Download Link</label>
+                    <input type="url" class="field-input" id="fACLink" placeholder="https://..." style="font-family:var(--font-en);">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ══ RESULT FIELDS ══ -->
+            <div id="fields-RESULT" class="dynamic-section">
+              <div class="ed-card">
+                <div class="ed-card-header"><i class="fas fa-trophy"></i> Result जानकारी</div>
+                <div class="ed-card-body">
+                  <div class="field-grid" style="margin-bottom:14px;">
+                    <div class="field-group">
+                      <label class="field-label">परिणाम तिथि</label>
+                      <input type="text" class="field-input" id="fResDate" placeholder="DD-MM-YYYY">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">परिणाम प्रकार</label>
+                      <input type="text" class="field-input" id="fResType" placeholder="e.g. अंतिम परिणाम / मेरिट लिस्ट">
+                    </div>
+                  </div>
+                  <div class="field-grid" style="margin-bottom:14px;">
+                    <div class="field-group">
+                      <label class="field-label">कुल चयनित</label>
+                      <input type="text" class="field-input" id="fResSelected" placeholder="e.g. 500">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">अगला चरण</label>
+                      <input type="text" class="field-input" id="fResNext" placeholder="e.g. दस्तावेज सत्यापन">
+                    </div>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label">Result Link</label>
+                    <input type="url" class="field-input" id="fResLink" placeholder="https://..." style="font-family:var(--font-en);">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ══ ANSWER_KEY FIELDS ══ -->
+            <div id="fields-ANSWER_KEY" class="dynamic-section">
+              <div class="ed-card">
+                <div class="ed-card-header"><i class="fas fa-key"></i> Answer Key जानकारी</div>
+                <div class="ed-card-body">
+                  <div class="field-grid" style="margin-bottom:14px;">
+                    <div class="field-group">
+                      <label class="field-label">आपत्ति शुरू तिथि</label>
+                      <input type="text" class="field-input" id="fAKStart" placeholder="DD-MM-YYYY">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">आपत्ति अंतिम तिथि</label>
+                      <input type="text" class="field-input" id="fAKEnd" placeholder="DD-MM-YYYY">
+                    </div>
+                  </div>
+                  <div class="field-grid">
+                    <div class="field-group">
+                      <label class="field-label">शुल्क प्रति प्रश्न</label>
+                      <input type="text" class="field-input" id="fAKFee" placeholder="e.g. ₹100">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">Answer Key Link</label>
+                      <input type="url" class="field-input" id="fAKLink" placeholder="https://..." style="font-family:var(--font-en);">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ══ CORRECTION FIELDS ══ -->
+            <div id="fields-CORRECTION" class="dynamic-section">
+              <div class="ed-card">
+                <div class="ed-card-header"><i class="fas fa-pen"></i> सुधार विंडो</div>
+                <div class="ed-card-body">
+                  <div class="field-grid" style="margin-bottom:14px;">
+                    <div class="field-group">
+                      <label class="field-label">सुधार शुरू तिथि</label>
+                      <input type="text" class="field-input" id="fCorStart" placeholder="DD-MM-YYYY">
+                    </div>
+                    <div class="field-group">
+                      <label class="field-label">सुधार अंतिम तिथि</label>
+                      <input type="text" class="field-input" id="fCorEnd" placeholder="DD-MM-YYYY">
+                    </div>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label">क्या-क्या बदला जा सकता है</label>
+                    <textarea class="field-textarea" id="fCorWhat" placeholder="e.g. नाम, फोटो, जन्म तिथि, श्रेणी..."></textarea>
+                  </div>
+                  <div class="field-group" style="margin-top:12px;">
+                    <label class="field-label">Correction Link</label>
+                    <input type="url" class="field-input" id="fCorLink" placeholder="https://..." style="font-family:var(--font-en);">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Official PDF (सभी types के लिए) -->
+            <div class="ed-card">
+              <div class="ed-card-header"><i class="fas fa-file-pdf" style="color:#dc2626;"></i> आधिकारिक PDF / Notice</div>
+              <div class="ed-card-body">
+                <div class="field-group">
+                  <label class="field-label">Official PDF URL</label>
+                  <input type="url" class="field-input" id="fPdfUrl" placeholder="https://ssc.gov.in/uploads/..." style="font-family:var(--font-en);">
+                  <div class="field-hint">सरकारी वेबसाइट का original PDF link यहाँ डालें</div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /editor-left -->
+
+          <!-- ══ RIGHT: SIDEBAR ══ -->
+          <div class="editor-right">
+
+            <!-- Publish Box -->
+            <div class="publish-box">
+              <div class="publish-box-header"><i class="fas fa-rocket"></i> Publish करें</div>
+              <div class="publish-box-body">
+                <div class="publish-status-row">
+                  <span class="publish-status-label">Status:</span>
+                  <span id="edStatusBadge" class="status-draft">📝 Draft</span>
+                </div>
+                <div class="publish-btns">
+                  <button class="btn btn-warning btn-sm" onclick="saveDraft()"><i class="fas fa-save"></i> Draft</button>
+                  <button class="btn btn-success" onclick="publishPost()"><i class="fas fa-rocket"></i> Publish</button>
+                </div>
+                <div style="font-size:11px;color:var(--gray-400);font-family:var(--font-hi);padding-top:6px;">
+                  Draft = सेव रहेगी, website पर नहीं दिखेगी<br>
+                  Publish = तुरंत website पर live हो जाएगी
+                </div>
+              </div>
+            </div>
+
+            <!-- Collection -->
+            <div class="sidebar-card">
+              <div class="sidebar-card-header"><i class="fas fa-folder"></i> Collection / विभाग</div>
+              <div class="sidebar-card-body">
+                <div class="field-group">
+                  <label class="field-label">Collection <span class="req">*</span></label>
+                  <select class="field-select" id="edCollection" onchange="onCollectionChange()">
+                    <option value="ssc_jobs">🏛️ SSC Jobs</option>
+                    <option value="rsmssb_jobs">⭐ RSMSSB Jobs</option>
+                    <option value="rssb_jobs">🛡️ RSSB Jobs</option>
+                    <option value="scholarship_notices">🎓 Scholarship</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Notice Type <span class="req">*</span></label>
+                  <select class="field-select" id="edNoticeType" onchange="onTypeChange()">
+                    <option value="RECRUITMENT">📋 नई भर्ती</option>
+                    <option value="EXAM_SCHEDULE">📅 परीक्षा तिथि</option>
+                    <option value="ADMIT_CARD">🪪 Admit Card</option>
+                    <option value="RESULT">🏆 रिजल्ट</option>
+                    <option value="ANSWER_KEY">🔑 Answer Key</option>
+                    <option value="CORRECTION">✏️ सुधार विंडो</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Department (English)</label>
+                  <input type="text" class="field-input" id="edDept" placeholder="e.g. Staff Selection Commission" style="font-family:var(--font-en);">
+                </div>
+              </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="sidebar-card">
+              <div class="sidebar-card-header"><i class="fas fa-tags"></i> Tags</div>
+              <div class="sidebar-card-body">
+                <div>
+                  <div class="tags-wrap" id="tagsWrap" onclick="document.getElementById('tagInput').focus()">
+                    <!-- tags chips will appear here -->
+                    <input type="text" class="tags-input" id="tagInput" placeholder="Tag लिखें + Enter">
+                  </div>
+                  <div class="field-hint">Tag लिखकर Enter दबाएं — जैसे: SSC CGL, Patwari, 12th Pass</div>
+                </div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                  <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-hi);">जल्दी जोड़ें:</span>
+                  <button onclick="addTag('SSC')" class="tag-chip" style="cursor:pointer;font-size:11px;">+SSC</button>
+                  <button onclick="addTag('RSMSSB')" class="tag-chip" style="cursor:pointer;font-size:11px;">+RSMSSB</button>
+                  <button onclick="addTag('RSSB')" class="tag-chip" style="cursor:pointer;font-size:11px;">+RSSB</button>
+                  <button onclick="addTag('राजस्थान सरकार')" class="tag-chip" style="cursor:pointer;font-size:11px;">+राजस्थान</button>
+                  <button onclick="addTag('केंद्र सरकार')" class="tag-chip" style="cursor:pointer;font-size:11px;">+केंद्र सरकार</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- State -->
+            <div class="sidebar-card">
+              <div class="sidebar-card-header"><i class="fas fa-map-marker-alt"></i> राज्य / Location</div>
+              <div class="sidebar-card-body">
+                <select class="field-select" id="edState">
+                  <option value="Rajasthan">राजस्थान</option>
+                  <option value="All India">All India</option>
+                  <option value="Central Government">केंद्र सरकार</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Quick Tips -->
+            <div class="sidebar-card" style="border-color:#dbeafe;">
+              <div class="sidebar-card-header" style="background:#eff6ff;color:var(--blue);"><i class="fas fa-lightbulb"></i> Tips</div>
+              <div class="sidebar-card-body" style="font-size:12px;color:var(--gray-600);font-family:var(--font-hi);line-height:1.7;">
+                <p>✅ Title हमेशा English में लिखें</p>
+                <p>✅ तिथियां DD-MM-YYYY format में</p>
+                <p>✅ Publish से पहले Preview जरूर देखें</p>
+                <p>✅ Official PDF link जरूर डालें</p>
+                <p>🔴 Draft save होगी लेकिन website पर नहीं दिखेगी</p>
+              </div>
+            </div>
+
+          </div><!-- /editor-right -->
+
+        </div><!-- /editor-layout -->
+      </div><!-- /sec-editor -->
+
+    </main>
+  </div>
+</div>
+
+<!-- ══ FIREBASE + LOGIC ══ -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+import { getFirestore, collection, getDocs, doc, getDoc,
+  updateDoc, deleteDoc, addDoc, serverTimestamp, setDoc,
+  query, orderBy, limit }
+  from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD6fwR3EsspTbw7YJPQiSEGChdLBcOCEU8",
+  authDomain: "newjobsarkari.firebaseapp.com",
+  projectId: "newjobsarkari",
+  storageBucket: "newjobsarkari.firebasestorage.app",
+  messagingSenderId: "489662168900",
+  appId: "1:489662168900:web:b214ef3f1269ef3a9de111"
+};
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+// ══ STATE ══
+window._currentCol    = 'ssc_jobs';
+window._allColJobs    = [];
+window._filteredJobs  = [];
+window._page          = 0;
+const PAGE_SIZE       = 15;
+window._deleteDocId   = null;
+window._deleteColName = null;
+window._editingDocId  = null;
+window._editingCol    = null;
+window._tags          = [];
+window._backSection   = 'ssc';
+
+// ══ HELPERS ══
+function showLoading(msg='लोड हो रहा है...') {
+  document.getElementById('loadingText').textContent = msg;
+  document.getElementById('loadingOverlay').classList.add('show');
+}
+function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
+
+window.toast = function(msg, type='success') {
+  const t = document.getElementById('toastAdm');
+  const icons = {success:'✅', error:'❌', info:'ℹ️', warning:'⚠️'};
+  t.innerHTML = `<span>${icons[type]||'ℹ️'}</span><span>${msg}</span>`;
+  t.className = 'toast-adm show';
+  clearTimeout(t._tmr);
+  t._tmr = setTimeout(() => t.classList.remove('show'), 3500);
+};
+
+function getTypeBadge(t) {
+  const m = {
+    RECRUITMENT:['type-REC','नई भर्ती'], EXAM_SCHEDULE:['type-EXAM','परीक्षा तिथि'],
+    RESULT:['type-RES','परिणाम'], ADMIT_CARD:['type-ADM','एडमिट कार्ड'],
+    ANSWER_KEY:['type-AK','आंसर की'], CORRECTION:['type-COR','सुधार'],
+    NEW_APPLICATION:['type-REC','नया आवेदन'], DATE_EXTENSION:['type-EXAM','तारीख विस्तार'],
+    PAYMENT:['type-RES','राशि जारी'], SHORTLIST:['type-ADM','शॉर्टलिस्ट'],
+    GENERAL:['type-OTH','सामान्य'],
+  };
+  const v = m[t] || ['type-OTH', t || 'अन्य'];
+  return `<span class="type-badge ${v[0]}">${v[1]}</span>`;
+}
+
+function getSrcBadge(col) {
+  if(col.includes('ssc'))          return `<span class="src-badge src-ssc">SSC</span>`;
+  if(col.includes('rsmssb'))       return `<span class="src-badge src-rsmssb">RSMSSB</span>`;
+  if(col.includes('rssb'))         return `<span class="src-badge src-rssb">RSSB</span>`;
+  if(col.includes('scholarship'))  return `<span class="src-badge src-scholarship">Scholarship</span>`;
+  return `<span class="src-badge">${col}</span>`;
+}
+
+// ══ AUTH ══
+window.doLogin = async function() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass  = document.getElementById('loginPass').value;
+  const errEl = document.getElementById('loginErr');
+  errEl.style.display = 'none';
+  if(!email || !pass) { errEl.textContent='Email और Password डालें'; errEl.style.display='block'; return; }
+  showLoading('लॉगिन हो रहा है...');
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch(e) {
+    hideLoading();
+    const msgs = {
+      'auth/invalid-email':'गलत Email format',
+      'auth/user-not-found':'Email registered नहीं है',
+      'auth/wrong-password':'गलत Password',
+      'auth/invalid-credential':'Email या Password गलत है'
+    };
+    errEl.textContent = msgs[e.code] || 'Login failed: ' + e.message;
+    errEl.style.display = 'block';
+  }
+};
+
+window.doLogout = async function() {
+  if(!confirm('क्या आप logout करना चाहते हैं?')) return;
+  await signOut(auth);
+};
+
+document.getElementById('loginPass').addEventListener('keydown', e => {
+  if(e.key === 'Enter') window.doLogin();
+});
+
+onAuthStateChanged(auth, async user => {
+  hideLoading();
+  if(user) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminApp').style.display    = 'flex';
+    document.getElementById('adminUserEmail').textContent = user.email;
+    await loadDashboard();
+  } else {
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('adminApp').style.display    = 'none';
+  }
+});
+
+// ══ DASHBOARD ══
+async function loadDashboard() {
+  showLoading('डेटा लोड हो रहा है...');
+  const cols   = ['ssc_jobs','rsmssb_jobs','rssb_jobs','scholarship_notices'];
+  const statIds= ['stSSC','stRSMSSB','stRSSB','stSchol'];
+  let allRecent = [];
+
+  for(let i=0; i<cols.length; i++) {
+    try {
+      const snap = await getDocs(query(collection(db, cols[i]), orderBy('published_at','desc'), limit(40)));
+      document.getElementById(statIds[i]).textContent = snap.size;
+      snap.forEach(d => allRecent.push({_id:d.id, _col:cols[i], ...d.data()}));
+    } catch(e) { document.getElementById(statIds[i]).textContent = '—'; }
+  }
+
+  allRecent.sort((a,b) => {
+    const ta = a.published_at?.toDate?.() || new Date(0);
+    const tb = b.published_at?.toDate?.() || new Date(0);
+    return tb - ta;
+  });
+
+  const tbody = document.getElementById('dashRecentTbody');
+  tbody.innerHTML = allRecent.slice(0,20).map(j => `
+    <tr>
+      <td><div class="job-title-cell">${escH(j.post_name || j.scheme_name || j.title || '—')}</div><div class="job-dept-cell">${escH(j.department || '—')}</div></td>
+      <td>${getSrcBadge(j._col)}</td>
+      <td>${getTypeBadge(j.notice_type)}</td>
+      <td>${j.status === 'published' ? '<span class="status-published">✅ Published</span>' : '<span class="status-draft">📝 Draft</span>'}</td>
+      <td><div class="actions-cell">
+        <button class="btn btn-primary btn-sm" onclick="window.openEditor('${j._id}','${j._col}')">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+        <button class="btn btn-danger btn-sm" onclick="window.openDelete('${j._id}','${j._col}','${escH((j.post_name||j.scheme_name||'').replace(/'/g,''))}')">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div></td>
+    </tr>`).join('') || `<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--gray-400);font-family:var(--font-hi);">कोई data नहीं मिला</td></tr>`;
+
+  hideLoading();
+}
+
+// ══ SECTION SWITCH ══
+window.showSection = function(sec) {
+  document.querySelectorAll('.adm-nav-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('nav-' + sec)?.classList.add('active');
+  ['sec-dashboard','sec-collection','sec-editor'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = 'none';
+  });
+
+  if(sec === 'dashboard') {
+    document.getElementById('sec-dashboard').style.display = 'block';
+  } else {
+    const colMap  = {ssc:'ssc_jobs', rsmssb:'rsmssb_jobs', rssb:'rssb_jobs', scholarship:'scholarship_notices'};
+    const labels  = {ssc:'SSC Jobs', rsmssb:'RSMSSB Jobs', rssb:'RSSB Jobs', scholarship:'Scholarship Notices'};
+    window._currentCol = colMap[sec];
+    document.getElementById('colTitle').textContent = labels[sec];
+    document.getElementById('sec-collection').style.display = 'block';
+    window._backSection = sec;
+    loadCollection(window._currentCol);
+  }
+};
+
+// ══ LOAD COLLECTION ══
+async function loadCollection(col) {
+  showLoading(`${col} लोड हो रहा है...`);
+  document.getElementById('tableSearch').value = '';
+  document.getElementById('typeFilter').value  = '';
+  try {
+    const snap = await getDocs(query(collection(db, col), orderBy('published_at','desc')));
+    window._allColJobs = [];
+    snap.forEach(d => window._allColJobs.push({_id:d.id, _col:col, ...d.data()}));
+    window._filteredJobs = [...window._allColJobs];
+    window._page = 0;
+    renderTable();
+  } catch(e) { toast('डेटा लोड नहीं हुआ: ' + e.message, 'error'); }
+  hideLoading();
+}
+
+// ══ FILTER TABLE ══
+window.filterTable = function() {
+  const q    = document.getElementById('tableSearch').value.toLowerCase();
+  const type = document.getElementById('typeFilter').value;
+  window._filteredJobs = window._allColJobs.filter(j => {
+    const name = (j.post_name || j.scheme_name || j.title || '').toLowerCase();
+    const dept = (j.department || '').toLowerCase();
+    const matchQ = !q || name.includes(q) || dept.includes(q);
+    const matchT = !type || j.notice_type === type;
+    return matchQ && matchT;
+  });
+  window._page = 0;
+  renderTable();
+};
+
+// ══ RENDER TABLE ══
+function renderTable() {
+  const start    = window._page * PAGE_SIZE;
+  const pageJobs = window._filteredJobs.slice(start, start + PAGE_SIZE);
+  const tbody    = document.getElementById('colTbody');
+
+  tbody.innerHTML = pageJobs.map(j => `
+    <tr>
+      <td><div class="job-title-cell">${escH(j.post_name || j.scheme_name || j.title || '—')}</div><div class="job-dept-cell">${escH(j.department || '—')}</div></td>
+      <td>${getTypeBadge(j.notice_type)}</td>
+      <td style="font-weight:700;">${escH(j.total_posts || '—')}</td>
+      <td style="color:var(--red);font-weight:700;">${escH(j.last_date || j.new_last_date || '—')}</td>
+      <td>${j.status === 'published' ? '<span class="status-published">✅ Published</span>' : '<span class="status-draft">📝 Draft</span>'}</td>
+      <td><div class="actions-cell">
+        <button class="btn btn-primary btn-sm" onclick="window.openEditor('${j._id}','${j._col}')">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+        <button class="btn btn-danger btn-sm" onclick="window.openDelete('${j._id}','${j._col}','${escH((j.post_name||j.scheme_name||'').replace(/'/g,"\\'")||'')}')">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div></td>
+    </tr>`).join('') || `<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--gray-400);font-family:var(--font-hi);">कोई post नहीं मिली</td></tr>`;
+
+  const totalPages = Math.ceil(window._filteredJobs.length / PAGE_SIZE);
+  const pag = document.getElementById('colPagination');
+  pag.innerHTML = `
+    <span style="font-family:var(--font-hi);">कुल ${window._filteredJobs.length} posts | Page ${window._page+1}/${totalPages||1}</span>
+    <div class="pag-btns">
+      <button class="pag-btn" onclick="window.goPage(${window._page-1})" ${window._page===0?'disabled':''}>← पिछला</button>
+      ${Array.from({length:Math.min(totalPages,7)},(_,i) =>
+        `<button class="pag-btn ${i===window._page?'active':''}" onclick="window.goPage(${i})">${i+1}</button>`
+      ).join('')}
+      <button class="pag-btn" onclick="window.goPage(${window._page+1})" ${window._page>=totalPages-1?'disabled':''}>अगला →</button>
+    </div>`;
+}
+
+window.goPage = function(p) {
+  const total = Math.ceil(window._filteredJobs.length / PAGE_SIZE);
+  if(p < 0 || p >= total) return;
+  window._page = p;
+  renderTable();
+  document.querySelector('.adm-main').scrollTo({top:0,behavior:'smooth'});
+};
+
+// ══════════════════════════════════════════════
+//  POST EDITOR — MAIN SECTION
+// ══════════════════════════════════════════════
+
+// Open Editor
+window.openEditor = async function(docId, colName) {
+  // Reset form
+  resetEditor();
+
+  if(docId && colName) {
+    // EDIT mode — existing post
+    showLoading('Post लोड हो रहा है...');
+    window._editingDocId = docId;
+    window._editingCol   = colName;
+
+    try {
+      const snap = await getDoc(doc(db, colName, docId));
+      if(!snap.exists()) { toast('Post नहीं मिली', 'error'); hideLoading(); return; }
+      const d = snap.data();
+
+      // Fill editor
+      document.getElementById('edTitle').value        = d.post_name || d.scheme_name || d.title || '';
+      document.getElementById('edCollection').value   = colName;
+      document.getElementById('edNoticeType').value   = d.notice_type || 'RECRUITMENT';
+      document.getElementById('edDept').value         = d.department || '';
+      document.getElementById('edState').value        = d.state || 'Rajasthan';
+      document.getElementById('edDescription').innerHTML = d.ai_summary || d.description || '';
+
+      // Tags
+      window._tags = Array.isArray(d.tags) ? [...d.tags] : [];
+      renderTags();
+
+      // Status badge
+      updateStatusBadge(d.status || 'draft');
+
+      // Type-specific fields
+      onTypeChange(d);
+
+      // PDF URL
+      setVal('fPdfUrl', d.official_pdf || d.pdf_url || '');
+
+      document.getElementById('editorTitle').textContent = '✏️ Post Edit करें';
+    } catch(e) { toast('Error: ' + e.message, 'error'); }
+    hideLoading();
+
+  } else {
+    // NEW mode
+    window._editingDocId = null;
+    window._editingCol   = colName || window._currentCol || 'ssc_jobs';
+    document.getElementById('edCollection').value = window._editingCol;
+    document.getElementById('editorTitle').textContent = '✍️ नई Post लिखें';
+    onTypeChange(null);
+
+    // Default tags based on collection
+    window._tags = getDefaultTags(window._editingCol);
+    renderTags();
+  }
+
+  // Switch to editor section
+  ['sec-dashboard','sec-collection'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = 'none';
+  });
+  document.getElementById('sec-editor').style.display = 'block';
+  document.querySelector('.adm-main').scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('edTitle').focus();
+};
+
+function getDefaultTags(col) {
+  const map = {
+    'ssc_jobs':             ['SSC','केंद्र सरकार'],
+    'rsmssb_jobs':          ['RSMSSB','राजस्थान सरकार'],
+    'rssb_jobs':            ['RSSB','राजस्थान सरकार'],
+    'scholarship_notices':  ['राजस्थान सरकार','छात्रवृत्ति'],
+  };
+  return map[col] || ['सरकारी नौकरी'];
+}
+
+// Back to list
+window.backToList = function() {
+  document.getElementById('sec-editor').style.display = 'none';
+  showSection(window._backSection || 'dashboard');
+};
+
+// Reset Editor
+function resetEditor() {
+  document.getElementById('edTitle').value        = '';
+  document.getElementById('edDescription').innerHTML = '';
+  document.getElementById('edDept').value         = '';
+  document.getElementById('fPdfUrl').value        = '';
+  // Reset dynamic fields
+  ['fFormStart','fLastDate','fExamDate','fAdmitDate','fResultDate',
+   'fPosts','fFeeGen','fFeeSCST','fFeeWomen','fAgeMin','fAgeMax','fQual',
+   'fApplyLink','fAppMode',
+   'fExamStart','fExamEnd','fExamShift','fScheduleLink','fExamCity',
+   'fACExamDate','fACAvailFrom','fACLink',
+   'fResDate','fResType','fResSelected','fResNext','fResLink',
+   'fAKStart','fAKEnd','fAKFee','fAKLink',
+   'fCorStart','fCorEnd','fCorWhat','fCorLink'
+  ].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('selectionList').innerHTML = '';
+  document.getElementById('documentsList').innerHTML = '';
+  window._tags = [];
+  renderTags();
+  updateStatusBadge('draft');
+}
+
+// Type change — show/hide dynamic sections
+window.onTypeChange = function(existingData) {
+  const type = document.getElementById('edNoticeType').value;
+  document.querySelectorAll('.dynamic-section').forEach(el => el.classList.remove('show'));
+  const sec = document.getElementById('fields-' + type);
+  if(sec) sec.classList.add('show');
+
+  // Update display
+  document.getElementById('edTypeDisplay').textContent = type;
+
+  // Fill existing data if editing
+  if(existingData) {
+    const d = existingData;
+    if(type === 'RECRUITMENT') {
+      setVal('fFormStart', d.form_start_date);
+      setVal('fLastDate',  d.last_date);
+      setVal('fExamDate',  d.exam_date || d.exam_start_date);
+      setVal('fPosts',     d.total_posts);
+      setVal('fFeeGen',    d.fees_general || d.fee || d.fees);
+      setVal('fFeeSCST',   d.fees_sc_st);
+      setVal('fFeeWomen',  d.fees_women);
+      setVal('fAgeMin',    d.age_min);
+      setVal('fAgeMax',    d.age_max);
+      setVal('fQual',      d.qualification);
+      setVal('fApplyLink', d.apply_link);
+      if(d.application_mode) document.getElementById('fAppMode').value = d.application_mode;
+      // Selection process list
+      if(Array.isArray(d.selection_process)) {
+        d.selection_process.forEach(item => addListItem('selectionList','selection',item));
+      }
+      // Documents list
+      if(Array.isArray(d.required_documents)) {
+        d.required_documents.forEach(item => addListItem('documentsList','documents',item));
+      }
+    } else if(type === 'EXAM_SCHEDULE') {
+      setVal('fExamStart',    d.exam_start_date);
+      setVal('fExamEnd',      d.exam_end_date);
+      setVal('fExamShift',    d.exam_shift_time);
+      setVal('fScheduleLink', d.schedule_link);
+      setVal('fExamCity',     d.exam_city_info);
+    } else if(type === 'ADMIT_CARD') {
+      setVal('fACExamDate',   d.exam_date);
+      setVal('fACAvailFrom',  d.admit_card_available_from);
+      setVal('fACLink',       d.admit_card_link);
+    } else if(type === 'RESULT') {
+      setVal('fResDate',      d.result_date);
+      setVal('fResType',      d.result_type);
+      setVal('fResSelected',  d.total_selected);
+      setVal('fResNext',      d.next_stage);
+      setVal('fResLink',      d.result_link);
+    } else if(type === 'ANSWER_KEY') {
+      setVal('fAKStart', d.objection_start_date);
+      setVal('fAKEnd',   d.objection_end_date);
+      setVal('fAKFee',   d.objection_fee);
+      setVal('fAKLink',  d.answer_key_link);
+    } else if(type === 'CORRECTION') {
+      setVal('fCorStart', d.correction_start_date);
+      setVal('fCorEnd',   d.correction_end_date);
+      setVal('fCorWhat',  d.what_can_be_changed);
+      setVal('fCorLink',  d.correction_link);
+    }
+  }
+};
+
+window.onCollectionChange = function() {
+  const col = document.getElementById('edCollection').value;
+  window._editingCol = col;
+  document.getElementById('edColDisplay').textContent = col;
+  // Scholarship के लिए अलग types
+  const typeSelect = document.getElementById('edNoticeType');
+  if(col === 'scholarship_notices') {
+    typeSelect.innerHTML = `
+      <option value="NEW_APPLICATION">📋 नया आवेदन</option>
+      <option value="DATE_EXTENSION">📅 तारीख विस्तार</option>
+      <option value="SHORTLIST">📋 शॉर्टलिस्ट</option>
+      <option value="PAYMENT">💰 राशि जारी</option>
+      <option value="CORRECTION">✏️ संशोधन</option>
+      <option value="RESULT">🏆 अंतिम परिणाम</option>
+      <option value="GENERAL">📌 सामान्य सूचना</option>`;
+  } else {
+    typeSelect.innerHTML = `
+      <option value="RECRUITMENT">📋 नई भर्ती</option>
+      <option value="EXAM_SCHEDULE">📅 परीक्षा तिथि</option>
+      <option value="ADMIT_CARD">🪪 Admit Card</option>
+      <option value="RESULT">🏆 रिजल्ट</option>
+      <option value="ANSWER_KEY">🔑 Answer Key</option>
+      <option value="CORRECTION">✏️ सुधार विंडो</option>`;
+  }
+  onTypeChange(null);
+};
+
+// ══ BUILD DATA OBJECT ══
+function buildPostData(status) {
+  const type = document.getElementById('edNoticeType').value;
+  const col  = document.getElementById('edCollection').value;
+
+  const postName = document.getElementById('edTitle').value.trim();
+  if(!postName) { toast('Post का Title जरूरी है!', 'error'); return null; }
+
+  const typeLabels = {
+    RECRUITMENT:'नई भर्ती', EXAM_SCHEDULE:'परीक्षा तिथि', ADMIT_CARD:'Admit Card जारी',
+    RESULT:'परिणाम घोषित', ANSWER_KEY:'Answer Key', CORRECTION:'सुधार विंडो',
+    NEW_APPLICATION:'नया आवेदन', DATE_EXTENSION:'तारीख विस्तार',
+    SHORTLIST:'शॉर्टलिस्ट', PAYMENT:'राशि जारी', GENERAL:'सामान्य सूचना',
+  };
+
+  // Source name
+  const sourceMap = {
+    'ssc_jobs':'ssc.gov.in', 'rsmssb_jobs':'rsmssb.rajasthan.gov.in',
+    'rssb_jobs':'rssb.rajasthan.gov.in', 'scholarship_notices':'rajasthan.gov.in'
+  };
+
+  const data = {
+    post_name:    postName,
+    title:        postName,
+    department:   document.getElementById('edDept').value.trim() || null,
+    notice_type:  type,
+    notice_label: typeLabels[type] || type,
+    state:        document.getElementById('edState').value,
+    ai_summary:   document.getElementById('edDescription').innerHTML.trim() || null,
+    description:  document.getElementById('edDescription').innerText.trim() || null,
+    tags:         [...window._tags],
+    official_pdf: getVal('fPdfUrl'),
+    source:       sourceMap[col] || 'rajasthan.gov.in',
+    status:       status,
+  };
+
+  // Type-specific fields
+  if(type === 'RECRUITMENT') {
+    Object.assign(data, {
+      form_start_date:    getVal('fFormStart'),
+      last_date:          getVal('fLastDate'),
+      exam_date:          getVal('fExamDate'),
+      total_posts:        getVal('fPosts'),
+      fees_general:       getVal('fFeeGen'),
+      fees_sc_st:         getVal('fFeeSCST'),
+      fees_women:         getVal('fFeeWomen'),
+      age_min:            getVal('fAgeMin'),
+      age_max:            getVal('fAgeMax'),
+      qualification:      getVal('fQual'),
+      apply_link:         getVal('fApplyLink'),
+      application_mode:   document.getElementById('fAppMode').value,
+      selection_process:  getListItems('selectionList'),
+      required_documents: getListItems('documentsList'),
+    });
+  } else if(type === 'EXAM_SCHEDULE') {
+    Object.assign(data, {
+      exam_start_date:   getVal('fExamStart'),
+      exam_end_date:     getVal('fExamEnd'),
+      exam_shift_time:   getVal('fExamShift'),
+      schedule_link:     getVal('fScheduleLink'),
+      exam_city_info:    getVal('fExamCity'),
+    });
+  } else if(type === 'ADMIT_CARD') {
+    Object.assign(data, {
+      exam_date:                  getVal('fACExamDate'),
+      admit_card_available_from:  getVal('fACAvailFrom'),
+      admit_card_link:            getVal('fACLink'),
+    });
+  } else if(type === 'RESULT') {
+    Object.assign(data, {
+      result_date:     getVal('fResDate'),
+      result_type:     getVal('fResType'),
+      total_selected:  getVal('fResSelected'),
+      next_stage:      getVal('fResNext'),
+      result_link:     getVal('fResLink'),
+    });
+  } else if(type === 'ANSWER_KEY') {
+    Object.assign(data, {
+      objection_start_date: getVal('fAKStart'),
+      objection_end_date:   getVal('fAKEnd'),
+      objection_fee:        getVal('fAKFee'),
+      answer_key_link:      getVal('fAKLink'),
+    });
+  } else if(type === 'CORRECTION') {
+    Object.assign(data, {
+      correction_start_date: getVal('fCorStart'),
+      correction_end_date:   getVal('fCorEnd'),
+      what_can_be_changed:   getVal('fCorWhat'),
+      correction_link:       getVal('fCorLink'),
+    });
+  }
+
+  // Remove null/empty
+  Object.keys(data).forEach(k => {
+    if(data[k] === null || data[k] === '' || data[k] === undefined) delete data[k];
+  });
+
+  return data;
+}
+
+// ══ SAVE AS DRAFT ══
+window.saveDraft = async function() {
+  const data = buildPostData('draft');
+  if(!data) return;
+  await saveToFirestore(data, 'draft');
+};
+
+// ══ PUBLISH ══
+window.publishPost = async function() {
+  const data = buildPostData('published');
+  if(!data) return;
+  await saveToFirestore(data, 'published');
+};
+
+async function saveToFirestore(data, status) {
+  const col    = document.getElementById('edCollection').value;
+  const isEdit = !!window._editingDocId;
+
+  showLoading(status === 'published' ? 'Publish हो रहा है...' : 'Draft Save हो रहा है...');
+  try {
+    if(isEdit) {
+      await updateDoc(doc(db, window._editingCol, window._editingDocId), data);
+      toast(status === 'published' ? '🚀 Post Published हो गई!' : '💾 Draft Save हो गई!');
+    } else {
+      data.published_at = serverTimestamp();
+      const ref = await addDoc(collection(db, col), data);
+      window._editingDocId = ref.id;
+      window._editingCol   = col;
+      toast(status === 'published' ? '🚀 नई Post Publish हो गई!' : '💾 Draft Save हो गई!');
+    }
+    updateStatusBadge(status);
+  } catch(e) {
+    toast('Error: ' + e.message, 'error');
+  }
+  hideLoading();
+}
+
+// ══ DELETE ══
+window.openDelete = function(docId, colName, title) {
+  window._deleteDocId   = docId;
+  window._deleteColName = colName;
+  document.getElementById('deleteConfirmText').innerHTML =
+    `<strong>"${title}"</strong><br>यह post permanently delete हो जाएगी। इसे वापस नहीं लाया जा सकता।`;
+  document.getElementById('deleteModal').classList.add('open');
+};
+
+window.confirmDelete = async function() {
+  if(!window._deleteDocId) return;
+  showLoading('Delete हो रहा है...');
+  try {
+    await deleteDoc(doc(db, window._deleteColName, window._deleteDocId));
+    window._allColJobs   = window._allColJobs.filter(j => j._id !== window._deleteDocId);
+    window._filteredJobs = window._filteredJobs.filter(j => j._id !== window._deleteDocId);
+    renderTable();
+    toast('Post delete हो गई');
+  } catch(e) { toast('Delete failed: ' + e.message, 'error'); }
+  closeModal('deleteModal');
+  hideLoading();
+};
+
+// ══ MODAL ══
+window.closeModal = function(id) { document.getElementById(id).classList.remove('open'); };
+document.querySelectorAll('.modal-overlay').forEach(el => {
+  el.addEventListener('click', e => { if(e.target === el) el.classList.remove('open'); });
+});
+
+// ══ TAGS ══
+window._tags = [];
+
+window.renderTags = function() {
+  const wrap = document.getElementById('tagsWrap');
+  const input = document.getElementById('tagInput');
+  wrap.innerHTML = '';
+  window._tags.forEach((tag, i) => {
+    const chip = document.createElement('span');
+    chip.className = 'tag-chip';
+    chip.innerHTML = `${escH(tag)}<button onclick="removeTag(${i})" title="हटाएं">×</button>`;
+    wrap.appendChild(chip);
+  });
+  wrap.appendChild(input);
+};
+
+window.addTag = function(tag) {
+  tag = tag.trim();
+  if(!tag || window._tags.includes(tag)) return;
+  window._tags.push(tag);
+  renderTags();
+};
+
+window.removeTag = function(i) {
+  window._tags.splice(i, 1);
+  renderTags();
+};
+
+document.getElementById('tagInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = e.target.value.trim().replace(/,$/, '');
+    if(val) { window.addTag(val); e.target.value = ''; }
+  }
+  if(e.key === 'Backspace' && !e.target.value && window._tags.length) {
+    window._tags.pop(); renderTags();
+    setTimeout(() => document.getElementById('tagInput').focus(), 10);
+  }
+});
+
+// ══ LIST ITEMS (Selection Process / Documents) ══
+window.addListItem = function(containerId, type, value='') {
+  const container = document.getElementById(containerId);
+  const row = document.createElement('div');
+  row.className = 'list-item-row';
+  const placeholder = type === 'selection' ? 'e.g. लिखित परीक्षा' : 'e.g. आधार कार्ड';
+  row.innerHTML = `
+    <input type="text" class="list-item-input" value="${escH(value)}" placeholder="${placeholder}">
+    <button class="list-remove-btn" onclick="this.parentElement.remove()" title="हटाएं">
+      <i class="fas fa-times"></i>
+    </button>`;
+  container.appendChild(row);
+  row.querySelector('input').focus();
+};
+
+function getListItems(containerId) {
+  const items = [];
+  document.querySelectorAll(`#${containerId} .list-item-input`).forEach(input => {
+    const v = input.value.trim();
+    if(v) items.push(v);
+  });
+  return items.length ? items : null;
+}
+
+// ══ RICH TEXT FORMATTING ══
+window.insertFormat = function(type) {
+  const el = document.getElementById('edDescription');
+  el.focus();
+  if(type === 'bold')   document.execCommand('bold', false, null);
+  else if(type === 'italic') document.execCommand('italic', false, null);
+  else if(type === 'ul') document.execCommand('insertUnorderedList', false, null);
+  else if(type === 'link') {
+    const url = prompt('Link URL डालें:');
+    if(url) document.execCommand('createLink', false, url);
+  } else if(type === 'clear') document.execCommand('removeFormat', false, null);
+};
+
+// ══ STATUS BADGE ══
+function updateStatusBadge(status) {
+  const badge = document.getElementById('edStatusBadge');
+  if(status === 'published') {
+    badge.className = 'status-published';
+    badge.textContent = '✅ Published';
+  } else {
+    badge.className = 'status-draft';
+    badge.textContent = '📝 Draft';
+  }
+}
+
+// ══ UTILITY ══
+function getVal(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() || null : null;
+}
+function setVal(id, val) {
+  const el = document.getElementById(id);
+  if(el && val !== undefined && val !== null) el.value = val;
+}
+function escH(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;');
+}
+
+// Type/Col display on load
+document.getElementById('edNoticeType').addEventListener('change', () => {
+  document.getElementById('edTypeDisplay').textContent = document.getElementById('edNoticeType').value;
+  onTypeChange(null);
+});
+document.getElementById('edCollection').addEventListener('change', () => {
+  document.getElementById('edColDisplay').textContent = document.getElementById('edCollection').value;
+});
+
+// Init default dynamic section
+window.addEventListener('load', () => {
+  document.getElementById('edColDisplay').textContent  = document.getElementById('edCollection').value;
+  document.getElementById('edTypeDisplay').textContent = document.getElementById('edNoticeType').value;
+});
+
+</script>
+</body>
+</html>

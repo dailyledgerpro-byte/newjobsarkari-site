@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── SSC JOBS ──────────────────────────────────────────────────────────
+    match /ssc_jobs/{document=**} {
+      allow read: if true;
+      allow write: if request.auth != null;   // केवल logged-in admin
+    }
+
+    // ── RSMSSB JOBS ───────────────────────────────────────────────────────
+    match /rsmssb_jobs/{document=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // ── RSSB JOBS ─────────────────────────────────────────────────────────
+    match /rssb_jobs/{document=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // ── SCHOLARSHIP NOTICES ───────────────────────────────────────────────
+    match /scholarship_notices/{document=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+  }
+}

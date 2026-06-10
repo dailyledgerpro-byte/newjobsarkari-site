@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laxmi Job Alert — सरकारी नौकरियाँ</title>
+<meta name="description" content="SSC, RSMSSB, RSSB की नवीनतम भर्ती सूचनाएं, परिणाम, एडमिट कार्ड और आंसर की।">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://*.googleapis.com https://www.gstatic.com wss://*.googleapis.com https://firestore.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://firebaseinstallations.googleapis.com https://*.firebasestorage.app https://*.firebaseio.com wss://*.firebaseio.com; frame-src 'none'; object-src 'none'; base-uri 'self'">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;
+  --green:#16a34a;--red:#dc2626;--orange:#ea580c;--purple:#7c3aed;
+  --gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;
+  --gray-400:#94a3b8;--gray-600:#475569;--text:#0f172a;
+  --font-hi:'Noto Sans Devanagari',sans-serif;
+  --font-en:'Inter',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-en);background:#f0f4ff;color:var(--text);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes rippleOut{0%{transform:scale(0);opacity:.45}100%{transform:scale(5);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* RIPPLE */
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);animation:rippleOut .7s linear forwards;pointer-events:none;}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 60%,#2563eb 100%);position:sticky;top:0;z-index:200;box-shadow:0 2px 20px rgba(30,58,138,.4);}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:38px;height:38px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--blue);flex-shrink:0;}
+.logo-main{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px;}
+.logo-sub{font-size:10px;color:rgba(255,255,255,.75);font-family:var(--font-hi);}
+.nav{display:flex;gap:4px;align-items:center;}
+.nav a{color:rgba(255,255,255,.85);font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:8px;transition:background .2s;display:flex;align-items:center;gap:5px;white-space:nowrap;}
+.nav a:hover{background:rgba(255,255,255,.18);color:#fff;}
+.nav a i{font-size:11px;}
+.hamburger{display:none;color:#fff;font-size:20px;cursor:pointer;padding:6px;}
+@media(max-width:900px){
+  .nav{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(30,58,138,.97);flex-direction:column;justify-content:flex-start;align-items:stretch;padding:20px;gap:4px;z-index:199;overflow-y:auto;}
+  .nav.open{display:flex;}
+  .nav a{font-size:15px;padding:12px 16px;border-radius:10px;}
+  .hamburger{display:block;}
+}
+
+/* PAGE TITLE BAR */
+.page-bar{background:#fff;border-bottom:1.5px solid var(--gray-200);padding:16px 20px;}
+.page-bar-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.page-bar-title{font-size:18px;font-weight:900;color:var(--text);font-family:var(--font-hi);display:flex;align-items:center;gap:8px;}
+.page-bar-count{font-size:13px;color:var(--gray-400);font-family:var(--font-hi);}
+
+/* JOBS SECTION */
+.jobs-section{padding:20px 16px 60px;max-width:760px;margin:0 auto;}
+
+/* JOB CARD */
+.job-card{
+  background:#fff;border-radius:18px;margin-bottom:16px;
+  box-shadow:0 2px 16px rgba(30,58,138,.08);
+  border:1.5px solid #e8edf5;overflow:hidden;
+  animation:cardIn .45s ease both;
+  transition:box-shadow .2s,transform .2s;
+}
+.job-card:hover{box-shadow:0 8px 32px rgba(30,58,138,.14);transform:translateY(-2px);}
+.card-top{padding:16px 16px 12px;border-bottom:1px solid var(--gray-100);}
+.card-new-badge{background:#059669;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:5px;flex-shrink:0;letter-spacing:.5px;}
+.card-title{font-size:15px;font-weight:800;color:var(--text);font-family:var(--font-hi);line-height:1.35;}
+.card-dept{font-size:12px;color:var(--gray-600);margin-top:4px;margin-bottom:10px;display:flex;align-items:center;gap:5px;}
+
+/* NOTICE TYPE BADGE */
+.notice-type-badge{font-size:11px;font-weight:800;padding:3px 12px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;margin-bottom:8px;}
+.ntype-recruitment{background:#dcfce7;color:#15803d;}
+.ntype-exam{background:#dbeafe;color:#1d4ed8;}
+.ntype-admit{background:#ede9fe;color:#7c3aed;}
+.ntype-result{background:#ffedd5;color:#ea580c;}
+.ntype-correction{background:#fef3c7;color:#b45309;}
+.ntype-answer{background:#ccfbf1;color:#0d9488;}
+
+/* INFO GRID */
+.card-info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
+.info-item{background:#f8faff;border-radius:10px;padding:8px 10px;}
+.info-label{font-size:10px;color:var(--gray-400);font-weight:600;margin-bottom:2px;display:flex;align-items:center;gap:4px;}
+.info-value{font-size:13px;font-weight:700;color:var(--text);}
+.info-value.blue{color:var(--blue);}
+.info-value.red{color:var(--red);}
+.info-value.green{color:#059669;}
+.countdown-badge{display:inline-block;background:#fee2e2;color:var(--red);font-size:10px;font-weight:700;padding:1px 6px;border-radius:5px;margin-left:4px;}
+
+/* DETAILS ROW */
+.card-details-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px;}
+.detail-chip{background:#f0f4ff;border-radius:8px;padding:6px 8px;font-size:11px;color:#475569;}
+.detail-chip span{font-weight:700;color:#1e3a8a;display:block;font-size:12px;}
+
+/* TAGS */
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.tag{background:#eff6ff;color:var(--blue);border:1px solid #bfdbfe;font-size:10px;font-weight:700;padding:2px 8px;border-radius:5px;}
+
+/* BUTTONS */
+.btn-detail{width:100%;padding:11px;border-radius:10px;font-size:13px;font-weight:700;border:none;background:linear-gradient(135deg,#1e3a8a,#1d4ed8);color:#fff;cursor:pointer;font-family:var(--font-hi);transition:all .2s;box-shadow:0 3px 12px rgba(30,58,138,.3);position:relative;overflow:hidden;}
+.btn-detail:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(30,58,138,.4);}
+
+/* STATES */
+.jobs-loading{text-align:center;padding:60px 20px;color:var(--gray-600);}
+.jobs-loading i{font-size:36px;color:var(--blue);display:block;margin-bottom:12px;animation:spin 1s linear infinite;}
+.jobs-empty{text-align:center;padding:60px 20px;}
+.jobs-empty i{font-size:48px;color:#cbd5e1;display:block;margin-bottom:12px;}
+.jobs-empty h3{font-size:16px;color:#475569;margin-bottom:6px;font-family:var(--font-hi);}
+.jobs-empty p{font-size:13px;color:var(--gray-400);font-family:var(--font-hi);}
+.reload-btn{margin-top:16px;padding:10px 24px;background:var(--blue);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-family:var(--font-hi);}
+
+/* MOBILE */
+@media(max-width:480px){
+  .card-info-grid{grid-template-columns:1fr 1fr;}
+  .card-details-row{grid-template-columns:1fr 1fr;}
+  .card-title{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">LJ</div>
+      <div>
+        <div class="logo-main">Laxmi Job Alert</div>
+        <div class="logo-sub">सरकारी नौकरी अलर्ट</div>
+      </div>
+    </a>
+    <nav class="nav" id="mainNav">
+      <a href="/"><i class="fas fa-home"></i> होम</a>
+      <a href="sarkari-jobs.html?src=ssc"><i class="fas fa-landmark"></i> SSC</a>
+      <a href="sarkari-jobs.html?src=rsmssb"><i class="fas fa-star-of-david"></i> RSMSSB</a>
+      <a href="sarkari-jobs.html?src=rssb"><i class="fas fa-shield-alt"></i> RSSB</a>
+      <a href="sarkari-jobs.html?type=RESULT"><i class="fas fa-trophy"></i> रिजल्ट</a>
+      <a href="sarkari-jobs.html?type=ADMIT_CARD"><i class="fas fa-id-card"></i> एडमिट कार्ड</a>
+      <a href="sarkari-jobs.html?type=ANSWER_KEY"><i class="fas fa-key"></i> आंसर की</a>
+      <a href="scholarship.html"><i class="fas fa-graduation-cap"></i> छात्रवृत्ति</a>
+    </nav>
+    <button class="hamburger" id="hamburger" onclick="document.getElementById('mainNav').classList.toggle('open')">
+      <i class="fas fa-bars" id="hamburgerIcon"></i>
+    </button>
+  </div>
+</header>
+
+<!-- PAGE TITLE BAR -->
+<div class="page-bar">
+  <div class="page-bar-inner">
+    <div class="page-bar-title" id="pageBarTitle">🔔 सरकारी नौकरियाँ</div>
+    <div class="page-bar-count" id="pageBarCount"></div>
+  </div>
+</div>
+
+<!-- JOBS LIST -->
+<div class="jobs-section" id="jobsContainer">
+  <div class="jobs-loading">
+    <i class="fas fa-circle-notch"></i>
+    <p style="font-family:var(--font-hi);">भर्तियां लोड हो रही हैं...</p>
+  </div>
+</div>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getFirestore, collection, getDocs, query, limit }
+  from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey:'AIzaSyD6fwR3EsspTbw7YJPQiSEGChdLBcOCEU8',
+  authDomain:'newjobsarkari.firebaseapp.com',
+  projectId:'newjobsarkari',
+  storageBucket:'newjobsarkari.firebasestorage.app',
+  messagingSenderId:'489662168900',
+  appId:'1:489662168900:web:b214ef3f1269ef3a9de111',
+};
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+// URL params
+const _params  = new URLSearchParams(location.search);
+const SRC      = _params.get('src')  || 'all';
+const URL_TYPE = _params.get('type') || '';
+const URL_Q    = (_params.get('q')   || '').trim();
+
+// Page title config
+const SRC_TITLES = {
+  'ssc':'🏛️ SSC Jobs','rsmssb':'⭐ RSMSSB Jobs','rssb':'🛡️ RSSB Jobs','all':'🔔 सभी सरकारी नौकरियाँ'
+};
+const TYPE_TITLES = {
+  RESULT:'🏆 परिणाम',ADMIT_CARD:'🪪 एडमिट कार्ड',EXAM_SCHEDULE:'📅 परीक्षा तिथि',
+  ANSWER_KEY:'🔑 आंसर की',RECRUITMENT:'📋 नई भर्ती',CORRECTION:'✏️ सुधार विंडो'
+};
+
+const pageTitle = URL_Q ? `🔍 "${URL_Q}" खोज परिणाम`
+                : URL_TYPE ? (TYPE_TITLES[URL_TYPE]||URL_TYPE)
+                : (SRC_TITLES[SRC]||SRC_TITLES['all']);
+
+document.title = pageTitle.replace(/[🏛️⭐🛡️🔔🏆🪪📅🔑📋✏️🔍]/gu,'').trim() + ' | Laxmi Job Alert';
+document.getElementById('pageBarTitle').textContent = pageTitle;
+
+window._allJobs = [];
+
+// CACHE
+const CACHE_KEY = 'lja_sj_' + SRC + '_' + URL_TYPE;
+const CACHE_TTL = 5 * 60 * 1000;
+function readCache(){try{const r=sessionStorage.getItem(CACHE_KEY);if(!r)return null;const{data,ts}=JSON.parse(r);if(Date.now()-ts<CACHE_TTL&&Array.isArray(data)&&data.length>0)return data;}catch(e){}return null;}
+function writeCache(data){try{sessionStorage.setItem(CACHE_KEY,JSON.stringify({data,ts:Date.now()}));}catch(e){}}
+
+function getColsToLoad(){return{ssc:['ssc_jobs'],rsmssb:['rsmssb_jobs'],rssb:['rssb_jobs'],all:['ssc_jobs','rsmssb_jobs','rssb_jobs']}[SRC]||['ssc_jobs','rsmssb_jobs','rssb_jobs'];}
+
+function withTimeout(p,ms){return Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),ms))]);}
+
+async function fetchFirestore(cols){
+  const results=await Promise.allSettled(cols.map(col=>withTimeout(getDocs(query(collection(db,col),limit(80))),8000).then(snap=>{const a=[];snap.forEach(d=>{const data=d.data();if(data.published_at?.seconds)data.published_at={seconds:data.published_at.seconds};a.push({id:d.id,_col:col,...data});});return a;})));
+  let jobs=[];let ok=false;
+  results.forEach(r=>{if(r.status==='fulfilled'){jobs=jobs.concat(r.value);ok=true;}});
+  if(!ok)throw new Error('All fetches failed');
+  return jobs;
+}
+
+async function loadJobs(){
+  const container=document.getElementById('jobsContainer');
+  const cached=readCache();
+  if(cached){
+    window._allJobs=cached;renderJobs(applyFilters(cached));
+    fetchFirestore(getColsToLoad()).then(jobs=>{
+      if(jobs.length>0){jobs.sort((a,b)=>(b.published_at?.seconds||0)-(a.published_at?.seconds||0));window._allJobs=jobs;writeCache(jobs);renderJobs(applyFilters(jobs));}
+    }).catch(()=>{});
+    return;
+  }
+  async function tryLoad(attempt){
+    try{
+      let jobs=await fetchFirestore(getColsToLoad());
+      jobs.sort((a,b)=>(b.published_at?.seconds||0)-(a.published_at?.seconds||0));
+      window._allJobs=jobs;
+      if(jobs.length===0){
+        if(attempt<2){setTimeout(()=>tryLoad(attempt+1),3000);return;}
+        container.innerHTML=`<div class="jobs-empty"><i class="fas fa-folder-open"></i><h3>कोई सूचना नहीं मिली</h3><p>बाद में देखें।</p><button class="reload-btn" onclick="location.reload()">🔄 दोबारा लोड करें</button></div>`;return;
+      }
+      writeCache(jobs);renderJobs(applyFilters(jobs));
+    }catch(err){
+      if(attempt<2){setTimeout(()=>tryLoad(attempt+1),4000);container.innerHTML=`<div class="jobs-loading"><i class="fas fa-circle-notch"></i><p style="font-family:var(--font-hi)">दोबारा कोशिश हो रही है...</p></div>`;}
+      else container.innerHTML=`<div class="jobs-empty"><i class="fas fa-triangle-exclamation"></i><h3>लोड नहीं हुआ</h3><p>इंटरनेट चेक करें।</p><button class="reload-btn" onclick="location.reload()">🔄 दोबारा लोड करें</button></div>`;
+    }
+  }
+  tryLoad(1);
+}
+
+function applyFilters(jobs){
+  let filtered=jobs;
+  if(URL_TYPE) filtered=filtered.filter(j=>(j.notice_type||'RECRUITMENT')===URL_TYPE);
+  if(URL_Q){const q=URL_Q.toLowerCase();filtered=filtered.filter(j=>{const t=(j.post_name||j.job_title||'').toLowerCase();const d=(j.department||'').toLowerCase();const tg=(j.tags||[]).join(' ').toLowerCase();return t.includes(q)||d.includes(q)||tg.includes(q);});}
+  return filtered;
+}
+
+function renderJobs(jobs){
+  const container=document.getElementById('jobsContainer');
+  document.getElementById('pageBarCount').textContent=jobs.length?`${jobs.length} नोटिस`:'';
+  if(!jobs.length){container.innerHTML=`<div class="jobs-empty"><i class="fas fa-search"></i><h3>कोई परिणाम नहीं</h3><p>अलग category चुनें।</p></div>`;return;}
+  container.innerHTML=jobs.map((j,i)=>buildCard(j,i)).join('');
+  initReveal();
+}
+
+// TYPE CONFIG
+const TYPE_CONFIG={
+  RECRUITMENT:{icon:'📋',cssClass:'ntype-recruitment',label:'नई भर्ती',btnText:'<i class="fas fa-pen-to-square"></i> आवेदन / पूरी जानकारी'},
+  EXAM_SCHEDULE:{icon:'📅',cssClass:'ntype-exam',label:'परीक्षा तिथि',btnText:'<i class="fas fa-calendar-days"></i> शेड्यूल देखें'},
+  ADMIT_CARD:{icon:'🪪',cssClass:'ntype-admit',label:'Admit Card जारी',btnText:'<i class="fas fa-download"></i> Admit Card डाउनलोड'},
+  RESULT:{icon:'🏆',cssClass:'ntype-result',label:'परिणाम घोषित',btnText:'<i class="fas fa-trophy"></i> परिणाम देखें'},
+  CORRECTION:{icon:'✏️',cssClass:'ntype-correction',label:'सुधार विंडो',btnText:'<i class="fas fa-pen"></i> सुधार / पूरी जानकारी'},
+  ANSWER_KEY:{icon:'🔑',cssClass:'ntype-answer',label:'Answer Key',btnText:'<i class="fas fa-key"></i> Answer Key देखें'},
+};
+
+function buildCard(job,idx){
+  const ntype=job.notice_type||'RECRUITMENT';
+  const tConf=TYPE_CONFIG[ntype]||TYPE_CONFIG['RECRUITMENT'];
+  const label=job.notice_label||tConf.label;
+  const title=job.post_name||job.job_title||'नोटिस';
+  const dept=job.department||(job._col==='ssc_jobs'?'Staff Selection Commission':'राजस्थान सरकार');
+  const defTags=job._col==='ssc_jobs'?['SSC','केंद्र सरकार']:job._col==='rsmssb_jobs'?['RSMSSB','राजस्थान सरकार']:['RSSB','राजस्थान सरकार'];
+  const tags=Array.isArray(job.tags)?job.tags:defTags;
+  const isNew=isNewJob(job.published_at);
+  const tagsHtml=tags.slice(0,4).map(t=>`<span class="tag">${escH(t)}</span>`).join('');
+  let infoGrid='',detailsRow='';
+
+  if(ntype==='RECRUITMENT'){
+    const posts=job.total_posts||'—';const startDate=job.form_start_date||'—';const lastDate=job.last_date||'—';
+    const feeGen=job.fees_general||job.fees||'—';const ageMin=job.age_min||'—';const ageMax=job.age_max||'—';
+    const qual=job.qualification||'—';const {daysLeft}=getStatus(lastDate,startDate);
+    const cBadge=(daysLeft!==null&&daysLeft>=0&&daysLeft<=10)?`<span class="countdown-badge">${daysLeft} दिन शेष</span>`:'';
+    const ageText=(ageMin!=='—'&&ageMax!=='—')?`${ageMin}-${ageMax} वर्ष`:(ageMax!=='—'?`${ageMax} वर्ष`:'—');
+    infoGrid=`<div class="card-info-grid"><div class="info-item"><div class="info-label"><i class="fas fa-users"></i> कुल पद</div><div class="info-value blue">${escH(String(posts))}</div></div><div class="info-item"><div class="info-label"><i class="far fa-calendar"></i> फॉर्म शुरू</div><div class="info-value">${escH(startDate)}</div></div><div class="info-item"><div class="info-label"><i class="far fa-calendar-xmark"></i> अंतिम तिथि</div><div class="info-value red">${escH(lastDate)}${cBadge}</div></div></div>`;
+    detailsRow=`<div class="card-details-row"><div class="detail-chip"><span>योग्यता</span>${escH(qual.length>30?qual.slice(0,30)+'…':qual)}</div><div class="detail-chip"><span>आयु सीमा</span>${escH(ageText)}</div><div class="detail-chip"><span>फीस</span>${escH(feeGen)}</div></div>`;
+  }else if(ntype==='EXAM_SCHEDULE'){
+    const start=job.exam_start_date||'—';const end=job.exam_end_date||'—';const shift=job.exam_shift_time||'—';const city=job.exam_city_info||'—';
+    infoGrid=`<div class="card-info-grid"><div class="info-item"><div class="info-label"><i class="far fa-calendar"></i> परीक्षा शुरू</div><div class="info-value blue">${escH(start)}</div></div><div class="info-item"><div class="info-label"><i class="far fa-calendar-xmark"></i> समाप्त</div><div class="info-value">${escH(end)}</div></div><div class="info-item"><div class="info-label"><i class="far fa-clock"></i> समय</div><div class="info-value">${escH(shift.length>18?shift.slice(0,18)+'…':shift)}</div></div></div>`;
+    detailsRow=`<div class="card-details-row" style="grid-template-columns:1fr"><div class="detail-chip"><span>परीक्षा केंद्र/शहर</span>${escH(city.length>65?city.slice(0,65)+'…':city)}</div></div>`;
+  }else if(ntype==='ADMIT_CARD'){
+    const examDate=job.exam_date||'—';const avail=job.admit_card_available_from||'—';
+    infoGrid=`<div class="card-info-grid"><div class="info-item"><div class="info-label"><i class="far fa-calendar"></i> परीक्षा तिथि</div><div class="info-value blue">${escH(examDate)}</div></div><div class="info-item"><div class="info-label"><i class="fas fa-download"></i> उपलब्ध से</div><div class="info-value green">${escH(avail)}</div></div><div class="info-item"><div class="info-label"><i class="fas fa-globe"></i> स्रोत</div><div class="info-value">${job._col==='ssc_jobs'?'ssc.gov.in':'rajasthan.gov.in'}</div></div></div>`;
+  }else if(ntype==='RESULT'){
+    const resDate=job.result_date||'—';const resType=job.result_type||'—';const sel=job.total_selected||'—';const next=job.next_stage||'—';
+    infoGrid=`<div class="card-info-grid"><div class="info-item"><div class="info-label"><i class="far fa-calendar"></i> परिणाम तिथि</div><div class="info-value blue">${escH(resDate)}</div></div><div class="info-item"><div class="info-label"><i class="fas fa-trophy"></i> प्रकार</div><div class="info-value">${escH(resType.length>18?resType.slice(0,18)+'…':resType)}</div></div><div class="info-item"><div class="info-label"><i class="fas fa-users"></i> चयनित</div><div class="info-value green">${escH(String(sel))}</div></div></div>`;
+    detailsRow=`<div class="card-details-row" style="grid-template-columns:1fr"><div class="detail-chip"><span>अगला चरण</span>${escH(next.length>65?next.slice(0,65)+'…':next)}</div></div>`;
+  }else if(ntype==='CORRECTION'){
+    const start=job.correction_start_date||'—';const end=job.correction_end_date||'—';const what=job.what_can_be_changed||'—';
+    infoGrid=`<div class="card-info-grid"><div class="info-item"><div class="info-label"><i class="far fa-calendar"></i> सुधार शुरू</div><div class="info-value blue">${escH(start)}</div></div><div class="info-item"><div class="info-label"><i class="far fa-calendar-xmark"></i> अंतिम तिथि</div><div class="info-value red">${escH(end)}</div></div><div class="info-item"><div class="info-label"><i class="fas fa-globe"></i> स्रोत</div><div class="info-value">${job._col==='ssc_jobs'?'ssc.gov.in':'rajasthan.gov.in'}</div></div></div>`;
+    detailsRow=`<div class="card-details-row" style="grid-template-columns:1fr"><div class="detail-chip"><span>क्या बदल सकते हैं</span>${escH(what.length>65?what.slice(0,65)+'…':what)}</div></div>`;
+  }else if(ntype==='ANSWER_KEY'){
+    const start=job.objection_start_date||'—';const end=job.objection_end_date||'—';const fee=job.objection_fee||'—';
+    infoGrid=`<div class="card-info-grid"><div class="info-item"><div class="info-label"><i class="far fa-calendar"></i> आपत्ति शुरू</div><div class="info-value blue">${escH(start)}</div></div><div class="info-item"><div class="info-label"><i class="far fa-calendar-xmark"></i> आपत्ति अंत</div><div class="info-value red">${escH(end)}</div></div><div class="info-item"><div class="info-label"><i class="fas fa-indian-rupee-sign"></i> शुल्क/प्रश्न</div><div class="info-value">${escH(fee)}</div></div></div>`;
+  }
+
+  return `
+  <div class="job-card reveal" style="animation-delay:${idx*0.06}s">
+    <div class="card-top">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+        <span class="notice-type-badge ${tConf.cssClass}">${tConf.icon} ${escH(label)}</span>
+        ${isNew?'<span class="card-new-badge">NEW</span>':''}
+      </div>
+      <div class="card-title">${escH(title)}</div>
+      <div class="card-dept"><i class="fas fa-building" style="color:#94a3b8;"></i> ${escH(dept)}</div>
+      ${infoGrid}${detailsRow}
+      <div class="card-tags">${tagsHtml}</div>
+    </div>
+    <div style="padding:12px 16px;">
+      <button class="btn-detail" onclick="addRipple(event,this);goDetail('${escH(job.id)}','${escH(job._col)}')">
+        ${tConf.btnText}
+      </button>
+    </div>
+  </div>`;
+}
+
+// HELPERS
+function getStatus(lastDateStr,startDateStr){
+  const today=new Date();today.setHours(0,0,0,0);
+  const last=parseDate(lastDateStr);const start=parseDate(startDateStr);
+  if(last&&last<today)return{daysLeft:null};
+  if(start&&start>today)return{daysLeft:null};
+  if(last){const diff=Math.ceil((last-today)/86400000);return{daysLeft:diff};}
+  return{daysLeft:null};
+}
+function parseDate(str){
+  if(!str||str==='—'||str==='उपलब्ध नहीं')return null;
+  const m1=str.match(/(\d{2})[\/\-](\d{2})[\/\-](\d{4})/);
+  if(m1){const d=new Date(+m1[3],+m1[2]-1,+m1[1]);return isNaN(d)?null:d;}
+  const m2=str.match(/(\d{4})[\/\-](\d{2})[\/\-](\d{2})/);
+  if(m2){const d=new Date(+m2[1],+m2[2]-1,+m2[3]);return isNaN(d)?null:d;}
+  return null;
+}
+function isNewJob(pa){if(!pa)return false;const ts=pa.seconds?new Date(pa.seconds*1000):new Date(pa);return(Date.now()-ts)<7*24*3600*1000;}
+function escH(s){const v=String(s||'');const c=(v==='Not Available'||v==='NA'||v==='N/A')?'उपलब्ध नहीं':v;return c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;');}
+window.goDetail=function(docId,col){location.href=`job-detail.html#${encodeURIComponent(docId)}||${encodeURIComponent(col)}`;};
+function initReveal(){const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.06});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));}
+
+loadJobs();
+</script>
+
+<script>
+function addRipple(e,el){const r=document.createElement('span');r.className='ripple';const rect=el.getBoundingClientRect();const sz=Math.max(rect.width,rect.height)*2;r.style.cssText=`width:${sz}px;height:${sz}px;left:${e.clientX-rect.left-sz/2}px;top:${e.clientY-rect.top-sz/2}px`;el.appendChild(r);setTimeout(()=>r.remove(),700);}
+document.getElementById('hamburger').addEventListener('click',()=>{const open=document.getElementById('mainNav').classList.contains('open');document.getElementById('hamburgerIcon').className=open?'fas fa-bars':'fas fa-times';});
+</script>
+</body>
+</html>
