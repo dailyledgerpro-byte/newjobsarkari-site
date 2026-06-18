@@ -1252,7 +1252,8 @@ window.openEditor = async function(docId, colName) {
       // Fill editor
       document.getElementById('edTitle').value        = d.post_name || d.scheme_name || d.title || '';
       document.getElementById('edCollection').value   = colName;
-      document.getElementById('edNoticeType').value   = d.notice_type || 'RECRUITMENT';
+      applyCollectionUI(colName);   // label + collection-सही notice-type options (value भरने से पहले)
+      document.getElementById('edNoticeType').value   = d.notice_type || (colName === 'scholarship_notices' ? 'GENERAL' : 'RECRUITMENT');
       document.getElementById('edDept').value         = d.department || '';
       document.getElementById('edState').value        = d.state || 'Rajasthan';
       document.getElementById('edDescription').innerHTML = d.ai_summary || d.description || '';
@@ -1279,6 +1280,7 @@ window.openEditor = async function(docId, colName) {
     window._editingDocId = null;
     window._editingCol   = colName || window._currentCol || 'ssc_jobs';
     document.getElementById('edCollection').value = window._editingCol;
+    applyCollectionUI(window._editingCol);   // label + collection-सही type options
     document.getElementById('editorTitle').textContent = '✍️ नई Post लिखें';
     onTypeChange(null);
 
@@ -1400,9 +1402,10 @@ window.onTypeChange = function(existingData) {
   }
 };
 
-window.onCollectionChange = function() {
-  const col = document.getElementById('edCollection').value;
-  window._editingCol = col;
+// Collection-dependent UI (display label + notice-type options) — single source of truth.
+// यह केवल label व type-options sync करता है; field values को नहीं छूता।
+// Caller (onCollectionChange / openEditor) onTypeChange व value-set अलग से संभालते हैं।
+function applyCollectionUI(col) {
   document.getElementById('edColDisplay').textContent = col;
   // Scholarship के लिए अलग types
   const typeSelect = document.getElementById('edNoticeType');
@@ -1424,6 +1427,12 @@ window.onCollectionChange = function() {
       <option value="ANSWER_KEY">🔑 Answer Key</option>
       <option value="CORRECTION">✏️ सुधार विंडो</option>`;
   }
+}
+
+window.onCollectionChange = function() {
+  const col = document.getElementById('edCollection').value;
+  window._editingCol = col;
+  applyCollectionUI(col);
   onTypeChange(null);
 };
 
