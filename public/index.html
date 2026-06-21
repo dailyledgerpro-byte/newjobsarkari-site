@@ -224,6 +224,9 @@ ul{list-style:none;}
   </div>
 </section>
 
+<!-- FILTER BAR -->
+<div id="filterBar" style="max-width:1200px;margin:0 auto;padding:22px 20px 0;"></div>
+
 <!-- DYNAMIC SECTIONS -->
 <main id="sectionsRoot">
   <section class="cat-section">
@@ -308,9 +311,9 @@ ul{list-style:none;}
 
 <!-- FIREBASE (read-only) -->
 <script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { getFirestore, collection, getDocs, query, limit }
-  from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import * as Portal from './portal-engine.js';
 
 // Public web config (already public in frontend). Read-only usage only.
 const firebaseConfig = {
@@ -321,262 +324,84 @@ const firebaseConfig = {
   messagingSenderId: "489662168900",
   appId: "1:489662168900:web:b214ef3f1269ef3a9de111"
 };
-const db = getFirestore(initializeApp(firebaseConfig));
+const db = getFirestore(getApps().length ? getApps()[0] : initializeApp(firebaseConfig));
 
-/* ============================================================
-   FUTURE-PROOF CONFIG — add a department by adding one entry.
-   ============================================================ */
-const SOURCE_REGISTRY = [
-  { id:'ssc',         label:'SSC',         collection:'ssc_jobs',            color:'#1d4ed8', icon:'🏛️' },
-  { id:'rsmssb',      label:'RSMSSB',      collection:'rsmssb_jobs',         color:'#7c3aed', icon:'⭐' },
-  { id:'rssb',        label:'RSSB',        collection:'rssb_jobs',           color:'#16a34a', icon:'🛡️' },
-  { id:'scholarship', label:'Scholarship', collection:'scholarship_notices', color:'#ea580c', icon:'🎓' }
-];
-
-// Homepage categories (render order). Add a category by adding one entry.
-const CATEGORIES = [
-  { id:'jobs',        icon:'🔥', hi:'नई भर्तियां',     en:'Latest Jobs',     dateLabel:'अंतिम तिथि',        dateFields:['last_date','form_start_date'],                     viewAll:'sarkari-jobs.html?src=all' },
-  { id:'result',      icon:'🏆', hi:'परिणाम',          en:'Results',         dateLabel:'परिणाम तिथि',       dateFields:['result_date','published_at'],                      viewAll:'sarkari-jobs.html?type=RESULT' },
-  { id:'admit',       icon:'🪪', hi:'एडमिट कार्ड',      en:'Admit Cards',     dateLabel:'परीक्षा तिथि',      dateFields:['exam_date','admit_card_available_from'],           viewAll:'sarkari-jobs.html?type=ADMIT_CARD' },
-  { id:'answer',      icon:'🔑', hi:'आंसर की',          en:'Answer Key',      dateLabel:'आपत्ति अंतिम तिथि', dateFields:['objection_end_date','objection_start_date'],       viewAll:'sarkari-jobs.html?type=ANSWER_KEY' },
-  { id:'extension',   icon:'⏳', hi:'तारीख परिवर्तन',   en:'Date Extension',  dateLabel:'नई अंतिम तिथि',     dateFields:['correction_end_date','last_date','document_last_date','correction_start_date'], viewAll:'sarkari-jobs.html?type=DATE_EXTENSION' },
-  { id:'scholarship', icon:'🎓', hi:'छात्रवृत्ति',       en:'Scholarship',     dateLabel:'अंतिम तिथि',        dateFields:['last_date','document_last_date','form_start_date'],viewAll:'scholarship.html' },
-  { id:'exam',        icon:'📅', hi:'परीक्षा तिथि',      en:'Exam Schedule',   dateLabel:'परीक्षा तिथि',      dateFields:['exam_date','exam_start_date'],                     viewAll:'sarkari-jobs.html?type=EXAM_SCHEDULE' },
-  { id:'other',       icon:'📋', hi:'अन्य सूचनाएं',     en:'Notices',         dateLabel:'दिनांक',            dateFields:['published_at'],                                    viewAll:'sarkari-jobs.html?src=all' }
-];
-const CAT_BY_ID = Object.fromEntries(CATEGORIES.map(c=>[c.id,c]));
-
-// notice_type -> category id (extend by adding one line)
-const TYPE_CATEGORY = {
-  RECRUITMENT:'jobs', VACANCY:'jobs', JOB:'jobs', NOTIFICATION:'jobs',
-  RESULT:'result',
-  ADMIT_CARD:'admit',
-  ANSWER_KEY:'answer',
-  EXAM_SCHEDULE:'exam',
-  DATE_EXTENSION:'extension', CORRECTION:'extension',
-  NEW_APPLICATION:'scholarship', SCHOLARSHIP:'scholarship'
-};
-
-const HERO_CHIPS = [
-  { label:'SSC',         icon:'🏛️', href:'sarkari-jobs.html?src=ssc' },
-  { label:'RSMSSB',      icon:'⭐',  href:'sarkari-jobs.html?src=rsmssb' },
-  { label:'RSSB',        icon:'🛡️', href:'sarkari-jobs.html?src=rssb' },
-  { label:'रिजल्ट',      icon:'🏆',  href:'sarkari-jobs.html?type=RESULT' },
-  { label:'एडमिट कार्ड', icon:'🪪',  href:'sarkari-jobs.html?type=ADMIT_CARD' },
-  { label:'आंसर की',     icon:'🔑',  href:'sarkari-jobs.html?type=ANSWER_KEY' },
-  { label:'छात्रवृत्ति',  icon:'🎓',  href:'scholarship.html' }
-];
-
-const PER_SECTION = 6;       // top N per homepage section
-const FETCH_LIMIT = 15;      // reads per collection
-
-/* ===================== SAFE HELPERS ===================== */
-const MISSING = new Set(['','-','—','n/a','na','null','undefined','उपलब्ध नहीं','available नहीं','nil']);
-function clean(v){ if(v==null) return ''; const s=String(v).trim(); return MISSING.has(s.toLowerCase()) ? '' : s; }
-function firstNonEmpty(){ for(const a of arguments){ const c=clean(a); if(c) return c; } return ''; }
-function toMillis(ts){ if(!ts) return 0; if(typeof ts.toMillis==='function') return ts.toMillis(); if(typeof ts.seconds==='number') return ts.seconds*1000; if(typeof ts==='number') return ts; const t=Date.parse(ts); return isNaN(t)?0:t; }
-function fmtDate(ms){ if(!ms) return ''; const d=new Date(ms); if(isNaN(d)) return ''; const p=n=>String(n).padStart(2,'0'); return `${p(d.getDate())}-${p(d.getMonth()+1)}-${d.getFullYear()}`; }
-// allow only same-origin or http/https absolute URLs in href
-function safeUrl(u){ const c=clean(u); if(!c) return null; try{ const x=new URL(c, location.href); return (x.protocol==='http:'||x.protocol==='https:') ? x.href : null; }catch(e){ return null; } }
-function srcMeta(col){ return SOURCE_REGISTRY.find(s=>s.collection===col) || {label:'सरकारी', color:'#475569', icon:'🏢'}; }
-// element builder — always textContent, never innerHTML with data
-function el(tag, cls, txt){ const n=document.createElement(tag); if(cls) n.className=cls; if(txt!=null) n.textContent=txt; return n; }
-
-/* ===================== NORMALIZE + CLASSIFY ===================== */
-function normalize(doc, col){
-  const r = doc.data() || {};
-  const item = {
-    id: doc.id,
-    col,
-    title: firstNonEmpty(r.post_name, r.scheme_name, r.title, r.job_title, r.name, r.examName, r.notice_label),
-    noticeType: firstNonEmpty(r.notice_type, r.type, r.category).toUpperCase(),
-    dept: firstNonEmpty(r.department, r.portal_name, r.apply_portal),
-    ts: toMillis(r.published_at),
-    pdf: safeUrl(firstNonEmpty(r.official_pdf, r.pdf_url, r.pdfUrl, r.official_url, r.detailUrl)),
-    raw: r
-  };
-  item.catId = classify(item);
-  return item;
-}
-function classify(item){
-  // scholarship collection stays in scholarship, unless it's an explicit date extension
-  if(item.col==='scholarship_notices' && item.noticeType!=='DATE_EXTENSION') return 'scholarship';
-  return TYPE_CATEGORY[item.noticeType] || 'other';
-}
-function pickDate(item, cat){
-  for(const f of cat.dateFields){
-    if(f==='published_at'){ const d=fmtDate(item.ts); if(d) return d; continue; }
-    const v=clean(item.raw[f]); if(v) return v;
-  }
-  return '';
-}
-
-/* ===================== RENDER (safe DOM) ===================== */
-function buildCard(item){
-  const cat = CAT_BY_ID[item.catId] || CAT_BY_ID.other;
-  const sm  = srcMeta(item.col);
-  const card = el('article','card');
-
-  const top = el('div','card-top');
-  const sb  = el('span','src-badge', sm.label); sb.style.background = sm.color;
-  top.appendChild(sb);
-  top.appendChild(el('span','cat-badge', cat.hi));
-  card.appendChild(top);
-
-  card.appendChild(el('div','card-title', item.title || 'सूचना देखें'));
-
-  if(item.dept){
-    const dp = el('div','card-dept');
-    const i = document.createElement('i'); i.className='fas fa-building'; dp.appendChild(i);
-    dp.appendChild(el('span', null, item.dept));
-    card.appendChild(dp);
-  }
-
-  const dateVal = pickDate(item, cat);
-  const dl = el('div','card-date');
-  const di = document.createElement('i'); di.className='fas fa-calendar-day'; dl.appendChild(di);
-  dl.appendChild(el('span', null, cat.dateLabel + ':'));
-  dl.appendChild(el('b', null, dateVal || 'देखें'));   // never a bare dash
-  card.appendChild(dl);
-
-  const foot = el('div','card-foot');
-  const details = el('a','btn-details','विवरण देखें');
-  details.setAttribute('href', `job-detail.html#${encodeURIComponent(item.id)}||${encodeURIComponent(item.col)}`);
-  foot.appendChild(details);
-  if(item.pdf){
-    const pdf = el('a','btn-pdf');
-    pdf.setAttribute('href', item.pdf);
-    pdf.setAttribute('target','_blank');
-    pdf.setAttribute('rel','noopener noreferrer');
-    const pi = document.createElement('i'); pi.className='fas fa-file-pdf'; pdf.appendChild(pi);
-    foot.appendChild(pdf);
-  }
-  card.appendChild(foot);
-  return card;
-}
-
-function buildSection(cat, items, alt){
-  const sec = el('section', 'cat-section' + (alt?' alt':''));
-  const inner = el('div','section-inner');
-
-  const head = el('div','section-head');
-  const h2 = el('h2','section-title');
-  h2.appendChild(el('span','ico', cat.icon));
-  h2.appendChild(el('span', null, cat.hi));
-  const small = el('small', null, cat.en); h2.appendChild(small);
-  head.appendChild(h2);
-  const all = el('a','see-all','सभी देखें');
-  all.setAttribute('href', cat.viewAll);
-  const ai = document.createElement('i'); ai.className='fas fa-arrow-right'; all.appendChild(ai);
-  head.appendChild(all);
-  inner.appendChild(head);
-
-  const grid = el('div','cards');
-  if(items.length){
-    items.forEach(it=>grid.appendChild(buildCard(it)));
-  }else{
-    const e = el('div','empty-state');
-    const ei = document.createElement('i'); ei.className='fas fa-inbox'; e.appendChild(ei);
-    e.appendChild(el('p', null, 'अभी कोई नई सूचना उपलब्ध नहीं है'));
-    grid.appendChild(e);
-  }
-  inner.appendChild(grid);
-  sec.appendChild(inner);
-  return sec;
-}
-
-function renderSections(items){
-  const root = document.getElementById('sectionsRoot');
-  root.textContent = '';
-  let altFlag = false, shown = 0;
-  for(const cat of CATEGORIES){
-    const list = items.filter(it=>it.catId===cat.id).sort((a,b)=>b.ts-a.ts).slice(0, PER_SECTION);
-    if(!list.length) continue;            // render only non-empty sections (premium, no empty walls)
-    root.appendChild(buildSection(cat, list, altFlag));
-    altFlag = !altFlag; shown++;
-  }
-  if(shown===0){
-    const wrap = el('div','section-inner');
-    wrap.appendChild(buildSection(CAT_BY_ID.jobs, [], false));
-    root.appendChild(wrap);
-  }
-}
-
-function renderError(){
-  const root = document.getElementById('sectionsRoot');
-  root.textContent = '';
-  const sec = el('section','cat-section');
-  const inner = el('div','section-inner page-empty');
-  const e = el('div','empty-state');
-  const i = document.createElement('i'); i.className='fas fa-triangle-exclamation'; e.appendChild(i);
-  e.appendChild(el('p', null, 'सूचनाएं अभी लोड नहीं हो पाईं। कृपया थोड़ी देर बाद पुनः प्रयास करें।'));
-  inner.appendChild(e); sec.appendChild(inner); root.appendChild(sec);
-}
-
-/* ===================== SEARCH (debounced, inline) ===================== */
+const PER_SECTION = 6;
+const sectionsRoot = document.getElementById('sectionsRoot');
 let ALL_ITEMS = [];
-function applySearch(qRaw){
-  const q = clean(qRaw).toLowerCase();
-  if(!q){ renderSections(ALL_ITEMS); return; }
-  const hits = ALL_ITEMS.filter(it=>{
-    const cat = CAT_BY_ID[it.catId] || CAT_BY_ID.other;
-    const hay = `${it.title} ${it.dept} ${it.noticeType} ${cat.hi} ${cat.en} ${srcMeta(it.col).label}`.toLowerCase();
-    return hay.includes(q);
-  }).sort((a,b)=>b.ts-a.ts).slice(0, 30);
+let controller = null;
 
-  const root = document.getElementById('sectionsRoot');
-  root.textContent = '';
-  const sec = el('section','cat-section');
-  const inner = el('div','section-inner');
-  const head = el('div','section-head');
-  const h2 = el('h2','section-title');
-  h2.appendChild(el('span','ico','🔎'));
-  h2.appendChild(el('span', null, `खोज परिणाम (${hits.length})`));
-  head.appendChild(h2);
-  inner.appendChild(head);
-  const grid = el('div','cards');
-  if(hits.length){ hits.forEach(it=>grid.appendChild(buildCard(it))); }
-  else{
-    const e = el('div','empty-state');
-    const ei = document.createElement('i'); ei.className='fas fa-magnifying-glass'; e.appendChild(ei);
-    e.appendChild(el('p', null, 'इस खोज से कोई सूचना नहीं मिली'));
-    grid.appendChild(e);
-  }
-  inner.appendChild(grid); sec.appendChild(inner); root.appendChild(sec);
-}
-function debounce(fn, ms){ let t; return function(){ clearTimeout(t); const a=arguments, c=this; t=setTimeout(()=>fn.apply(c,a), ms); }; }
-
-/* ===================== INIT ===================== */
 function renderChips(){
   const box = document.getElementById('heroChips');
-  HERO_CHIPS.forEach(c=>{
-    const a = el('a','chip');
-    a.setAttribute('href', c.href);
-    a.appendChild(el('span', null, c.icon));
-    a.appendChild(el('span', null, c.label));
-    box.appendChild(a);
+  const CHIPS = [
+    { label:'SSC', icon:'\u{1F3DB}️', href:'sarkari-jobs.html?source=ssc' },
+    { label:'RSMSSB', icon:'⭐', href:'sarkari-jobs.html?source=rsmssb' },
+    { label:'RSSB', icon:'\u{1F6E1}️', href:'sarkari-jobs.html?source=rssb' },
+    { label:'रिजल्ट', icon:'\u{1F3C6}', href:'sarkari-jobs.html?type=RESULT' },
+    { label:'एडमिट कार्ड', icon:'\u{1FAAA}', href:'sarkari-jobs.html?type=ADMIT_CARD' },
+    { label:'आंसर की', icon:'\u{1F511}', href:'sarkari-jobs.html?type=ANSWER_KEY' },
+    { label:'छात्रवृत्ति', icon:'\u{1F393}', href:'scholarship.html' }
+  ];
+  CHIPS.forEach(c=>{
+    const a=document.createElement('a'); a.className='chip'; a.setAttribute('href',c.href);
+    const s1=document.createElement('span'); s1.textContent=c.icon;
+    const s2=document.createElement('span'); s2.textContent=c.label;
+    a.appendChild(s1); a.appendChild(s2); box.appendChild(a);
   });
+}
+
+// Default homepage view = category sections (top N each). Filtered view = flat grid.
+function renderSections(items){
+  sectionsRoot.textContent='';
+  let alt=false, shown=0;
+  for(const cat of Portal.CATEGORIES){
+    const list=items.filter(it=>it.catId===cat.id).slice(0,PER_SECTION);
+    if(!list.length) continue;
+    sectionsRoot.appendChild(Portal.buildSection(cat, list, alt));
+    alt=!alt; shown++;
+  }
+  if(shown===0) sectionsRoot.appendChild(Portal.buildSection(Portal.CAT_BY_ID.jobs, [], false));
+}
+function renderFiltered(items, state){
+  sectionsRoot.textContent='';
+  const sec=document.createElement('section'); sec.className='cat-section';
+  const inner=document.createElement('div'); inner.className='section-inner';
+  const head=document.createElement('div'); head.className='section-head';
+  const h2=document.createElement('h2'); h2.className='section-title';
+  const ico=document.createElement('span'); ico.className='ico'; ico.textContent='\u{1F50E}';
+  const tx=document.createElement('span'); tx.textContent='खोज / फ़िल्टर परिणाम ('+items.length+')';
+  h2.appendChild(ico); h2.appendChild(tx); head.appendChild(h2); inner.appendChild(head);
+  inner.appendChild(items.length ? Portal.buildGrid(items) : Portal.buildEmpty('इस खोज से कोई सूचना नहीं मिली'));
+  sec.appendChild(inner); sectionsRoot.appendChild(sec);
+}
+function renderError(){
+  sectionsRoot.textContent='';
+  const sec=document.createElement('section'); sec.className='cat-section';
+  const inner=document.createElement('div'); inner.className='section-inner page-empty';
+  inner.appendChild(Portal.buildEmpty('डेटा लोड नहीं हो पाया, कृपया बाद में प्रयास करें'));
+  sec.appendChild(inner); sectionsRoot.appendChild(sec);
 }
 
 async function init(){
   renderChips();
-  const settled = await Promise.allSettled(
-    SOURCE_REGISTRY.map(s =>
-      getDocs(query(collection(db, s.collection), limit(FETCH_LIMIT)))
-        .then(snap => { const a=[]; snap.forEach(d=>a.push(normalize(d, s.collection))); return a; })
-    )
-  );
-  let ok=0;
-  settled.forEach(r=>{ if(r.status==='fulfilled'){ ok++; ALL_ITEMS.push(...r.value); } });
-  if(ok===0){ renderError(); return; }   // all reads failed → friendly error (no technical detail)
-  ALL_ITEMS.sort((a,b)=>b.ts-a.ts);
-  renderSections(ALL_ITEMS);
+  const { items, ok } = await Portal.fetchSources(db, { perCollection: 20 });
+  if(ok===0){ renderError(); return; }
+  ALL_ITEMS = items;
 
+  controller = Portal.mountFilterBar(document.getElementById('filterBar'), {
+    items: ALL_ITEMS,
+    showSearch: false,
+    onChange: (filtered, state, isDefault) => { if(isDefault) renderSections(ALL_ITEMS); else renderFiltered(filtered, state); }
+  });
+
+  // hero search drives the filter controller
   const input = document.getElementById('heroSearchInput');
-  const run = debounce(()=>applySearch(input.value), 250);
+  const debounce=(fn,ms)=>{let t;return (...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms);};};
+  const run = debounce(()=>controller.setQuery(input.value), 250);
   input.addEventListener('input', run);
-  input.addEventListener('keydown', e=>{ if(e.key==='Enter'){ applySearch(input.value); document.getElementById('sectionsRoot').scrollIntoView({behavior:'smooth'}); } });
-  document.getElementById('heroSearchBtn').addEventListener('click', ()=>{ applySearch(input.value); document.getElementById('sectionsRoot').scrollIntoView({behavior:'smooth'}); });
+  const go = ()=>{ controller.setQuery(input.value); document.getElementById('filterBar').scrollIntoView({behavior:'smooth'}); };
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter') go(); });
+  document.getElementById('heroSearchBtn').addEventListener('click', go);
 }
 init().catch(()=>renderError());
 
