@@ -75,6 +75,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .btn-browse{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--gray-200);color:var(--gray-600);padding:8px 14px;border-radius:9px;font-size:12.5px;font-weight:700;font-family:var(--font-hi);}
 .btn-browse:hover{border-color:var(--blue);color:var(--blue);}
 .no-url{font-size:11.5px;color:var(--gray-400);font-family:var(--font-hi);font-style:italic;}
+.soon-pill{font-size:11.5px;font-weight:700;color:var(--gray-600);font-family:var(--font-hi);background:var(--gray-100);border:1px solid var(--gray-200);padding:7px 13px;border-radius:9px;}
 .empty{text-align:center;padding:50px 20px;color:var(--gray-400);font-family:var(--font-hi);}
 .empty i{font-size:40px;color:var(--gray-200);display:block;margin-bottom:12px;}
 @media(max-width:600px){ .grid{grid-template-columns:1fr;} .clear{margin-left:0;} .sel{flex:1;min-width:0;} }
@@ -201,10 +202,15 @@ function buildCard(s){
   } else {
     foot.appendChild(el('span','no-url','आधिकारिक URL सत्यापन आवश्यक'));
   }
-  if(s.collection && s.status==='LIVE'){
+  if(s.collection){
+    // data exists for this source (incl. parked RSSB old data) -> open unified listing filtered
     const b=el('a','btn-browse'); b.setAttribute('href', `sarkari-jobs.html?source=${encodeURIComponent(s.id)}`);
     b.appendChild(icon('fas fa-list')); b.appendChild(el('span',null,'सूचनाएं देखें'));
     foot.appendChild(b);
+  } else {
+    // no collection yet -> honest "coming soon", no fake empty page
+    const soon=el('span','soon-pill','जल्द उपलब्ध');
+    foot.appendChild(soon);
   }
   card.appendChild(foot);
   return card;

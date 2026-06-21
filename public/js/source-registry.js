@@ -273,3 +273,9 @@ export function filterSources(state={}){
 
 // live sources that already have a Firestore collection (for future home/listing merge)
 export function liveSources(){ return SOURCE_REGISTRY.filter(s=>s.collection && s.status==='LIVE'); }
+
+// sources whose Firestore collection actually exists & is readable now (incl. PARKED RSSB).
+// A registry entry gets `collection` only once its data exists, so this never
+// points the listing engine at a non-existent collection.
+export function readableSources(){ return SOURCE_REGISTRY.filter(s=>!!s.collection); }
+export function sourceById(id){ return SOURCE_REGISTRY.find(s=>s.id===id) || null; }

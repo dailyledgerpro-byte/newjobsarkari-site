@@ -178,7 +178,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 <script type="module">
 import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-import * as Portal from './portal-engine.js';
+import * as Engine from './js/alert-data-engine.js';
 
 const firebaseConfig = {
   apiKey:'AIzaSyD6fwR3EsspTbw7YJPQiSEGChdLBcOCEU8',
@@ -192,14 +192,14 @@ const db = getFirestore(getApps().length ? getApps()[0] : initializeApp(firebase
 
 // ---- URL params (support both src and source) ----
 const P = new URLSearchParams(location.search);
-const rawSource = Portal.sanitizeParam(P.get('source') || P.get('src') || 'all').toLowerCase();
-const rawType   = Portal.sanitizeParam(P.get('type') || '').toUpperCase();
-const rawQ      = Portal.sanitizeParam(P.get('q') || '');
+const rawSource = Engine.sanitizeParam(P.get('source') || P.get('src') || 'all').toLowerCase();
+const rawType   = Engine.sanitizeParam(P.get('type') || '').toUpperCase();
+const rawQ      = Engine.sanitizeParam(P.get('q') || '');
 
 const TYPE_TO_CAT = { RECRUITMENT:'jobs', JOB:'jobs', VACANCY:'jobs', NEW_APPLICATION:'jobs',
   RESULT:'result', ADMIT_CARD:'admit', ANSWER_KEY:'answer', DATE_EXTENSION:'extension',
   SCHOLARSHIP:'scholarship', EXAM_SCHEDULE:'exam', CORRECTION:'other' };
-const VALID_SRC = new Set(Portal.SOURCE_REGISTRY.map(s=>s.id));
+const VALID_SRC = new Set(Engine.READABLE_SOURCE_IDS);   // registry-driven valid sources
 const initial = {
   q: rawQ,
   type: (rawType && TYPE_TO_CAT[rawType]) ? TYPE_TO_CAT[rawType] : 'all',
@@ -207,8 +207,8 @@ const initial = {
 };
 
 // ---- page title ----
-const cat = Portal.CAT_BY_ID[initial.type];
-const srcLabel = (Portal.SOURCE_REGISTRY.find(s=>s.id===initial.source)||{}).label;
+const cat = Engine.CAT_BY_ID[initial.type];
+const srcLabel = (Engine.sourceById(initial.source)||{}).shortName;
 let titleTxt = rawQ ? ('\u{1F50D} "'+rawQ+'" खोज परिणाम')
   : initial.type!=='all' ? (cat.icon+' '+cat.hi)
   : initial.source!=='all' ? ('\u{1F4CB} '+srcLabel+' सूचनाएं')
@@ -221,22 +221,22 @@ const countEl = document.getElementById('pageBarCount');
 
 function render(items){
   container.textContent='';
-  if(!items.length){ container.appendChild(Portal.buildEmpty('कोई परिणाम नहीं मिला — फ़िल्टर बदलें')); countEl.textContent=''; return; }
-  container.appendChild(Portal.buildGrid(items));
+  if(!items.length){ container.appendChild(Engine.buildEmpty('कोई परिणाम नहीं मिला — फ़िल्टर बदलें')); countEl.textContent=''; return; }
+  container.appendChild(Engine.buildGrid(items));
 }
 function renderError(){
   container.textContent='';
-  container.appendChild(Portal.buildEmpty('डेटा लोड नहीं हो पाया, कृपया बाद में प्रयास करें'));
+  container.appendChild(Engine.buildEmpty('डेटा लोड नहीं हो पाया, कृपया बाद में प्रयास करें'));
 }
 
 (async ()=>{
   try{
-    // load only the requested source if specified, else all
+    // registry-driven: read only existing collections; restrict if ?source= given
     const sources = (initial.source!=='all') ? [initial.source] : undefined;
-    const { items, ok } = await Portal.fetchSources(db, { sources, perCollection: 60 });
+    const { items, ok } = await Engine.fetchAlerts(db, { sourceIds: sources, perCollection: 40 });
     if(ok===0){ renderError(); return; }
 
-    Portal.mountFilterBar(document.getElementById('filterBar'), {
+    Engine.mountFilterBar(document.getElementById('filterBar'), {
       items,
       showSearch: true,
       initial,
