@@ -106,7 +106,7 @@ export async function fetchSources(db, { sources, perCollection=20 } = {}){
     const cached=_cacheGet(col);
     if(cached){ const norm=cached.map(r=>normalizeDoc(r,col)); _mem.set(col,norm); return norm; }
     const snap = await getDocs(query(collection(db, col), limit(perCollection)));
-    const rawLite=[]; snap.forEach(d=>{ const data=d.data()||{}; if(data.published_at && data.published_at.seconds!=null) data={...data, published_at:{seconds:data.published_at.seconds}}; rawLite.push({ _id:d.id, ...data }); });
+    const rawLite=[]; snap.forEach(d=>{ let data=d.data()||{}; if(data.published_at && data.published_at.seconds!=null) data={...data, published_at:{seconds:data.published_at.seconds}}; rawLite.push({ _id:d.id, ...data }); });
     _cacheSet(col, rawLite);
     const norm=rawLite.map(r=>normalizeDoc(r,col));
     _mem.set(col,norm);
