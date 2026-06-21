@@ -35,5 +35,29 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // ── UNIFIED MANUAL ALERTS (admin-published Rajasthan dept notices) ─────
+    // Public can read ONLY published alerts. Admin can read all (incl. drafts).
+    // Writes are admin-only AND must pass shape validation. No public/auth-only
+    // writes. Existing bot collections above are unaffected.
+    function validAlertBase() {
+      let d = request.resource.data;
+      return d.title is string && d.title.size() > 2 && d.title.size() < 300
+          && d.sourceId is string && d.sourceId.size() > 0 && d.sourceId.size() < 60
+          && d.alertType is string && d.alertType.size() > 0 && d.alertType.size() < 40
+          && d.status in ['draft', 'review', 'published', 'archived']
+          && d.origin == 'manual_admin'
+          && (
+               (d.officialPdf is string && d.officialPdf.size() > 0) ||
+               (d.officialUrl is string && d.officialUrl.size() > 0)
+             );
+    }
+    match /alerts/{id} {
+      allow read:   if resource.data.status == 'published' || isAdmin();
+      allow create: if isAdmin() && validAlertBase()
+                       && request.resource.data.createdBy == request.auth.uid;
+      allow update: if isAdmin() && validAlertBase();
+      allow delete: if isAdmin();   // archive (status='archived') preferred over hard delete
+    }
+
   }
 }

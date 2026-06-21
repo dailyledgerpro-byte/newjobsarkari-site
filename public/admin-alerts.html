@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Manual Alert Admin — Laxmi Job Alert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--blue:#1d4ed8;--blue-dark:#1e3a8a;--green:#16a34a;--red:#dc2626;--amber:#b45309;
+  --gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;--gray-400:#94a3b8;--gray-600:#475569;--text:#0f172a;
+  --font-hi:'Noto Sans Devanagari',sans-serif;--font-en:'Inter',sans-serif;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font-en);background:#eef2f9;color:var(--text);line-height:1.55;}
+a{color:var(--blue);text-decoration:none;}
+button{cursor:pointer;border:none;font-family:inherit;}
+.hidden{display:none!important;}
+.header{background:linear-gradient(135deg,#1e3a8a,#1d4ed8);color:#fff;padding:0 20px;height:58px;display:flex;align-items:center;justify-content:space-between;}
+.header .h-title{font-size:15px;font-weight:800;display:flex;gap:9px;align-items:center;}
+.header .h-right{display:flex;gap:12px;align-items:center;font-size:12.5px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border-radius:9px;font-size:13px;font-weight:700;font-family:var(--font-hi);transition:.18s;}
+.btn-primary{background:var(--blue);color:#fff;} .btn-primary:hover{background:var(--blue-dark);}
+.btn-green{background:var(--green);color:#fff;} .btn-green:hover{filter:brightness(.94);}
+.btn-ghost{background:#fff;border:1.5px solid var(--gray-200);color:var(--gray-600);}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);}
+.btn-amber{background:#fffbeb;border:1.5px solid #fde68a;color:var(--amber);}
+.btn-sm{padding:6px 11px;font-size:12px;}
+.wrap{max-width:1100px;margin:0 auto;padding:22px 18px 70px;}
+.login-card{max-width:380px;margin:80px auto;background:#fff;border-radius:16px;padding:30px;box-shadow:0 10px 40px rgba(15,23,42,.12);}
+.login-card h2{font-size:18px;font-weight:800;font-family:var(--font-hi);margin-bottom:18px;text-align:center;}
+.deny{max-width:460px;margin:80px auto;background:#fff;border-radius:16px;padding:30px;text-align:center;box-shadow:0 10px 40px rgba(15,23,42,.12);font-family:var(--font-hi);}
+.deny i{font-size:42px;color:var(--red);margin-bottom:14px;}
+.field{margin-bottom:14px;} .field.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+label{display:block;font-size:12.5px;font-weight:700;color:var(--gray-600);font-family:var(--font-hi);margin-bottom:5px;}
+input,select,textarea{width:100%;border:1.5px solid var(--gray-200);border-radius:9px;padding:10px 12px;font-size:13.5px;font-family:var(--font-hi);color:var(--text);background:#fff;outline:none;}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);}
+textarea{resize:vertical;min-height:64px;}
+.req::after{content:" *";color:var(--red);}
+.card-box{background:#fff;border-radius:14px;padding:20px;box-shadow:0 4px 20px rgba(15,23,42,.06);margin-bottom:18px;}
+.card-box h3{font-size:15px;font-weight:800;font-family:var(--font-hi);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.checks{display:flex;flex-wrap:wrap;gap:8px;}
+.checks label{display:inline-flex;align-items:center;gap:6px;background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:8px;padding:6px 11px;font-weight:600;cursor:pointer;margin:0;}
+.checks input{width:auto;}
+.warn{background:#fffbeb;border:1px solid #fde68a;color:var(--amber);border-radius:8px;padding:8px 11px;font-size:12px;font-family:var(--font-hi);margin-top:6px;}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+.msg{padding:10px 14px;border-radius:9px;font-size:13px;font-family:var(--font-hi);margin-bottom:14px;font-weight:600;}
+.msg.ok{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}
+.msg.err{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;}
+.alert-row{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--gray-100);}
+.alert-row .info{min-width:0;} .alert-row .t{font-size:13.5px;font-weight:700;font-family:var(--font-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.alert-row .m{font-size:11.5px;color:var(--gray-400);font-family:var(--font-hi);}
+.pill{font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:999px;color:#fff;}
+.preview-card{border:1px solid var(--gray-200);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:9px;background:#fff;max-width:340px;}
+.pv-top{display:flex;justify-content:space-between;gap:8px;}
+.pv-src{font-size:11px;font-weight:800;padding:3px 11px;border-radius:999px;color:#fff;background:var(--blue);}
+.pv-cat{font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:#eef2ff;color:#4338ca;font-family:var(--font-hi);}
+.pv-title{font-size:14px;font-weight:700;font-family:var(--font-hi);line-height:1.4;}
+.pv-date{font-size:12.5px;font-weight:600;font-family:var(--font-hi);background:var(--gray-50);border-radius:8px;padding:7px 11px;}
+@media(max-width:600px){.field.row2{grid-template-columns:1fr;}.wrap{padding:16px 12px 60px;}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="h-title"><i class="fas fa-bullhorn"></i> विभागीय सूचना जोड़ें — Manual Alert Admin</div>
+  <div class="h-right">
+    <a href="admin.html" style="color:#cfe0ff;">मुख्य एडमिन</a>
+    <span id="hdrEmail"></span>
+    <button class="btn btn-ghost btn-sm hidden" id="logoutBtn" onclick="window._logout()">लॉगआउट</button>
+  </div>
+</header>
+
+<!-- LOGIN -->
+<div id="loginScreen" class="login-card hidden">
+  <h2>एडमिन लॉगिन</h2>
+  <div class="field"><label>Email</label><input type="email" id="loginEmail" autocomplete="username"></div>
+  <div class="field"><label>Password</label><input type="password" id="loginPass" autocomplete="current-password"></div>
+  <div class="msg err hidden" id="loginErr"></div>
+  <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="window._login()">लॉगिन</button>
+</div>
+
+<!-- ACCESS DENIED (logged in but not admin) -->
+<div id="denyScreen" class="deny hidden">
+  <i class="fas fa-shield-halved"></i>
+  <h2 style="font-size:17px;font-weight:800;margin-bottom:8px;">पहुँच अस्वीकृत</h2>
+  <p style="font-size:13.5px;color:var(--gray-600);">यह खाता एडमिन नहीं है। केवल अधिकृत एडमिन ही सूचना जोड़ सकते हैं।</p>
+  <button class="btn btn-ghost" style="margin-top:16px;" onclick="window._logout()">लॉगआउट</button>
+</div>
+
+<!-- APP -->
+<div id="appScreen" class="wrap hidden">
+  <div class="msg ok hidden" id="appMsg"></div>
+
+  <div class="card-box">
+    <h3><i class="fas fa-plus-circle"></i> <span id="formHeading">नई सूचना</span></h3>
+    <input type="hidden" id="editId">
+
+    <div class="field">
+      <label class="req">स्रोत / विभाग (Source)</label>
+      <select id="fSource"></select>
+      <div class="warn hidden" id="srcWarn"></div>
+    </div>
+
+    <div class="field row2">
+      <div><label class="req">Alert Type</label><select id="fType"></select></div>
+      <div><label>Beneficiary Gender</label>
+        <select id="fGender"><option value="ALL">ALL</option><option value="MALE">MALE</option><option value="FEMALE">FEMALE</option><option value="NA">NA</option></select>
+      </div>
+    </div>
+
+    <div class="field"><label class="req">शीर्षक / Post Name</label><input type="text" id="fTitle" maxlength="280"></div>
+    <div class="field"><label>विभाग नाम (Department, optional)</label><input type="text" id="fDept" maxlength="160"></div>
+
+    <div class="field row2">
+      <div><label>प्रारंभ तिथि (startDate)</label><input type="text" id="fStart" placeholder="dd-mm-yyyy"></div>
+      <div><label>अंतिम तिथि (lastDate)</label><input type="text" id="fLast" placeholder="dd-mm-yyyy"></div>
+    </div>
+    <div class="field row2">
+      <div><label>परीक्षा तिथि (examDate)</label><input type="text" id="fExam" placeholder="dd-mm-yyyy"></div>
+      <div><label>परिणाम तिथि (resultDate)</label><input type="text" id="fResult" placeholder="dd-mm-yyyy"></div>
+    </div>
+    <div class="field"><label>प्रकाशित तिथि (publishedAt)</label><input type="text" id="fPub" placeholder="dd-mm-yyyy"></div>
+
+    <div class="field"><label class="req">Official PDF (या नीचे Official URL)</label><input type="url" id="fPdf" placeholder="https://..."></div>
+    <div class="field row2">
+      <div><label>Official URL</label><input type="url" id="fUrl" placeholder="https://..."></div>
+      <div><label>Apply URL</label><input type="url" id="fApply" placeholder="https://..."></div>
+    </div>
+
+    <div class="field"><label>लाभार्थी (Beneficiaries)</label><div class="checks" id="fBenef"></div></div>
+    <div class="field"><label>योग्यता (Qualification)</label><div class="checks" id="fQual"></div></div>
+
+    <div class="field"><label>संक्षिप्त विवरण (Description)</label><textarea id="fDesc" maxlength="1500"></textarea></div>
+    <div class="field"><label>आवश्यक दस्तावेज़ (एक प्रति पंक्ति)</label><textarea id="fDocs" placeholder="आधार कार्ड&#10;फोटो&#10;..."></textarea></div>
+
+    <div class="field"><label>Status</label>
+      <select id="fStatus"><option value="draft">draft</option><option value="review">review</option><option value="published">published</option><option value="archived">archived</option></select>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="window._preview()"><i class="fas fa-eye"></i> Preview</button>
+      <button class="btn btn-primary" onclick="window._save('draft')"><i class="fas fa-floppy-disk"></i> Save Draft</button>
+      <button class="btn btn-green" onclick="window._save('published')"><i class="fas fa-paper-plane"></i> Publish</button>
+      <button class="btn btn-ghost hidden" id="resetBtn" onclick="window._resetForm()">नया फ़ॉर्म</button>
+    </div>
+  </div>
+
+  <div class="card-box hidden" id="previewBox">
+    <h3><i class="fas fa-eye"></i> Preview</h3>
+    <div id="previewHost"></div>
+  </div>
+
+  <div class="card-box">
+    <h3><i class="fas fa-list"></i> मौजूदा Manual Alerts <span id="alertCount" style="font-size:12px;color:var(--gray-400);font-weight:600;"></span></h3>
+    <div id="alertList"></div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+import { getFirestore, collection, addDoc, updateDoc, doc, getDocs, query, orderBy, serverTimestamp }
+  from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import * as R from './js/source-registry.js';
+
+const firebaseConfig = {
+  apiKey:'AIzaSyD6fwR3EsspTbw7YJPQiSEGChdLBcOCEU8', authDomain:'newjobsarkari.firebaseapp.com',
+  projectId:'newjobsarkari', storageBucket:'newjobsarkari.firebasestorage.app',
+  messagingSenderId:'489662168900', appId:'1:489662168900:web:b214ef3f1269ef3a9de111'
+};
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// Same admin UID the Firestore rules enforce. Client gate is defence-in-depth;
+// the actual write security is enforced server-side by rules (isAdmin()).
+const ADMIN_UIDS = ['tgHjEVv2FwWygy9x0rxe5k4ZzOt1'];
+let CURRENT_UID = null;
+
+const ALERT_TYPES = ['RECRUITMENT','RESULT','ADMIT_CARD','ANSWER_KEY','DATE_EXTENSION','SCHOLARSHIP',
+  'SCHEME','FARMER_HELP','WOMEN_HELP','ANIMAL_HELP','STUDENT_HELP','LABOUR_HELP','SOCIAL_SECURITY','PUBLIC_NOTICE'];
+const QUALS = ['10th','12th','Graduate','ITI','Diploma','Degree','Other'];
+
+const $ = id => document.getElementById(id);
+function el(t,c,x){ const n=document.createElement(t); if(c)n.className=c; if(x!=null)n.textContent=x; return n; }
+function show(id,on){ $(id).classList.toggle('hidden', !on); }
+function msg(text, ok){ const m=$('appMsg'); m.textContent=text; m.className='msg '+(ok?'ok':'err'); show('appMsg',true); setTimeout(()=>show('appMsg',false), 4000); }
+function isValidUrl(u){ return R.isValidUrl(u); }
+
+/* ---------- AUTH ---------- */
+window._login = async function(){
+  const email=$('loginEmail').value.trim(), pass=$('loginPass').value;
+  const err=$('loginErr'); err.classList.add('hidden');
+  if(!email||!pass){ err.textContent='Email और Password डालें'; err.classList.remove('hidden'); return; }
+  try{ await signInWithEmailAndPassword(auth, email, pass); }
+  catch(e){ err.textContent='लॉगिन विफल: '+(e.code||e.message); err.classList.remove('hidden'); }
+};
+window._logout = ()=>signOut(auth);
+$('loginPass').addEventListener('keydown', e=>{ if(e.key==='Enter') window._login(); });
+
+onAuthStateChanged(auth, user=>{
+  if(!user){ show('loginScreen',true); show('denyScreen',false); show('appScreen',false); show('logoutBtn',false); $('hdrEmail').textContent=''; return; }
+  CURRENT_UID = user.uid;
+  $('hdrEmail').textContent = user.email || '';
+  show('logoutBtn',true);
+  show('loginScreen',false);
+  if(ADMIN_UIDS.includes(user.uid)){
+    show('denyScreen',false); show('appScreen',true);
+    buildForm(); loadAlerts();
+  } else {
+    show('appScreen',false); show('denyScreen',true);   // logged in but not admin
+  }
+});
+
+/* ---------- FORM BUILD ---------- */
+function buildForm(){
+  const src=$('fSource'); src.textContent='';
+  src.appendChild(el('option','', '— स्रोत चुनें —')).value='';
+  R.SOURCE_REGISTRY.forEach(s=>{
+    const o=el('option','', `${s.shortName} — ${s.hindiName} (${R.sourceTypeLabel(s.sourceType)}) [${s.phase}]`);
+    o.value=s.id; src.appendChild(o);
+  });
+  src.addEventListener('change', ()=>{
+    const s=R.sourceById(src.value);
+    if(s && s.status==='REVIEW_NEEDED'){ $('srcWarn').textContent='⚠ यह स्रोत REVIEW_NEEDED है — आधिकारिक URL/जानकारी सत्यापित करके ही प्रकाशित करें।'; show('srcWarn',true); }
+    else show('srcWarn',false);
+  });
+
+  const ty=$('fType'); ty.textContent='';
+  ty.appendChild(el('option','','— प्रकार चुनें —')).value='';
+  ALERT_TYPES.forEach(t=>{ const o=el('option','', `${t} — ${R.contentLabel(t)}`); o.value=t; ty.appendChild(o); });
+
+  const ben=$('fBenef'); ben.textContent='';
+  Object.keys(R.BENEFICIARIES).forEach(k=>{
+    const lab=el('label'); const cb=document.createElement('input'); cb.type='checkbox'; cb.value=k; cb.dataset.group='benef';
+    lab.appendChild(cb); lab.appendChild(el('span','',R.beneficiaryLabel(k))); ben.appendChild(lab);
+  });
+  const ql=$('fQual'); ql.textContent='';
+  QUALS.forEach(k=>{ const lab=el('label'); const cb=document.createElement('input'); cb.type='checkbox'; cb.value=k; cb.dataset.group='qual';
+    lab.appendChild(cb); lab.appendChild(el('span','',k)); ql.appendChild(lab); });
+}
+function checked(group){ return [...document.querySelectorAll(`input[data-group="${group}"]:checked`)].map(c=>c.value); }
+function setChecks(group, vals){ const v=new Set(vals||[]); document.querySelectorAll(`input[data-group="${group}"]`).forEach(c=>c.checked=v.has(c.value)); }
+
+/* ---------- COLLECT + VALIDATE ---------- */
+function collect(status){
+  const sourceId=$('fSource').value;
+  const reg=R.sourceById(sourceId)||{};
+  const data={
+    sourceId, sourceLabel: reg.shortName||sourceId, sourceHindiName: reg.hindiName||'',
+    alertType: $('fType').value,
+    title: $('fTitle').value.trim(),
+    department: $('fDept').value.trim(),
+    beneficiaries: checked('benef'),
+    gender: $('fGender').value || 'ALL',
+    qualification: checked('qual'),
+    startDate: $('fStart').value.trim(), lastDate: $('fLast').value.trim(),
+    examDate: $('fExam').value.trim(), resultDate: $('fResult').value.trim(),
+    publishedAt: $('fPub').value.trim(),
+    officialPdf: $('fPdf').value.trim(), officialUrl: $('fUrl').value.trim(), applyUrl: $('fApply').value.trim(),
+    description: $('fDesc').value.trim(),
+    requiredDocuments: $('fDocs').value.split('\n').map(s=>s.trim()).filter(Boolean),
+    status, state:'Rajasthan', origin:'manual_admin'
+  };
+  return data;
+}
+function validate(d){
+  if(!d.sourceId) return 'स्रोत/विभाग चुनें';
+  if(!d.alertType) return 'Alert Type चुनें';
+  if(!d.title || d.title.length<3) return 'मान्य शीर्षक डालें';
+  if(!d.officialPdf && !d.officialUrl) return 'Official PDF या Official URL आवश्यक है';
+  for(const [k,u] of [['Official PDF',d.officialPdf],['Official URL',d.officialUrl],['Apply URL',d.applyUrl]]){
+    if(u && !isValidUrl(u)) return `${k} मान्य http/https URL नहीं है`;
+  }
+  return null;
+}
+
+/* ---------- SAVE (create / update) ---------- */
+window._save = async function(forcedStatus){
+  if(!ADMIN_UIDS.includes(CURRENT_UID)){ msg('अनधिकृत',false); return; }
+  const status = forcedStatus || $('fStatus').value || 'draft';
+  $('fStatus').value = status;
+  const data = collect(status);
+  const err = validate(data);
+  if(err){ msg(err,false); return; }
+  try{
+    const editId=$('editId').value;
+    if(editId){
+      data.updatedAt=serverTimestamp(); data.updatedBy=CURRENT_UID;
+      await updateDoc(doc(db,'alerts',editId), data);
+      msg('अपडेट हो गया ('+status+')', true);
+    } else {
+      data.createdAt=serverTimestamp(); data.updatedAt=serverTimestamp();
+      data.createdBy=CURRENT_UID; data.updatedBy=CURRENT_UID;
+      const ref=await addDoc(collection(db,'alerts'), data);
+      $('editId').value=ref.id; $('formHeading').textContent='सूचना संपादित करें'; show('resetBtn',true);
+      msg('सहेजा गया ('+status+')', true);
+    }
+    loadAlerts();
+  }catch(e){ msg('सेव विफल: '+(e.code||e.message), false); }
+};
+
+window._resetForm = function(){
+  ['editId','fTitle','fDept','fStart','fLast','fExam','fResult','fPub','fPdf','fUrl','fApply','fDesc','fDocs'].forEach(id=>$(id).value='');
+  $('fSource').value=''; $('fType').value=''; $('fGender').value='ALL'; $('fStatus').value='draft';
+  setChecks('benef',[]); setChecks('qual',[]); show('srcWarn',false);
+  $('formHeading').textContent='नई सूचना'; show('resetBtn',false); show('previewBox',false);
+};
+
+/* ---------- ARCHIVE (no hard delete) ---------- */
+window._archive = async function(id){
+  if(!confirm('इस सूचना को archive करें? (सार्वजनिक रूप से छिप जाएगी)')) return;
+  try{ await updateDoc(doc(db,'alerts',id), { status:'archived', updatedAt:serverTimestamp(), updatedBy:CURRENT_UID });
+    msg('Archived', true); loadAlerts();
+  }catch(e){ msg('Archive विफल: '+(e.code||e.message), false); }
+};
+
+/* ---------- LIST (admin reads all) ---------- */
+const STATUS_COLOR={draft:'#64748b',review:'#b45309',published:'#16a34a',archived:'#94a3b8'};
+async function loadAlerts(){
+  const host=$('alertList'); host.textContent='लोड हो रहा है...';
+  try{
+    const snap=await getDocs(query(collection(db,'alerts'), orderBy('updatedAt','desc')));
+    host.textContent='';
+    $('alertCount').textContent='('+snap.size+')';
+    if(snap.empty){ host.appendChild(el('div','', 'अभी कोई manual alert नहीं।')); host.querySelector('div').style.cssText='color:#94a3b8;font-family:var(--font-hi);padding:10px 0;'; return; }
+    snap.forEach(d=>{ const a=d.data(); host.appendChild(rowFor(d.id,a)); });
+  }catch(e){ host.textContent=''; host.appendChild(el('div','msg err', 'सूची लोड विफल: '+(e.code||e.message))); }
+}
+function rowFor(id,a){
+  const row=el('div','alert-row');
+  const info=el('div','info');
+  info.appendChild(el('div','t', a.title||'(no title)'));
+  const m=el('div','m', `${a.sourceLabel||a.sourceId||''} • ${a.alertType||''}`); info.appendChild(m);
+  row.appendChild(info);
+  const right=el('div'); right.style.cssText='display:flex;gap:7px;align-items:center;flex-shrink:0;';
+  const p=el('span','pill', a.status||'draft'); p.style.background=STATUS_COLOR[a.status]||'#64748b'; right.appendChild(p);
+  const edit=el('button','btn btn-ghost btn-sm','Edit'); edit.addEventListener('click',()=>fillForm(id,a)); right.appendChild(edit);
+  if(a.status!=='archived'){ const ar=el('button','btn btn-amber btn-sm','Archive'); ar.addEventListener('click',()=>window._archive(id)); right.appendChild(ar); }
+  row.appendChild(right);
+  return row;
+}
+function fillForm(id,a){
+  $('editId').value=id; $('formHeading').textContent='सूचना संपादित करें'; show('resetBtn',true);
+  $('fSource').value=a.sourceId||''; $('fSource').dispatchEvent(new Event('change'));
+  $('fType').value=a.alertType||''; $('fGender').value=a.gender||'ALL';
+  $('fTitle').value=a.title||''; $('fDept').value=a.department||'';
+  $('fStart').value=a.startDate||''; $('fLast').value=a.lastDate||''; $('fExam').value=a.examDate||'';
+  $('fResult').value=a.resultDate||''; $('fPub').value=a.publishedAt||'';
+  $('fPdf').value=a.officialPdf||''; $('fUrl').value=a.officialUrl||''; $('fApply').value=a.applyUrl||'';
+  $('fDesc').value=a.description||''; $('fDocs').value=(a.requiredDocuments||[]).join('\n');
+  $('fStatus').value=a.status||'draft';
+  setChecks('benef', a.beneficiaries||[]); setChecks('qual', a.qualification||[]);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- PREVIEW (safe DOM) ---------- */
+window._preview = function(){
+  const d=collect($('fStatus').value);
+  const host=$('previewHost'); host.textContent='';
+  const card=el('div','preview-card');
+  const top=el('div','pv-top');
+  top.appendChild(el('span','pv-src', d.sourceLabel||'स्रोत'));
+  top.appendChild(el('span','pv-cat', R.contentLabel(d.alertType)||'सूचना'));
+  card.appendChild(top);
+  card.appendChild(el('div','pv-title', d.title||'(शीर्षक)'));
+  const dateTxt = d.lastDate||d.resultDate||d.examDate||d.publishedAt||'देखें';
+  card.appendChild(el('div','pv-date', 'तिथि: '+dateTxt));
+  host.appendChild(card);
+  show('previewBox',true);
+  $('previewBox').scrollIntoView({behavior:'smooth'});
+};
+</script>
+</body>
+</html>
