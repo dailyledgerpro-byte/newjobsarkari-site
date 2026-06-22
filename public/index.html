@@ -314,7 +314,7 @@ ul{list-style:none;}
 <!-- FIREBASE (read-only) -->
 <script type="module">
 import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { getFirestore, initializeFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 import * as Portal from './portal-engine.js';
 
 // Public web config (already public in frontend). Read-only usage only.
@@ -326,7 +326,11 @@ const firebaseConfig = {
   messagingSenderId: "489662168900",
   appId: "1:489662168900:web:b214ef3f1269ef3a9de111"
 };
-const db = getFirestore(getApps().length ? getApps()[0] : initializeApp(firebaseConfig));
+const _app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+// Auto-detect long-polling: survives networks where the WebChannel/Listen
+// stream is blocked (corporate proxies/firewalls). Falls back to default if
+// Firestore was already initialized on this app.
+let db; try { db = initializeFirestore(_app, { experimentalAutoDetectLongPolling: true }); } catch (e) { db = getFirestore(_app); }
 
 const PER_SECTION = 6;
 const sectionsRoot = document.getElementById('sectionsRoot');

@@ -91,10 +91,49 @@ function pickDate(item, cat){
 }
 function lastDateOf(item){ return parseDate(firstNonEmpty(item.raw.last_date, item.raw.lastDate, item.raw.application_end_date, item.raw.correction_end_date, item.raw.document_last_date)); }
 
-/* ===================== FETCH (read-only, capped, cached) ===================== */
+/* ===================== FETCH (read-only, capped, cached, resilient) ==========
+   SDK first (timed); if the WebChannel/Listen transport fails OR resolves from
+   an empty offline cache, fall back to the public Firestore REST API (plain
+   HTTPS, rules still enforced, public web key only — NO secret/service account).
+   ============================================================================= */
 const _mem = new Map(); // collection -> normalized[]
 function _cacheGet(col){ try{ const r=sessionStorage.getItem('lja_pe_'+col); if(!r) return null; const {data,ts}=JSON.parse(r); if(Date.now()-ts<5*60*1000 && Array.isArray(data)) return data; }catch(e){} return null; }
 function _cacheSet(col, rawLite){ try{ sessionStorage.setItem('lja_pe_'+col, JSON.stringify({data:rawLite, ts:Date.now()})); }catch(e){} }
+
+const _FS_PROJECT='newjobsarkari';
+const _FS_KEY='AIzaSyD6fwR3EsspTbw7YJPQiSEGChdLBcOCEU8'; // public web API key (already in frontend)
+const _FS_BASE=`https://firestore.googleapis.com/v1/projects/${_FS_PROJECT}/databases/(default)/documents`;
+const _SDK_TIMEOUT_MS=6000;
+function _withTimeout(p,ms){ return Promise.race([p, new Promise((_,rej)=>setTimeout(()=>rej(new Error('sdk-timeout')),ms))]); }
+function _fromRestValue(v){
+  if(v==null) return null;
+  if('stringValue' in v) return v.stringValue;
+  if('integerValue' in v) return Number(v.integerValue);
+  if('doubleValue' in v) return v.doubleValue;
+  if('booleanValue' in v) return v.booleanValue;
+  if('timestampValue' in v) return v.timestampValue;     // ISO string; toMillis() parses it
+  if('nullValue' in v) return null;
+  if('arrayValue' in v) return (v.arrayValue.values||[]).map(_fromRestValue);
+  if('mapValue' in v){ const o={}; const f=v.mapValue.fields||{}; for(const k in f) o[k]=_fromRestValue(f[k]); return o; }
+  return null;
+}
+function _restDocToObj(d){ const o={_id:(d.name||'').split('/').pop()}; const f=d.fields||{}; for(const k in f) o[k]=_fromRestValue(f[k]); return o; }
+async function _restReadCollection(col, perCollection){
+  const r=await fetch(`${_FS_BASE}/${encodeURIComponent(col)}?pageSize=${perCollection}&key=${_FS_KEY}`);
+  if(!r.ok) throw new Error('REST '+r.status);
+  const j=await r.json();
+  return (j.documents||[]).map(_restDocToObj);
+}
+async function _readResilient(db, col, perCollection){
+  try{
+    const snap=await _withTimeout(getDocs(query(collection(db,col), limit(perCollection))), _SDK_TIMEOUT_MS);
+    const rawLite=[]; snap.forEach(d=>{ let data=d.data()||{}; if(data.published_at && data.published_at.seconds!=null) data={...data, published_at:{seconds:data.published_at.seconds}}; rawLite.push({ _id:d.id, ...data }); });
+    if(rawLite.length>0) return rawLite;
+    try{ const r=await _restReadCollection(col, perCollection); return r.length>rawLite.length ? r : rawLite; }catch(e){ return rawLite; }
+  }catch(e){
+    return await _restReadCollection(col, perCollection);
+  }
+}
 
 export async function fetchSources(db, { sources, perCollection=20 } = {}){
   const cols = (sources && sources.length)
@@ -105,18 +144,17 @@ export async function fetchSources(db, { sources, perCollection=20 } = {}){
     if(_mem.has(col)) return _mem.get(col);
     const cached=_cacheGet(col);
     if(cached){ const norm=cached.map(r=>normalizeDoc(r,col)); _mem.set(col,norm); return norm; }
-    const snap = await getDocs(query(collection(db, col), limit(perCollection)));
-    const rawLite=[]; snap.forEach(d=>{ let data=d.data()||{}; if(data.published_at && data.published_at.seconds!=null) data={...data, published_at:{seconds:data.published_at.seconds}}; rawLite.push({ _id:d.id, ...data }); });
+    const rawLite = await _readResilient(db, col, perCollection);   // SDK -> REST
     _cacheSet(col, rawLite);
     const norm=rawLite.map(r=>normalizeDoc(r,col));
     _mem.set(col,norm);
     return norm;
   }));
 
-  let ok=0, items=[];
-  settled.forEach(r=>{ if(r.status==='fulfilled'){ ok++; items.push(...r.value); } });
+  let ok=0, failed=0, items=[];
+  settled.forEach(r=>{ if(r.status==='fulfilled'){ ok++; items.push(...r.value); } else { failed++; } });
   items.sort((a,b)=>b.ts-a.ts);
-  return { items, ok, total: cols.length };
+  return { items, ok, failed, total: cols.length };
 }
 
 /* ===================== FILTER OPTIONS (dynamic) ===================== */
