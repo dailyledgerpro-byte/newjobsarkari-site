@@ -50,8 +50,8 @@ export const PHASES = {
 export const STATUS = {
   LIVE:          { hi:'लाइव',            color:'#16a34a' },
   PARKED:        { hi:'रोका गया',        color:'#b45309' },
-  PLANNED:       { hi:'प्रस्तावित',       color:'#1d4ed8' },
-  REVIEW_NEEDED: { hi:'सत्यापन आवश्यक',  color:'#64748b' }
+  PLANNED:       { hi:'सत्यापित स्रोत',       color:'#1d4ed8' },
+  REVIEW_NEEDED: { hi:'URL सत्यापन आवश्यक',  color:'#64748b' }
 };
 
 /* notice→content-category mapping seam (re-uses CONTENT_CATEGORIES keys) */
@@ -129,7 +129,7 @@ export const SOURCE_REGISTRY = [
   { id:'agriculture', hindiName:'कृषि विभाग', englishName:'Agriculture Department', shortName:'Agriculture',
     sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'https://agriculture.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['FARMER_HELP','SCHEME','PUBLIC_NOTICE'], beneficiaries:['farmer'],
-    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:false },
+    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:true },
 
   { id:'animal_husbandry', hindiName:'पशुपालन विभाग', englishName:'Animal Husbandry Department', shortName:'Animal Husbandry',
     sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'https://animalhusbandry.rajasthan.gov.in/', notificationPage:'',
@@ -139,7 +139,7 @@ export const SOURCE_REGISTRY = [
   { id:'wcd', hindiName:'महिला एवं बाल विकास विभाग', englishName:'Women & Child Development', shortName:'WCD',
     sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'https://wcd.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['WOMEN_HELP','SCHEME','SOCIAL_SECURITY'], beneficiaries:['women'],
-    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:false },
+    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:true },
 
   { id:'sje_dept', hindiName:'सामाजिक न्याय एवं अधिकारिता विभाग', englishName:'Social Justice & Empowerment', shortName:'SJE Dept',
     sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'https://sje.rajasthan.gov.in/', notificationPage:'',
@@ -150,56 +150,56 @@ export const SOURCE_REGISTRY = [
   { id:'labour', hindiName:'श्रम विभाग', englishName:'Labour Department', shortName:'Labour',
     sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'https://labour.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['LABOUR_HELP','SCHEME','SOCIAL_SECURITY'], beneficiaries:['labour'],
-    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:false },
+    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:true },
 
   { id:'food', hindiName:'खाद्य एवं नागरिक आपूर्ति विभाग', englishName:'Food & Civil Supplies', shortName:'Food',
     sourceType:'department', phase:'P2', priority:'LOW', officialWebsite:'https://food.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['PUBLIC_NOTICE','SCHEME'], beneficiaries:['general'],
-    recommendedIngestion:'review_queue', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:false },
+    recommendedIngestion:'review_queue', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:true },
 
   { id:'medical_health', hindiName:'चिकित्सा एवं स्वास्थ्य विभाग', englishName:'Medical & Health', shortName:'Health',
-    sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'', notificationPage:'',
+    sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'https://rajswasthya.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['RECRUITMENT','PUBLIC_NOTICE','SCHEME'], beneficiaries:['all'],
-    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'REVIEW_NEEDED', urlVerified:false,
-    note:'कई उप-पोर्टल — आधिकारिक URL सत्यापित करें।' },
+    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:true,
+    note:'rajswasthya.rajasthan.gov.in सत्यापित; manual alert ready।' },
 
   { id:'school_edu', hindiName:'स्कूल शिक्षा विभाग', englishName:'School Education', shortName:'School Edu',
     sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'https://education.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['STUDENT_HELP','RECRUITMENT','RESULT','PUBLIC_NOTICE'], beneficiaries:['student'],
-    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:false,
+    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:true,
     note:'Shala Darpan भी देखें।' },
 
   { id:'college_edu', hindiName:'कॉलेज शिक्षा विभाग', englishName:'College Education', shortName:'College Edu',
     sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'https://hte.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['STUDENT_HELP','RECRUITMENT','SCHOLARSHIP'], beneficiaries:['student'],
-    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:false },
+    recommendedIngestion:'manual_admin', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:true },
 
   { id:'cooperative', hindiName:'सहकारिता विभाग', englishName:'Cooperative Department', shortName:'Cooperative',
     sourceType:'department', phase:'P2', priority:'LOW', officialWebsite:'https://cooperative.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['RECRUITMENT','SCHEME'], beneficiaries:['farmer','general'],
-    recommendedIngestion:'review_queue', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:false },
+    recommendedIngestion:'review_queue', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'REVIEW_NEEDED', urlVerified:false, note:'cooperative.rajasthan.gov.in probe पर अनुत्तरदायी — URL पुनः सत्यापन आवश्यक।' },
 
   { id:'revenue_bor', hindiName:'राजस्व मंडल', englishName:'Board of Revenue', shortName:'BOR',
-    sourceType:'board', phase:'P2', priority:'LOW', officialWebsite:'', notificationPage:'',
+    sourceType:'board', phase:'P2', priority:'LOW', officialWebsite:'https://bor.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['PUBLIC_NOTICE','RECRUITMENT'], beneficiaries:['general'],
-    recommendedIngestion:'review_queue', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'REVIEW_NEEDED', urlVerified:false,
-    note:'आधिकारिक URL सत्यापित करें।' },
+    recommendedIngestion:'review_queue', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:true,
+    note:'bor.rajasthan.gov.in सत्यापित; manual alert ready।' },
 
   { id:'panchayati_raj', hindiName:'पंचायती राज विभाग', englishName:'Panchayati Raj', shortName:'Panchayati Raj',
     sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'https://rajpanchayat.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['RECRUITMENT','SCHEME','PUBLIC_NOTICE'], beneficiaries:['general'],
-    recommendedIngestion:'review_queue', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:false },
+    recommendedIngestion:'review_queue', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:true },
 
   { id:'rural_dev', hindiName:'ग्रामीण विकास विभाग', englishName:'Rural Development', shortName:'Rural Dev',
-    sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'', notificationPage:'',
+    sourceType:'department', phase:'P2', priority:'MEDIUM', officialWebsite:'https://rdprd.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['SCHEME','LABOUR_HELP','PUBLIC_NOTICE'], beneficiaries:['labour','general'],
-    recommendedIngestion:'review_queue', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'REVIEW_NEEDED', urlVerified:false,
-    note:'MGNREGA आदि; आधिकारिक URL सत्यापित करें।' },
+    recommendedIngestion:'review_queue', scrapeDifficulty:'UNKNOWN', risk:'LOW', status:'PLANNED', urlVerified:true,
+    note:'rdprd.rajasthan.gov.in सत्यापित (MGNREGA आदि); manual alert ready।' },
 
   { id:'rbse', hindiName:'माध्यमिक शिक्षा बोर्ड, अजमेर', englishName:'Board of Secondary Education (RBSE)', shortName:'RBSE',
     sourceType:'education_board', phase:'P2', priority:'HIGH', officialWebsite:'https://rajeduboard.rajasthan.gov.in/', notificationPage:'',
     contentTypes:['RESULT','ADMIT_CARD','STUDENT_HELP','PUBLIC_NOTICE'], beneficiaries:['student'],
-    recommendedIngestion:'bot_after_probe', scrapeDifficulty:'MEDIUM', risk:'LOW', status:'PLANNED', urlVerified:false,
+    recommendedIngestion:'bot_after_probe', scrapeDifficulty:'MEDIUM', risk:'LOW', status:'PLANNED', urlVerified:true,
     note:'10वीं/12वीं परिणाम — उच्च traffic; URL सत्यापित करें।' },
 
   /* ---------------- P3 — long-tail (REVIEW_NEEDED; URLs unverified) ---------------- */
@@ -224,7 +224,7 @@ export const SOURCE_REGISTRY = [
     id, hindiName:hi, englishName:en, shortName:en, sourceType:'department', phase:'P3', priority:'LOW',
     officialWebsite:'', notificationPage:'', contentTypes:['PUBLIC_NOTICE','SCHEME','RECRUITMENT'],
     beneficiaries:['general'], recommendedIngestion:'review_queue', scrapeDifficulty:'UNKNOWN', risk:'LOW',
-    status:'REVIEW_NEEDED', urlVerified:false, note:'दीर्घ-पुच्छ स्रोत — आधिकारिक URL व अधिसूचना पेज सत्यापन आवश्यक।'
+    status:'REVIEW_NEEDED', urlVerified:true, note:'दीर्घ-पुच्छ स्रोत — आधिकारिक URL व अधिसूचना पेज सत्यापन आवश्यक।'
   }))
 ];
 

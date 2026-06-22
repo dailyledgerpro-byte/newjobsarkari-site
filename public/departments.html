@@ -76,6 +76,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .btn-browse:hover{border-color:var(--blue);color:var(--blue);}
 .no-url{font-size:11.5px;color:var(--gray-400);font-family:var(--font-hi);font-style:italic;}
 .soon-pill{font-size:11.5px;font-weight:700;color:var(--gray-600);font-family:var(--font-hi);background:var(--gray-100);border:1px solid var(--gray-200);padding:7px 13px;border-radius:9px;}
+.ready-pill{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:#15803d;font-family:var(--font-hi);background:#f0fdf4;border:1px solid #bbf7d0;padding:7px 13px;border-radius:9px;}
+.ready-pill i{font-size:11px;}
 .empty{text-align:center;padding:50px 20px;color:var(--gray-400);font-family:var(--font-hi);}
 .empty i{font-size:40px;color:var(--gray-200);display:block;margin-bottom:12px;}
 @media(max-width:600px){ .grid{grid-template-columns:1fr;} .clear{margin-left:0;} .sel{flex:1;min-width:0;} }
@@ -207,10 +209,13 @@ function buildCard(s){
     const b=el('a','btn-browse'); b.setAttribute('href', `sarkari-jobs.html?source=${encodeURIComponent(s.id)}`);
     b.appendChild(icon('fas fa-list')); b.appendChild(el('span',null,'सूचनाएं देखें'));
     foot.appendChild(b);
+  } else if(s.status==='PLANNED'){
+    // verified official source, no auto-data yet -> admin can add manual alerts
+    const ready=el('span','ready-pill'); ready.appendChild(icon('fas fa-circle-check')); ready.appendChild(el('span',null,'सूचना जोड़ने के लिए तैयार'));
+    foot.appendChild(ready);
   } else {
-    // no collection yet -> honest "coming soon", no fake empty page
-    const soon=el('span','soon-pill','जल्द उपलब्ध');
-    foot.appendChild(soon);
+    // REVIEW_NEEDED / other -> honest pending state, no fake page
+    foot.appendChild(el('span','soon-pill','URL सत्यापन आवश्यक'));
   }
   card.appendChild(foot);
   return card;
