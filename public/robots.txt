@@ -4,3 +4,4 @@ Disallow: /admin.html
 Disallow: /admin-alerts.html
 
 Sitemap: https://newjobsarkari.web.app/sitemap.xml
+Sitemap: https://newjobsarkari.web.app/sitemap-alerts.xml
