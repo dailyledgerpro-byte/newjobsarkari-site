@@ -155,7 +155,10 @@ textarea{resize:vertical;min-height:64px;}
   </div>
 
   <div class="card-box">
-    <h3><i class="fas fa-list"></i> मौजूदा Manual Alerts <span id="alertCount" style="font-size:12px;color:var(--gray-400);font-weight:600;"></span></h3>
+    <h3><i class="fas fa-inbox"></i> Review Inbox — सभी Alerts <span id="alertCount" style="font-size:12px;color:var(--gray-400);font-weight:600;"></span></h3>
+    <div id="autoInfo"></div>
+    <div id="summaryCards"></div>
+    <div id="inboxFilters"></div>
     <div id="alertList"></div>
   </div>
 </div>
@@ -411,30 +414,157 @@ window._archive = async function(id){
   }catch(e){ msg('Archive विफल: '+(e.code||e.message), false); }
 };
 
-/* ---------- LIST (admin reads all) ---------- */
-const STATUS_COLOR={draft:'#64748b',review:'#b45309',published:'#16a34a',archived:'#94a3b8'};
+/* ---------- REVIEW INBOX (admin reads all; read-only render + safe actions) ---------- */
+const STATUS_COLOR={draft:'#64748b',review:'#b45309',published:'#16a34a',archived:'#94a3b8',rejected:'#dc2626'};
+const STATUS_HI={draft:'ड्राफ्ट',review:'समीक्षा',published:'प्रकाशित',archived:'आर्काइव',rejected:'अस्वीकृत'};
+const AUTO_ORIGIN='department_auto_scanner';
+let ALL_ALERTS=[];
+let INBOX={tab:'review', source:'all', type:'all'};
+let _inboxCss=false;
+
+function injectInboxCss(){
+  if(_inboxCss) return; _inboxCss=true;
+  const css=`
+  .ai-box{background:#eef2ff;border:1px solid #c7d2fe;border-radius:10px;padding:11px 14px;margin:4px 0 12px;font-size:12.5px;color:#3730a3;font-family:var(--font-hi);line-height:1.6;}
+  .ai-box b{color:#1e3a8a;}
+  .sum-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+  .sum-card{flex:1;min-width:120px;background:#fff;border:1px solid var(--gray-200,#e2e8f0);border-radius:10px;padding:10px 12px;}
+  .sum-card .n{font-size:20px;font-weight:800;color:var(--text,#0f172a);}
+  .sum-card .l{font-size:11px;color:var(--gray-600,#475569);font-family:var(--font-hi);}
+  .inbox-filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;}
+  .ibt{font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;border:1.5px solid var(--gray-200,#e2e8f0);background:#fff;color:var(--gray-600,#475569);font-family:var(--font-hi);cursor:pointer;}
+  .ibt.active{background:#1d4ed8;border-color:#1d4ed8;color:#fff;}
+  .ibt .c{margin-left:5px;background:rgba(15,23,42,.08);padding:0 6px;border-radius:999px;font-size:11px;} .ibt.active .c{background:rgba(255,255,255,.25);}
+  .ib-sel{font-size:12px;padding:6px 10px;border:1.5px solid var(--gray-200,#e2e8f0);border-radius:9px;font-family:var(--font-hi);}
+  .ra{border:1px solid var(--gray-200,#e2e8f0);border-radius:12px;padding:13px 15px;margin-bottom:11px;background:#fff;}
+  .ra-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:5px;}
+  .ra-badge{font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:999px;color:#fff;}
+  .ra-origin{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:999px;font-family:var(--font-hi);}
+  .ra-origin.auto{background:#ede9fe;color:#6d28d9;} .ra-origin.manual{background:#e0f2fe;color:#0369a1;}
+  .ra-src{font-size:11.5px;font-weight:700;color:#475569;font-family:var(--font-hi);}
+  .ra-title{font-size:14px;font-weight:700;color:#0f172a;font-family:var(--font-hi);line-height:1.45;margin:3px 0;}
+  .ra-meta{font-size:11.5px;color:#64748b;font-family:var(--font-hi);display:flex;gap:12px;flex-wrap:wrap;}
+  .ra-warn{font-size:11.5px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:5px 9px;margin-top:6px;font-family:var(--font-hi);}
+  .ra-note{font-size:11px;color:#475569;font-family:var(--font-hi);margin-top:5px;}
+  .ra-acts{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px;}
+  .ra-acts .btn{font-size:11.5px;padding:6px 11px;}
+  @media(max-width:600px){ .sum-card{min-width:calc(50% - 5px);} }
+  `;
+  const st=document.createElement('style'); st.textContent=css; document.head.appendChild(st);
+}
+
 async function loadAlerts(){
+  injectInboxCss();
   const host=$('alertList'); host.textContent='लोड हो रहा है...';
   try{
     const snap=await getDocs(query(collection(db,'alerts'), orderBy('updatedAt','desc')));
-    host.textContent='';
-    $('alertCount').textContent='('+snap.size+')';
-    if(snap.empty){ host.appendChild(el('div','', 'अभी कोई manual alert नहीं।')); host.querySelector('div').style.cssText='color:#94a3b8;font-family:var(--font-hi);padding:10px 0;'; return; }
-    snap.forEach(d=>{ const a=d.data(); host.appendChild(rowFor(d.id,a)); });
+    ALL_ALERTS = snap.docs.map(d=>({ id:d.id, ...d.data() }));
+    $('alertCount').textContent='('+ALL_ALERTS.length+')';
+    renderAutoInfo(); renderSummary(); renderFilters(); renderInbox();
   }catch(e){ host.textContent=''; host.appendChild(el('div','msg err', 'सूची लोड विफल: '+(e.code||e.message))); }
 }
-function rowFor(id,a){
-  const row=el('div','alert-row');
-  const info=el('div','info');
-  info.appendChild(el('div','t', a.title||'(no title)'));
-  const m=el('div','m', `${a.sourceLabel||a.sourceId||''} • ${a.alertType||''}`); info.appendChild(m);
-  row.appendChild(info);
-  const right=el('div'); right.style.cssText='display:flex;gap:7px;align-items:center;flex-shrink:0;';
-  const p=el('span','pill', a.status||'draft'); p.style.background=STATUS_COLOR[a.status]||'#64748b'; right.appendChild(p);
-  const edit=el('button','btn btn-ghost btn-sm','Edit'); edit.addEventListener('click',()=>fillForm(id,a)); right.appendChild(edit);
-  if(a.status!=='archived'){ const ar=el('button','btn btn-amber btn-sm','Archive'); ar.addEventListener('click',()=>window._archive(id)); right.appendChild(ar); }
-  row.appendChild(right);
-  return row;
+
+function renderAutoInfo(){
+  const h=$('autoInfo'); if(!h) return; h.textContent='';
+  const b=el('div','ai-box');
+  b.appendChild(el('b',null,'🤖 Auto Scanner सक्रिय: '));
+  b.appendChild(document.createTextNode('SJE · Food · College Education   |   शेड्यूल: 06:00, 12:00, 18:00, 22:00 IST'));
+  b.appendChild(el('div',null,'Auto scanner केवल review बनाता है — publish हमेशा admin करता है।'));
+  h.appendChild(b);
+}
+
+function renderSummary(){
+  const h=$('summaryCards'); if(!h) return; h.textContent='';
+  const n=(f)=>ALL_ALERTS.filter(f).length;
+  const cards=[
+    ['Pending Review',       n(a=>a.status==='review')],
+    ['Auto Scanner Review',  n(a=>a.status==='review' && a.origin===AUTO_ORIGIN)],
+    ['Published',            n(a=>a.status==='published')],
+    ['Draft/Archived',       n(a=>a.status==='draft' || a.status==='archived')],
+  ];
+  const row=el('div','sum-row');
+  cards.forEach(([l,v])=>{ const c=el('div','sum-card'); c.appendChild(el('div','n',String(v))); c.appendChild(el('div','l',l)); row.appendChild(c); });
+  h.appendChild(row);
+}
+
+function inboxMatch(a){
+  if(INBOX.tab==='review'       && a.status!=='review') return false;
+  if(INBOX.tab==='auto'         && !(a.status==='review' && a.origin===AUTO_ORIGIN)) return false;
+  if(INBOX.tab==='manualdraft'  && !(a.status==='draft' && a.origin!==AUTO_ORIGIN)) return false;
+  if(INBOX.tab==='published'    && a.status!=='published') return false;
+  if(INBOX.source!=='all' && a.sourceId!==INBOX.source) return false;
+  if(INBOX.type!=='all'   && a.alertType!==INBOX.type)   return false;
+  return true;
+}
+
+function renderFilters(){
+  const h=$('inboxFilters'); if(!h) return; h.textContent='';
+  const wrap=el('div','inbox-filters');
+  const cnt={ all:ALL_ALERTS.length,
+    review:ALL_ALERTS.filter(a=>a.status==='review').length,
+    auto:ALL_ALERTS.filter(a=>a.status==='review'&&a.origin===AUTO_ORIGIN).length,
+    manualdraft:ALL_ALERTS.filter(a=>a.status==='draft'&&a.origin!==AUTO_ORIGIN).length,
+    published:ALL_ALERTS.filter(a=>a.status==='published').length };
+  [['review','Pending Review'],['auto','Auto Scanner'],['manualdraft','Manual Drafts'],['published','Published'],['all','All']].forEach(([k,lbl])=>{
+    const b=el('button','ibt'+(INBOX.tab===k?' active':'')); b.appendChild(el('span',null,lbl));
+    b.appendChild(el('span','c',String(cnt[k]??0)));
+    b.addEventListener('click',()=>{ INBOX.tab=k; renderFilters(); renderInbox(); });
+    wrap.appendChild(b);
+  });
+  const srcs=[...new Set(ALL_ALERTS.map(a=>a.sourceId).filter(Boolean))].sort();
+  const types=[...new Set(ALL_ALERTS.map(a=>a.alertType).filter(Boolean))].sort();
+  wrap.appendChild(mkSel(INBOX.source, [['all','सभी स्रोत'],...srcs.map(s=>[s,s])], v=>{INBOX.source=v;renderInbox();}));
+  wrap.appendChild(mkSel(INBOX.type,   [['all','सभी प्रकार'],...types.map(t=>[t,t])], v=>{INBOX.type=v;renderInbox();}));
+  h.appendChild(wrap);
+}
+function mkSel(val, opts, onch){
+  const s=document.createElement('select'); s.className='ib-sel';
+  opts.forEach(([v,l])=>{ const o=document.createElement('option'); o.value=v; o.textContent=l; s.appendChild(o); });
+  s.value=val; s.addEventListener('change',()=>onch(s.value)); return s;
+}
+
+function renderInbox(){
+  const host=$('alertList'); host.textContent='';
+  const list=ALL_ALERTS.filter(inboxMatch);
+  if(!list.length){ const e=el('div',null,'इस फ़िल्टर से कोई alert नहीं।'); e.style.cssText='color:#94a3b8;font-family:var(--font-hi);padding:12px 0;'; host.appendChild(e); return; }
+  list.forEach(a=>host.appendChild(reviewCard(a)));
+}
+
+function reviewCard(a){
+  const card=el('div','ra');
+  const top=el('div','ra-top');
+  const st=el('span','ra-badge', STATUS_HI[a.status]||a.status||'—'); st.style.background=STATUS_COLOR[a.status]||'#64748b'; top.appendChild(st);
+  const isAuto=a.origin===AUTO_ORIGIN;
+  top.appendChild(el('span','ra-origin '+(isAuto?'auto':'manual'), isAuto?'🤖 Auto Scanner':'✍ Manual Admin'));
+  top.appendChild(el('span','ra-src', (a.sourceLabel||a.sourceId||'')+' • '+(a.alertType||'')));
+  card.appendChild(top);
+  card.appendChild(el('div','ra-title', a.title||'(no title)'));
+  const meta=el('div','ra-meta');
+  meta.appendChild(el('span',null,'प्रकाशित तिथि: '+(a.publishedAt||'—')));
+  if(a.lastDate)   meta.appendChild(el('span',null,'अंतिम: '+a.lastDate));
+  if(a.resultDate) meta.appendChild(el('span',null,'परिणाम: '+a.resultDate));
+  card.appendChild(meta);
+  if(a.description){ card.appendChild(el('div','ra-note', a.description.length>140?a.description.slice(0,140)+'…':a.description)); }
+  const link = R.isValidUrl(a.officialPdf)?a.officialPdf : (R.isValidUrl(a.officialUrl)?a.officialUrl : '');
+  if(!link) card.appendChild(el('div','ra-warn','⚠ कोई official PDF/URL नहीं — publish से पहले जोड़ें।'));
+  if((a.title||'').trim().length<20) card.appendChild(el('div','ra-warn','⚠ शीर्षक छोटा/अधूरा लग रहा है — जाँचें।'));
+  if(a.status==='review') card.appendChild(el('div','ra-note','🔒 Public में नहीं दिखेगा जब तक publish नहीं करेंगे।'));
+  const acts=el('div','ra-acts');
+  const editB=el('button','btn btn-ghost btn-sm','Edit'); editB.addEventListener('click',()=>fillForm(a.id,a)); acts.appendChild(editB);
+  if(a.status!=='published'){ const pubB=el('button','btn btn-green btn-sm','Review & Publish'); pubB.addEventListener('click',()=>reviewPublish(a)); acts.appendChild(pubB); }
+  if(a.status!=='archived'){ const rj=el('button','btn btn-amber btn-sm','Reject / Archive'); rj.addEventListener('click',()=>window._archive(a.id)); acts.appendChild(rj); }
+  if(link){ const op=el('a','btn btn-ghost btn-sm','Open PDF/URL'); op.setAttribute('href',link); op.setAttribute('target','_blank'); op.setAttribute('rel','noopener noreferrer'); acts.appendChild(op); }
+  const ct=el('button','btn btn-ghost btn-sm','Copy Title'); ct.addEventListener('click',()=>copyText(a.title||'')); acts.appendChild(ct);
+  if(link){ const cl=el('button','btn btn-ghost btn-sm','Copy Link'); cl.addEventListener('click',()=>copyText(link)); acts.appendChild(cl); }
+  card.appendChild(acts);
+  return card;
+}
+function copyText(t){ try{ navigator.clipboard.writeText(t); msg('कॉपी हो गया', true); }catch(e){ msg('कॉपी विफल', false); } }
+// Loads the doc into the form so the EXISTING dup-guarded Publish path is used (no new direct-publish).
+function reviewPublish(a){
+  fillForm(a.id, a);
+  msg('फ़ॉर्म में load हुआ — dup-check के बाद "Publish" दबाएँ।', true);
+  document.querySelector('.card-box').scrollIntoView({behavior:'smooth'});
 }
 function fillForm(id,a){
   $('editId').value=id; $('formHeading').textContent='सूचना संपादित करें'; show('resetBtn',true);
