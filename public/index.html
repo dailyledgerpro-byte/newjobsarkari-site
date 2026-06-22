@@ -196,16 +196,14 @@ ul{list-style:none;}
     </a>
     <nav class="nav" id="mainNav">
       <a href="/" class="active"><i class="fas fa-home"></i> होम</a>
-      <a href="sarkari-jobs.html?src=all"><i class="fas fa-bell"></i> सभी सूचनाएँ</a>
-      <a href="departments.html"><i class="fas fa-sitemap"></i> विभाग</a>
-      <a href="sarkari-jobs.html?src=ssc"><i class="fas fa-landmark"></i> SSC</a>
-      <a href="sarkari-jobs.html?src=rsmssb"><i class="fas fa-star-of-david"></i> RSMSSB</a>
-      <a href="sarkari-jobs.html?src=rssb"><i class="fas fa-shield-alt"></i> RSSB</a>
-      <a href="sarkari-jobs.html?type=RESULT"><i class="fas fa-trophy"></i> रिजल्ट</a>
-      <a href="sarkari-jobs.html?type=ADMIT_CARD"><i class="fas fa-id-card"></i> एडमिट कार्ड</a>
-      <a href="sarkari-jobs.html?type=ANSWER_KEY"><i class="fas fa-key"></i> आंसर की</a>
+      <a href="latest-alerts.html"><i class="fas fa-bell"></i> ताज़ा सूचनाएँ</a>
+      <a href="jobs.html"><i class="fas fa-briefcase"></i> नौकरी</a>
+      <a href="results.html"><i class="fas fa-trophy"></i> रिजल्ट</a>
+      <a href="admit-card.html"><i class="fas fa-id-card"></i> एडमिट कार्ड</a>
+      <a href="answer-key.html"><i class="fas fa-key"></i> आंसर की</a>
       <a href="scholarship.html"><i class="fas fa-graduation-cap"></i> छात्रवृत्ति</a>
-      <a href="#contact"><i class="fas fa-phone"></i> संपर्क</a>
+      <a href="schemes.html"><i class="fas fa-seedling"></i> योजनाएँ</a>
+      <a href="departments.html"><i class="fas fa-sitemap"></i> विभाग</a>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="मेन्यू">
       <i class="fas fa-bars" id="hamburgerIcon"></i>
@@ -225,6 +223,66 @@ ul{list-style:none;}
     <div class="chips" id="heroChips"></div>
   </div>
 </section>
+
+<!-- SEO DASHBOARD (static, crawlable links) -->
+<style>
+.dash{max-width:1200px;margin:0 auto;padding:22px 20px 0;}
+.dash h2{font-size:16px;font-weight:800;font-family:var(--font-hi);color:var(--text);margin:20px 0 12px;display:flex;align-items:center;gap:8px;}
+.catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+.catcard{display:flex;flex-direction:column;gap:5px;background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:15px;box-shadow:0 4px 18px rgba(15,23,42,.05);transition:.2s;}
+.catcard:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(15,23,42,.12);border-color:#c7d2fe;}
+.catcard .ic{font-size:22px;}.catcard .ti{font-size:14px;font-weight:800;font-family:var(--font-hi);color:var(--text);}
+.catcard .sub{font-size:11.5px;color:var(--gray-600);font-family:var(--font-hi);}
+.elig,.deptt{display:flex;gap:8px;flex-wrap:wrap;}
+.elig a{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe;padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:700;font-family:var(--font-hi);}
+.elig a:hover{background:#c7d2fe;}
+.deptt a{background:#fff;border:1.5px solid var(--gray-200);color:var(--gray-600);padding:7px 13px;border-radius:999px;font-size:12.5px;font-weight:700;font-family:var(--font-hi);}
+.deptt a:hover{border-color:var(--blue);color:var(--blue);}
+.deptt a.all{background:var(--blue);color:#fff;border-color:var(--blue);}
+.trust{max-width:1200px;margin:20px auto 0;padding:0 20px;}
+.trustbox{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:16px 18px;font-size:13px;color:#166534;font-family:var(--font-hi);line-height:1.7;}
+.trustbox b{color:#14532d;}
+</style>
+<section class="dash" aria-label="श्रेणियाँ">
+  <h2>🗂️ श्रेणी अनुसार सरकारी सूचनाएँ</h2>
+  <div class="catgrid">
+    <a class="catcard" href="latest-alerts.html"><span class="ic">🔔</span><span class="ti">ताज़ा सूचनाएँ</span><span class="sub">सभी नवीनतम</span></a>
+    <a class="catcard" href="jobs.html"><span class="ic">💼</span><span class="ti">सरकारी नौकरी</span><span class="sub">भर्ती / Vacancy</span></a>
+    <a class="catcard" href="results.html"><span class="ic">🏆</span><span class="ti">परिणाम</span><span class="sub">Result</span></a>
+    <a class="catcard" href="admit-card.html"><span class="ic">🪪</span><span class="ti">एडमिट कार्ड</span><span class="sub">Admit Card</span></a>
+    <a class="catcard" href="answer-key.html"><span class="ic">🔑</span><span class="ti">आंसर की</span><span class="sub">Answer Key</span></a>
+    <a class="catcard" href="scholarship.html"><span class="ic">🎓</span><span class="ti">छात्रवृत्ति</span><span class="sub">Scholarship</span></a>
+    <a class="catcard" href="schemes.html"><span class="ic">🌾</span><span class="ti">योजनाएँ</span><span class="sub">किसान/महिला/श्रमिक</span></a>
+    <a class="catcard" href="departments.html"><span class="ic">🏛️</span><span class="ti">विभाग</span><span class="sub">सभी स्रोत</span></a>
+  </div>
+
+  <h2>🎯 पात्रता / वर्ग अनुसार</h2>
+  <div class="elig">
+    <a href="jobs.html">10वीं पास</a><a href="jobs.html">12वीं पास</a><a href="jobs.html">स्नातक</a>
+    <a href="scholarship.html">विद्यार्थी</a><a href="schemes.html">महिला</a><a href="schemes.html">किसान</a><a href="schemes.html">श्रमिक</a>
+  </div>
+
+  <h2>🏛️ प्रमुख विभाग</h2>
+  <div class="deptt">
+    <a href="sarkari-jobs.html?source=ssc">SSC</a>
+    <a href="sarkari-jobs.html?source=rsmssb">RSMSSB</a>
+    <a href="sarkari-jobs.html?source=rssb">RSSB</a>
+    <a href="departments.html">RPSC</a>
+    <a href="sarkari-jobs.html?source=scholarship">SJE / छात्रवृत्ति</a>
+    <a href="departments.html">Food</a>
+    <a href="departments.html">College Education</a>
+    <a href="departments.html">Agriculture</a>
+    <a href="departments.html">WCD</a>
+    <a href="departments.html">Labour</a>
+    <a class="all" href="departments.html">सभी विभाग देखें →</a>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="trustbox">
+    <b>✅ भरोसेमंद जानकारी —</b> हम केवल आधिकारिक वेबसाइट/PDF लिंक उपलब्ध कराते हैं। आवेदन/लाभ लेने से पहले official notification अवश्य पढ़ें। यह एक निजी सूचना पोर्टल है, किसी सरकारी विभाग से आधिकारिक रूप से संबद्ध नहीं।
+  </div>
+</div>
 
 <!-- FILTER BAR -->
 <div id="filterBar" style="max-width:1200px;margin:0 auto;padding:22px 20px 0;"></div>
@@ -275,20 +333,22 @@ ul{list-style:none;}
         </div>
       </div>
       <div class="footer-col">
-        <h4>महत्वपूर्ण लिंक</h4>
+        <h4>श्रेणियाँ</h4>
         <ul>
-          <li><a href="#contact"><i class="fas fa-chevron-right"></i>संपर्क करें</a></li>
-          <li><a href="sarkari-jobs.html?src=all"><i class="fas fa-chevron-right"></i>सभी नौकरियाँ</a></li>
-          <li><a href="scholarship.html"><i class="fas fa-chevron-right"></i>छात्रवृत्ति</a></li>
+          <li><a href="latest-alerts.html"><i class="fas fa-chevron-right"></i>ताज़ा सूचनाएँ</a></li>
+          <li><a href="jobs.html"><i class="fas fa-chevron-right"></i>सरकारी नौकरी</a></li>
+          <li><a href="results.html"><i class="fas fa-chevron-right"></i>परिणाम</a></li>
+          <li><a href="admit-card.html"><i class="fas fa-chevron-right"></i>एडमिट कार्ड</a></li>
+          <li><a href="answer-key.html"><i class="fas fa-chevron-right"></i>आंसर की</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>सरकारी जॉब्स</h4>
+        <h4>और देखें</h4>
         <ul>
-          <li><a href="sarkari-jobs.html?src=ssc"><i class="fas fa-chevron-right"></i>SSC Jobs</a></li>
-          <li><a href="sarkari-jobs.html?src=rsmssb"><i class="fas fa-chevron-right"></i>RSMSSB Jobs</a></li>
-          <li><a href="sarkari-jobs.html?src=rssb"><i class="fas fa-chevron-right"></i>RSSB Jobs</a></li>
           <li><a href="scholarship.html"><i class="fas fa-chevron-right"></i>छात्रवृत्ति</a></li>
+          <li><a href="schemes.html"><i class="fas fa-chevron-right"></i>योजनाएँ</a></li>
+          <li><a href="departments.html"><i class="fas fa-chevron-right"></i>सभी विभाग</a></li>
+          <li><a href="sarkari-jobs.html?src=all"><i class="fas fa-chevron-right"></i>सभी सूचनाएँ</a></li>
         </ul>
       </div>
       <div class="footer-col">

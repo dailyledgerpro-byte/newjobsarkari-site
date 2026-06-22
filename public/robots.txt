@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin-alerts.html
+
+Sitemap: https://newjobsarkari.web.app/sitemap.xml
