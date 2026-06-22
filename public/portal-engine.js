@@ -272,7 +272,7 @@ export function buildCard(item){
 
   const foot=el('div','pe-foot');
   const d=el('a','pe-btn','विवरण देखें');
-  d.setAttribute('href', `job-detail.html#${encodeURIComponent(item.id)}||${encodeURIComponent(item.col)}`);
+  d.setAttribute('href', `alert-detail.html?id=${encodeURIComponent(item.id)}&src=${encodeURIComponent(item.col)}`);
   foot.appendChild(d);
   if(item.pdf){
     const p=el('a','pe-pdf'); p.setAttribute('href',item.pdf); p.setAttribute('target','_blank'); p.setAttribute('rel','noopener noreferrer');
