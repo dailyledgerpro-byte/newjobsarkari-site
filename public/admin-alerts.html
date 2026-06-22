@@ -139,6 +139,8 @@ textarea{resize:vertical;min-height:64px;}
       <select id="fStatus"><option value="draft">draft</option><option value="review">review</option><option value="published">published</option><option value="archived">archived</option></select>
     </div>
 
+    <div id="dupWarn" class="hidden"></div>
+
     <div class="actions">
       <button class="btn btn-ghost" onclick="window._preview()"><i class="fas fa-eye"></i> Preview</button>
       <button class="btn btn-primary" onclick="window._save('draft')"><i class="fas fa-floppy-disk"></i> Save Draft</button>
@@ -162,7 +164,7 @@ textarea{resize:vertical;min-height:64px;}
 import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
   from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-import { getFirestore, collection, addDoc, updateDoc, doc, getDocs, query, orderBy, serverTimestamp }
+import { getFirestore, initializeFirestore, collection, addDoc, updateDoc, doc, getDocs, query, orderBy, limit, serverTimestamp }
   from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 import * as R from './js/source-registry.js';
 
@@ -173,7 +175,8 @@ const firebaseConfig = {
 };
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
+// auto-detect long-polling so admin reads (dup-scan/list) survive networks that block WebChannel
+let db; try { db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true }); } catch (e) { db = getFirestore(app); }
 
 // Same admin UID the Firestore rules enforce. Client gate is defence-in-depth;
 // the actual write security is enforced server-side by rules (isAdmin()).
@@ -278,6 +281,82 @@ function validate(d){
   return null;
 }
 
+/* ---------- DUPLICATE GUARD + PUBLISH SAFETY ---------- */
+const DUP_COLS   = ['alerts','ssc_jobs','rsmssb_jobs','rssb_jobs','scholarship_notices'];
+const COL_TO_SRC = { ssc_jobs:'ssc', rsmssb_jobs:'rsmssb', rssb_jobs:'rssb', scholarship_notices:'scholarship' };
+const TEST_PREFIX = /^(test|demo|asdf|asd|dfb|qwerty|qwe|xxx|aaa|abc|sample|dummy|lorem|zzz|tbd|na)\b/i;
+
+function normTitle(s){
+  return String(s||'').toLowerCase().normalize('NFKC')
+    .replace(/^[\s\-_.#/0-9]+/, '')                 // strip leading numbering e.g. "001 "
+    .replace(/[^\wऀ-ॿ]+/g, ' ')
+    .trim().replace(/\s+/g, ' ');
+}
+function looksLikeTest(title){
+  const t = String(title||'').trim();
+  if(/^0{2,}\d*/.test(t)) return true;                          // 001, 000...
+  if(TEST_PREFIX.test(t)) return true;                          // explicit tokens (test/demo/asdf…)
+  if(/^[a-z]{1,4}\d{0,3}$/i.test(t.replace(/\s/g,''))) return true; // ab, ab12
+  const w = normTitle(t);
+  if(w.length < 4) return true;                                 // too short
+  // single run-on word with no vowel = keyboard gibberish (e.g. DFBFBFGB)
+  if(w.split(' ').length === 1 && w.length <= 12 && !/[aeiouऀ-ॏ]/.test(w)) return true;
+  return false;
+}
+function cmpOf(col, id, d){
+  const title = d.title || d.post_name || d.scheme_name || d.job_title || '';
+  const sourceId = col==='alerts' ? (d.sourceId||'') : (COL_TO_SRC[col]||col);
+  return {
+    col, id, title, ntitle: normTitle(title),
+    sourceId, alertType: String(d.alertType || d.notice_type || d.type || '').toUpperCase(),
+    pdf: String(d.officialPdf || d.official_pdf || d.pdf_url || '').trim(),
+    url: String(d.officialUrl || d.official_url || '').trim()
+  };
+}
+// read-only scan of readable collections; returns [{col,id,title,reason}]
+async function findDuplicates(data){
+  const nd = {
+    ntitle: normTitle(data.title), sourceId: data.sourceId || '',
+    alertType: String(data.alertType||'').toUpperCase(),
+    pdf: String(data.officialPdf||'').trim(), url: String(data.officialUrl||'').trim()
+  };
+  const editId = $('editId').value;
+  const matches = [], seen = new Set();
+  const results = await Promise.allSettled(DUP_COLS.map(async col=>{
+    const snap = await getDocs(query(collection(db, col), limit(300)));
+    const out = []; snap.forEach(s=>{ if(col==='alerts' && s.id===editId) return; out.push(cmpOf(col, s.id, s.data()||{})); });
+    return out;
+  }));
+  results.forEach(r=>{ if(r.status!=='fulfilled') return; r.value.forEach(ex=>{
+    let reason = null;
+    if(nd.pdf && ex.pdf && nd.pdf===ex.pdf) reason='समान Official PDF';
+    else if(nd.url && ex.url && nd.url===ex.url) reason='समान Official URL';
+    else if(nd.ntitle && ex.ntitle===nd.ntitle && ex.sourceId===nd.sourceId) reason='समान शीर्षक + स्रोत';
+    else if(nd.ntitle && ex.ntitle===nd.ntitle && ex.alertType===nd.alertType) reason='समान शीर्षक + प्रकार';
+    if(reason){ const k=ex.col+'/'+ex.id; if(!seen.has(k)){ seen.add(k); matches.push({col:ex.col, id:ex.id, title:ex.title, reason}); } }
+  }); });
+  return matches;
+}
+function clearDupWarn(){ const w=$('dupWarn'); w.textContent=''; show('dupWarn', false); }
+function showDupWarn(test, dups){
+  const w = $('dupWarn'); w.textContent='';
+  w.style.cssText='margin:6px 0 2px;padding:11px 13px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;color:#991b1b;font-family:var(--font-hi);font-size:13px;';
+  if(test) w.appendChild(el('div', null, '⚠ परीक्षण जैसा शीर्षक (test/demo/001/dfb…) — प्रकाशित नहीं किया जा सकता। Draft सहेज सकते हैं।'));
+  if(dups && dups.length){
+    w.appendChild(el('div', null, 'यह सूचना पहले से मौजूद लग रही है:'));
+    const ul=el('ul'); ul.style.cssText='margin:6px 0 0 16px;';
+    dups.slice(0,6).forEach(m=>{
+      const li=el('li'); li.style.marginBottom='3px';
+      li.appendChild(el('b', null, '['+m.col+'] '));
+      li.appendChild(document.createTextNode((m.title||'(no title)').slice(0,70)+' — '+m.reason+' (doc: '+m.id+')'));
+      ul.appendChild(li);
+    });
+    w.appendChild(ul);
+    w.appendChild(el('div', null, 'सुझाव: मौजूदा को Edit/Archive करें; डुप्लीकेट प्रकाशित न करें।'));
+  }
+  show('dupWarn', true);
+}
+
 /* ---------- SAVE (create / update) ---------- */
 window._save = async function(forcedStatus){
   if(!ADMIN_UIDS.includes(CURRENT_UID)){ msg('अनधिकृत',false); return; }
@@ -286,6 +365,20 @@ window._save = async function(forcedStatus){
   const data = collect(status);
   const err = validate(data);
   if(err){ msg(err,false); return; }
+
+  // ---- publish safety: obvious-test-title + cross-collection duplicate guard ----
+  clearDupWarn();
+  let dups = [];
+  try { dups = await findDuplicates(data); }
+  catch(e){
+    // fail-closed for publish: never publish if duplicate scan could not run
+    if(status==='published'){ msg('डुप्लीकेट जाँच विफल — सुरक्षा हेतु प्रकाशन रोका गया। बाद में प्रयास करें या Draft सहेजें।', false); return; }
+  }
+  const testBad = looksLikeTest(data.title);
+  if(status==='published' && testBad){ showDupWarn(true, dups);  msg('परीक्षण जैसा शीर्षक — प्रकाशन रोका गया।', false); return; }
+  if(status==='published' && dups.length){ showDupWarn(false, dups); msg('यह सूचना पहले से मौजूद लग रही है — प्रकाशन रोका गया।', false); return; }
+  if(dups.length || testBad){ showDupWarn(testBad, dups); }   // draft: warn but allow save
+
   try{
     const editId=$('editId').value;
     if(editId){
