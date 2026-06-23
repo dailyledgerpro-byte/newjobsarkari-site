@@ -188,8 +188,18 @@ const POST_TYPE_SECTION_CONFIG={
   notification:{showDocuments:false,showHowToApply:false,showFee:false,showAgeLimit:false,showVacancy:false,showEligibility:false,showSelection:false,procedureHeading:null,procedureFallback:null},
   generic:{showDocuments:false,showHowToApply:false,showFee:false,showAgeLimit:false,showVacancy:false,showEligibility:false,showSelection:false,documentsHeading:'📎 आवश्यक दस्तावेज़',documentsFallback:null,procedureHeading:null,procedureFallback:null}
 };
+const DATE_LABELS_BY_POST_TYPE={
+  result:{resultDate:'परिणाम तिथि'},
+  answer_key:{answerKeyDate:'उत्तर कुंजी जारी तिथि',correctionDate:'आपत्ति की अंतिम तिथि'},
+  admit_card:{admitCardDate:'एडमिट कार्ड जारी तिथि',examDate:'परीक्षा तिथि'},
+  notification:{notificationDate:'नोटिफिकेशन तिथि',examDate:'परीक्षा तिथि'},
+  recruitment:{startDate:'आवेदन शुरू',lastDate:'अंतिम तिथि',feeLastDate:'फीस जमा करने की अंतिम तिथि',examDate:'परीक्षा तिथि'},
+  scholarship:{startDate:'आवेदन शुरू',lastDate:'अंतिम तिथि',notificationDate:'नोटिफिकेशन तिथि'},
+  admission:{startDate:'आवेदन शुरू',lastDate:'अंतिम तिथि',notificationDate:'नोटिफिकेशन तिथि'}
+};
+function dateLabel(postType,key,fallback){ return (DATE_LABELS_BY_POST_TYPE[postType]||{})[key]||fallback; }
 function detectPostType(raw,item,srcCol){
-  const MAP={recruitment:'recruitment',job:'recruitment',jobs:'recruitment',result:'result',admit_card:'admit_card','admit card':'admit_card',answer_key:'answer_key','answer key':'answer_key',scholarship:'scholarship',admission:'admission',notification:'notification',government_update:'notification',scheme:'notification',update:'notification'};
+  const MAP={recruitment:'recruitment',job:'recruitment',jobs:'recruitment',result:'result',admit_card:'admit_card','admit card':'admit_card',answer_key:'answer_key','answer key':'answer_key',scholarship:'scholarship',admission:'admission',notification:'notification',exam_schedule:'notification','exam schedule':'notification',government_update:'notification',scheme:'notification',update:'notification'};
   const pt=(clean(raw.postType)||'').toLowerCase().replace(/[\s\-]/g,'_');
   if(pt&&MAP[pt])return MAP[pt];
   const cat=(clean(raw.category)||'').toLowerCase();
@@ -263,23 +273,23 @@ function render(item, raw){
 
   // 4. summary (fallback per spec)
   const summary=firstNonEmpty(raw.summary,raw.ai_summary,raw.description);
-  const ss=secOf('📄 सारांश'); ss.appendChild(summary?el('div','summary',summary):el('div','fallback','Official notification में उपलब्ध नहीं')); card.appendChild(ss);
+  const ss=secOf('📄 सारांश'); ss.appendChild(summary?el('div','summary',summary):el('div','fallback','सारांश आधिकारिक नोटिफिकेशन में उपलब्ध नहीं है।')); card.appendChild(ss);
 
   // 5. important dates (fallback per spec)
   const datePairs=[
-    ['अधिसूचना तिथि', firstNonEmpty(D.notificationDate,raw.notification_date)],
-    ['प्रारंभ तिथि', firstNonEmpty(D.startDate,raw.form_start_date,raw.startDate)],
-    ['अंतिम तिथि', firstNonEmpty(D.lastDate,raw.last_date,raw.lastDate), true],
-    ['शुल्क अंतिम तिथि', firstNonEmpty(D.feeLastDate,raw.fee_last_date)],
-    ['परीक्षा तिथि', firstNonEmpty(D.examDate,raw.exam_date,raw.examDate,raw.exam_start_date)],
-    ['Admit Card तिथि', firstNonEmpty(D.admitCardDate,raw.admit_card_available_from)],
-    ['Answer Key तिथि', firstNonEmpty(D.answerKeyDate,raw.objection_start_date)],
-    ['सुधार तिथि', firstNonEmpty(D.correctionDate,raw.correction_end_date)],
-    ['परिणाम तिथि', firstNonEmpty(D.resultDate,raw.result_date,raw.resultDate)]
+    [dateLabel(postType,'notificationDate','अधिसूचना तिथि'), firstNonEmpty(D.notificationDate,raw.notification_date)],
+    [dateLabel(postType,'startDate','प्रारंभ तिथि'), firstNonEmpty(D.startDate,raw.form_start_date,raw.startDate)],
+    [dateLabel(postType,'lastDate','अंतिम तिथि'), firstNonEmpty(D.lastDate,raw.last_date,raw.lastDate), true],
+    [dateLabel(postType,'feeLastDate','शुल्क अंतिम तिथि'), firstNonEmpty(D.feeLastDate,raw.fee_last_date)],
+    [dateLabel(postType,'examDate','परीक्षा तिथि'), firstNonEmpty(D.examDate,raw.exam_date,raw.examDate,raw.exam_start_date)],
+    [dateLabel(postType,'admitCardDate','एडमिट कार्ड तिथि'), firstNonEmpty(D.admitCardDate,raw.admit_card_available_from)],
+    [dateLabel(postType,'answerKeyDate','उत्तर कुंजी तिथि'), firstNonEmpty(D.answerKeyDate,raw.objection_start_date)],
+    [dateLabel(postType,'correctionDate','सुधार तिथि'), firstNonEmpty(D.correctionDate,raw.correction_end_date)],
+    [dateLabel(postType,'resultDate','परिणाम तिथि'), firstNonEmpty(D.resultDate,raw.result_date,raw.resultDate)]
   ];
   asArr(D.otherDates).forEach(o=>{ if(isObj(o)) datePairs.push([clean(o.label)||'अन्य तिथि', clean(o.date)]); });
   const dg=gridFrom(datePairs);
-  const ds=secOf('📅 महत्वपूर्ण तिथियाँ'); ds.appendChild(dg.children.length?dg:el('div','fallback','Important dates official notification में उपलब्ध नहीं')); card.appendChild(ds);
+  const ds=secOf('📅 महत्वपूर्ण तिथियाँ'); ds.appendChild(dg.children.length?dg:el('div','fallback','महत्वपूर्ण तिथियाँ आधिकारिक नोटिफिकेशन में उपलब्ध नहीं हैं।')); card.appendChild(ds);
 
   // 6. application fee — only if exists AND type allows
   if(cfg.showFee){
@@ -343,13 +353,17 @@ function render(item, raw){
   card.appendChild(cmt('ad-slot: detail-mid'));
 
   // 13. important links (only available)
+  const officialPdf=firstNonEmpty(L.officialNotificationPdf,L.notification,L.pdf,pdf0);
+  const resultPdf=firstNonEmpty(L.resultPdf,L.result_pdf,raw.resultPdf,raw.result_pdf);
+  const pdfLink=resultPdf||officialPdf;
+  const pdfLabel=postType==='result'&&(resultPdf||/result/i.test(clean(pdfLink)))?'Result PDF':'आधिकारिक PDF';
   const linkDefs=[
-    ['btn-pdf','आधिकारिक PDF', firstNonEmpty(L.officialNotificationPdf,L.notification,L.pdf,pdf0), 'fas fa-file-pdf'],
+    ['btn-pdf',pdfLabel, pdfLink, 'fas fa-file-pdf'],
     ['btn-web','आधिकारिक वेबसाइट', firstNonEmpty(L.website,L.officialWebsite,raw.officialUrl,raw.official_url,raw.source), 'fas fa-up-right-from-square'],
     ['btn-out','Apply Online', firstNonEmpty(L.applyOnline,L.apply,raw.apply_link,raw.applyUrl), 'fas fa-pen-to-square'],
     ['btn-out','Login', firstNonEmpty(L.login), 'fas fa-right-to-bracket'],
-    ['btn-out','Correction Form', firstNonEmpty(L.correctionForm,L.correction,raw.correction_link), 'fas fa-pen'],
-    ['btn-out','Admit Card', firstNonEmpty(L.admitCard,raw.admit_card_link), 'fas fa-id-card'],
+    ['btn-out',postType==='answer_key'?'Objection / Correction':'Correction Form', firstNonEmpty(L.objection,L.objectionLink,L.correctionForm,L.correction,raw.objection_link,raw.correction_link), 'fas fa-pen'],
+    ['btn-out',postType==='admit_card'?'Admit Card डाउनलोड':'Admit Card', firstNonEmpty(L.admitCard,raw.admit_card_link), 'fas fa-id-card'],
     ['btn-out','Answer Key', firstNonEmpty(L.answerKey,raw.answer_key_link), 'fas fa-key'],
     ['btn-out','Result', firstNonEmpty(L.result), 'fas fa-trophy'],
     ['btn-out','Syllabus', firstNonEmpty(L.syllabus,raw.schedule_link), 'fas fa-book'],
