@@ -178,8 +178,51 @@ function tbl(headers,rows){ const w=el('div','tbl-wrap'); const t=el('table','tb
 function chipsEl(arr){ const c=el('div','chips'); arr.forEach(x=>c.appendChild(el('span','chip',x))); return c; }
 function bulletsEl(arr,ordered){ const u=el(ordered?'ol':'ul','bullets'); arr.forEach(x=>u.appendChild(el('li',null,x))); return u; }
 
+const POST_TYPE_SECTION_CONFIG={
+  recruitment:{showDocuments:true,showHowToApply:true,showFee:true,showAgeLimit:true,showVacancy:true,showEligibility:true,showSelection:true,documentsHeading:'📎 आवश्यक दस्तावेज़',documentsFallback:'दस्तावेज़ों की जानकारी आधिकारिक नोटिफिकेशन में देखें।',procedureHeading:'📝 आवेदन कैसे करें',procedureFallback:'आवेदन प्रक्रिया की विस्तृत जानकारी आधिकारिक नोटिफिकेशन में उपलब्ध है।'},
+  result:{showDocuments:false,showHowToApply:false,showFee:false,showAgeLimit:false,showVacancy:false,showEligibility:false,showSelection:false,procedureHeading:'📋 Result कैसे देखें',procedureFallback:null},
+  admit_card:{showDocuments:false,showHowToApply:false,showFee:false,showAgeLimit:false,showVacancy:false,showEligibility:false,showSelection:false,procedureHeading:'📥 Admit Card कैसे डाउनलोड करें',procedureFallback:'Admit Card डाउनलोड करने की विस्तृत जानकारी आधिकारिक वेबसाइट/नोटिफिकेशन में उपलब्ध है।'},
+  answer_key:{showDocuments:false,showHowToApply:false,showFee:false,showAgeLimit:false,showVacancy:false,showEligibility:false,showSelection:false,procedureHeading:'🔑 Answer Key कैसे देखें',procedureFallback:null,objectionHeading:'📝 Objection कैसे दर्ज करें'},
+  scholarship:{showDocuments:true,showHowToApply:true,showFee:false,showAgeLimit:false,showVacancy:false,showEligibility:true,showSelection:false,documentsHeading:'📎 Scholarship के लिए आवश्यक दस्तावेज़',documentsFallback:null,procedureHeading:'📝 Scholarship आवेदन प्रक्रिया',procedureFallback:null},
+  admission:{showDocuments:true,showHowToApply:true,showFee:true,showAgeLimit:false,showVacancy:false,showEligibility:true,showSelection:false,documentsHeading:'📎 Admission के लिए आवश्यक दस्तावेज़',documentsFallback:null,procedureHeading:'📝 Admission आवेदन प्रक्रिया',procedureFallback:null},
+  notification:{showDocuments:false,showHowToApply:false,showFee:false,showAgeLimit:false,showVacancy:false,showEligibility:false,showSelection:false,procedureHeading:null,procedureFallback:null},
+  generic:{showDocuments:false,showHowToApply:false,showFee:false,showAgeLimit:false,showVacancy:false,showEligibility:false,showSelection:false,documentsHeading:'📎 आवश्यक दस्तावेज़',documentsFallback:null,procedureHeading:null,procedureFallback:null}
+};
+function detectPostType(raw,item,srcCol){
+  const MAP={recruitment:'recruitment',job:'recruitment',jobs:'recruitment',result:'result',admit_card:'admit_card','admit card':'admit_card',answer_key:'answer_key','answer key':'answer_key',scholarship:'scholarship',admission:'admission',notification:'notification',government_update:'notification',scheme:'notification',update:'notification'};
+  const pt=(clean(raw.postType)||'').toLowerCase().replace(/[\s\-]/g,'_');
+  if(pt&&MAP[pt])return MAP[pt];
+  const cat=(clean(raw.category)||'').toLowerCase();
+  if(cat){
+    if(cat.includes('result')||cat.includes('परिणाम'))return'result';
+    if(cat.includes('admit')||cat.includes('प्रवेश पत्र'))return'admit_card';
+    if(cat.includes('answer')||cat.includes('उत्तर'))return'answer_key';
+    if(cat.includes('scholarship')||cat.includes('छात्रवृत्ति'))return'scholarship';
+    if(cat.includes('admission')||cat.includes('प्रवेश'))return'admission';
+    if(cat.includes('recruit')||cat.includes('vacancy')||cat.includes('भर्ती')||cat.includes('job'))return'recruitment';
+    if(cat.includes('scheme')||cat.includes('योजना'))return'notification';
+  }
+  const cid=item.catId;
+  if(cid==='result')return'result';
+  if(cid==='admit')return'admit_card';
+  if(cid==='answer')return'answer_key';
+  if(cid==='jobs')return'recruitment';
+  if(cid==='scholarship')return'scholarship';
+  const srcM={ssc_jobs:'recruitment',rsmssb_jobs:'recruitment',rssb_jobs:'recruitment',scholarship_notices:'scholarship'};
+  if(srcM[srcCol])return srcM[srcCol];
+  const title=(item.title||clean(raw.title)||'').toLowerCase();
+  if(title.includes('result')||title.includes('परिणाम'))return'result';
+  if((title.includes('admit')&&title.includes('card'))||title.includes('प्रवेश पत्र'))return'admit_card';
+  if((title.includes('answer')&&title.includes('key'))||title.includes('उत्तर कुंजी'))return'answer_key';
+  if(title.includes('scholarship')||title.includes('छात्रवृत्ति'))return'scholarship';
+  if(title.includes('recruitment')||title.includes('vacancy')||title.includes('भर्ती'))return'recruitment';
+  return'generic';
+}
+
 function render(item, raw){
   const cat=CAT_BY_ID[item.catId]||CAT_BY_ID.other;
+  const postType=detectPostType(raw,item,src);
+  const cfg=POST_TYPE_SECTION_CONFIG[postType]||POST_TYPE_SECTION_CONFIG.generic;
   const host=document.getElementById('detail'); host.textContent='';
   // breadcrumb: Home > Category > Title
   const cb=document.getElementById('crumb'); cb.textContent=''; const ha=el('a',null,'होम'); ha.href='/'; cb.appendChild(ha);
@@ -235,42 +278,64 @@ function render(item, raw){
   const dg=gridFrom(datePairs);
   const ds=secOf('📅 महत्वपूर्ण तिथियाँ'); ds.appendChild(dg.children.length?dg:el('div','fallback','Important dates official notification में उपलब्ध नहीं')); card.appendChild(ds);
 
-  // 6. application fee (only if exists)
+  // 6. application fee — only if exists AND type allows
+  if(cfg.showFee){
   const feeRows=[['सामान्य/General',firstNonEmpty(F.general,F.General,raw.fees_general)],['OBC',firstNonEmpty(F.obc,F.OBC)],['EWS',firstNonEmpty(F.ews,F.EWS)],['SC',firstNonEmpty(F.sc,F.SC,raw.fees_sc_st)],['ST',firstNonEmpty(F.st,F.ST)],['PwD',firstNonEmpty(F.pwd,F.PwD)],['महिला/Female',firstNonEmpty(F.female,F.Female)],['अन्य/Other',firstNonEmpty(F.other,F.Other)]].filter(r=>clean(r[1]));
   if(feeRows.length){ const s=secOf('💳 आवेदन शुल्क'); s.appendChild(tbl(['श्रेणी','शुल्क'], feeRows.map(r=>[r[0], '₹'+clean(r[1])]))); card.appendChild(s); }
+  }
 
-  // 7. age limit (only if exists)
+  // 7. age limit — only if exists AND type allows
+  if(cfg.showAgeLimit){
   const ag=gridFrom([['न्यूनतम आयु',firstNonEmpty(A.minimumAge,A.min,A.minimum,raw.age_min)],['अधिकतम आयु',firstNonEmpty(A.maximumAge,A.max,A.maximum,raw.age_max)],['कट-ऑफ तिथि',firstNonEmpty(A.cutoffDate,A.cutoff)],['आयु छूट',firstNonEmpty(A.relaxation)],['टिप्पणी',firstNonEmpty(A.ageNote)]]);
   if(ag.children.length){ const s=secOf('🎂 आयु सीमा'); s.appendChild(ag); card.appendChild(s); }
+  }
 
-  // 8. vacancy details
+  // 8. vacancy details — only if exists AND type allows
+  if(cfg.showVacancy){
   const vac=asArr(raw.vacancyDetails).filter(isObj);
   if(vac.length){ const s=secOf('📋 रिक्ति विवरण'); s.appendChild(tbl(['पद','कुल पद','विभाग','Pay Level'], vac.map(v=>[gv(v,'postName','post_name','name'),gv(v,'totalPosts','total_posts','posts'),gv(v,'department','dept'),gv(v,'payLevel','pay_level')]))); card.appendChild(s); }
   else if(clean(raw.post_name)&&clean(raw.total_posts)){ const s=secOf('📋 रिक्ति विवरण'); s.appendChild(tbl(['पद','कुल पद'],[[clean(raw.post_name),clean(raw.total_posts)]])); card.appendChild(s); }
+  }
 
-  // 9. eligibility (only if exists)
+  // 9. eligibility — only if exists AND type allows
+  if(cfg.showEligibility){
   const eg=gridFrom([['शैक्षणिक योग्यता',firstNonEmpty(E.educationQualification,E.education,item.qualification)],['अनुभव',firstNonEmpty(E.experienceRequired,E.experience)],['टाइपिंग',firstNonEmpty(E.typingRequirement,E.typing)],['कौशल',firstNonEmpty(E.skillRequirement,E.skill)],['शारीरिक मानक',firstNonEmpty(E.physicalStandard,E.physical)]]);
   if(eg.children.length){ const s=secOf('🎯 पात्रता'); s.appendChild(eg); card.appendChild(s); }
+  }
 
-  // 10. selection process
+  // 10. selection process — only if exists AND type allows
+  if(cfg.showSelection){
   const sel=asArr(raw.selectionProcess).map(x=>clean(isObj(x)?gv(x,'name','step','title'):x)).filter(Boolean);
   if(sel.length){ const s=secOf('🪜 चयन प्रक्रिया'); s.appendChild(chipsEl(sel)); card.appendChild(s); }
+  }
 
-  // 11. required documents (fallback per spec — no generic list)
+  // 11. required documents — type-aware: no section on result/admit_card/answer_key/notification
+  if(cfg.showDocuments){
   const docs=asArr(raw.requiredDocuments).map(x=>clean(isObj(x)?gv(x,'name','title'):x)).filter(Boolean);
-  const ds2=secOf('📎 आवश्यक दस्तावेज़'); ds2.appendChild(docs.length?bulletsEl(docs):el('div','fallback','दस्तावेज़ों की जानकारी आधिकारिक नोटिफिकेशन में देखें।')); card.appendChild(ds2);
+  if(docs.length){ const ds2=secOf(cfg.documentsHeading||'📎 आवश्यक दस्तावेज़'); ds2.appendChild(bulletsEl(docs)); card.appendChild(ds2); }
+  else if(cfg.documentsFallback){ const ds2=secOf(cfg.documentsHeading||'📎 आवश्यक दस्तावेज़'); ds2.appendChild(el('div','fallback',cfg.documentsFallback)); card.appendChild(ds2); }
+  }
 
-  // 12. how to apply (fallback per spec — no generic steps)
+  // 12. procedure — type-specific heading and fallback (replaces generic "आवेदन कैसे करें" for non-recruitment)
+  if(cfg.procedureHeading){
   const how=raw.howToApply;
-  const hs=secOf('📝 आवेदन कैसे करें');
+  const hs=secOf(cfg.procedureHeading);
   let howSteps=[], howText='';
   if(isObj(how)){ howSteps=asArr(how.steps).map(x=>clean(isObj(x)?gv(x,'step','text'):x)).filter(Boolean); howText=clean(how.officialProcedureText); }
   else if(Array.isArray(how)){ howSteps=how.map(x=>clean(isObj(x)?gv(x,'step','text'):x)).filter(Boolean); }
   else { howText=clean(how); }
   if(howText) hs.appendChild(el('div','summary',howText));
   if(howSteps.length) hs.appendChild(bulletsEl(howSteps,true));
-  if(!howText && !howSteps.length) hs.appendChild(el('div','fallback','आवेदन प्रक्रिया की विस्तृत जानकारी आधिकारिक नोटिफिकेशन में उपलब्ध है।'));
-  card.appendChild(hs);
+  if(!howText&&!howSteps.length&&cfg.procedureFallback) hs.appendChild(el('div','fallback',cfg.procedureFallback));
+  if(howText||howSteps.length||cfg.procedureFallback) card.appendChild(hs);
+  }
+
+  // 12b. answer_key only: objection section if data exists in Firestore
+  if(postType==='answer_key'){
+  const obj=raw.objectionDetails||raw.objection;
+  const objText=clean(isObj(obj)?gv(obj,'procedure','text','description'):obj);
+  if(objText){ const os=secOf(cfg.objectionHeading||'📝 Objection कैसे दर्ज करें'); os.appendChild(el('div','summary',objText)); const objFee=isObj(obj)?clean(obj.fee||obj.objectionFee):''; const objDate=isObj(obj)?clean(obj.lastDate||obj.endDate):''; if(objFee||objDate){ const g=gridFrom([['Objection शुल्क',objFee],['अंतिम तिथि',objDate]]); if(g.children.length)os.appendChild(g); } card.appendChild(os); }
+  }
 
   card.appendChild(cmt('ad-slot: detail-mid'));
 
