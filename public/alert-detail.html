@@ -62,6 +62,25 @@ h1{font-size:clamp(19px,3.4vw,26px);font-weight:900;font-family:var(--font-hi);l
 .fcols{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
 .foot a{color:rgba(255,255,255,.7);font-size:13px;font-family:var(--font-hi);}.foot a:hover{color:#fff;}
 .fdis{font-size:12px;color:rgba(255,255,255,.5);font-family:var(--font-hi);line-height:1.7;border-top:1px solid rgba(255,255,255,.1);padding-top:12px;}
+.qic{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px;}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px;font-family:var(--font-hi);min-width:340px;}
+.tbl th,.tbl td{border:1px solid var(--gray-200);padding:8px 11px;text-align:left;}
+.tbl th{background:#eef2ff;color:#3730a3;font-weight:800;white-space:nowrap;}
+.tbl td{color:#334155;}
+.chips{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;font-size:12px;font-weight:700;padding:6px 13px;border-radius:999px;font-family:var(--font-hi);}
+.bullets{font-size:13.5px;color:#334155;font-family:var(--font-hi);line-height:1.85;padding-left:20px;}
+.bullets li{margin-bottom:3px;}
+.fallback{font-size:13px;color:var(--gray-400);font-family:var(--font-hi);font-style:italic;}
+.faq-i{border:1px solid var(--gray-200);border-radius:10px;margin-bottom:8px;overflow:hidden;}
+.faq-q{background:var(--gray-50);padding:10px 13px;font-size:13.5px;font-weight:700;font-family:var(--font-hi);color:var(--text);}
+.faq-a{padding:10px 13px;font-size:13px;color:#334155;font-family:var(--font-hi);line-height:1.7;}
+.verify{background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;padding:13px 15px;margin-top:18px;}
+.verify h2{color:#075985;border:none;padding:0;}
+.verify .vrow{font-size:12.5px;color:#0c4a6e;font-family:var(--font-hi);display:flex;gap:8px;flex-wrap:wrap;margin-top:5px;}
+.verify b{color:#075985;}
+@media print{.header,.foot,.crumb,.btn-wa,.btn-out,#relWrap{display:none!important;}.card{box-shadow:none;border:none;}}
 </style>
 </head>
 <body>
@@ -147,72 +166,150 @@ function jsonLd(item, raw){
 
 function row(label,val,red){ if(!clean(val))return null; const i=el('div','dt-i'); i.appendChild(el('div','dt-l',label)); const v=el('div','dt-v'+(red?' red':''),clean(val)); i.appendChild(v); return i; }
 
+// ---- schema-ready helpers (support old flat data + future structured fields) ----
+function isObj(v){ return v && typeof v==='object' && !Array.isArray(v); }
+function pickObj(){ for(const x of arguments){ if(isObj(x)) return x; } return {}; }
+function asArr(v){ return Array.isArray(v)?v:(v!=null&&clean(v)?[v]:[]); }
+function gv(o){ for(let i=1;i<arguments.length;i++){ const k=arguments[i]; if(o&&o[k]!=null&&clean(o[k])!=='') return o[k]; } return ''; }
+function cmt(t){ return document.createComment(' '+t+' '); }
+function secOf(title){ const s=el('div','sec'); s.appendChild(el('h2',null,title)); return s; }
+function gridFrom(pairs,cls){ const g=el('div',cls||'dt'); pairs.forEach(p=>{ const r=row(p[0],p[1],p[2]); if(r)g.appendChild(r); }); return g; }
+function tbl(headers,rows){ const w=el('div','tbl-wrap'); const t=el('table','tbl'); const thr=el('tr'); headers.forEach(h=>thr.appendChild(el('th',null,h))); t.appendChild(thr); rows.forEach(r=>{ const tr=el('tr'); r.forEach(c=>tr.appendChild(el('td',null,clean(c)||'—'))); t.appendChild(tr); }); w.appendChild(t); return w; }
+function chipsEl(arr){ const c=el('div','chips'); arr.forEach(x=>c.appendChild(el('span','chip',x))); return c; }
+function bulletsEl(arr,ordered){ const u=el(ordered?'ol':'ul','bullets'); arr.forEach(x=>u.appendChild(el('li',null,x))); return u; }
+
 function render(item, raw){
   const cat=CAT_BY_ID[item.catId]||CAT_BY_ID.other;
   const host=document.getElementById('detail'); host.textContent='';
-  // breadcrumb
-  const cb=document.getElementById('crumb'); cb.textContent=''; cb.appendChild((()=>{const a=el('a',null,'होम');a.href='/';return a;})());
-  const catHref={jobs:'jobs.html',result:'results.html',admit:'admit-card.html',answer:'answer-key.html',scholarship:'scholarship.html',extension:'latest-alerts.html',exam:'latest-alerts.html',other:'latest-alerts.html'}[item.catId]||'latest-alerts.html';
+  // breadcrumb: Home > Category > Title
+  const cb=document.getElementById('crumb'); cb.textContent=''; const ha=el('a',null,'होम'); ha.href='/'; cb.appendChild(ha);
+  const catHref={jobs:'jobs.html',result:'results.html',admit:'admit-card.html',answer:'answer-key.html',scholarship:'scholarship.html'}[item.catId]||'latest-alerts.html';
   cb.appendChild(ic('fas fa-chevron-right')); const ca=el('a',null,cat.hi); ca.href=catHref; cb.appendChild(ca);
   cb.appendChild(ic('fas fa-chevron-right')); cb.appendChild(el('span',null,(item.title||'').slice(0,40)+((item.title||'').length>40?'…':'')));
 
   const card=el('div','card');
+  // hero header
   const bd=el('div','badges');
   const sb=el('span','bd',item.sourceLabel||item.sourceId||'सरकारी'); sb.style.background=item.sourceColor||'#475569'; bd.appendChild(sb);
-  bd.appendChild(el('span','bd bd-cat',cat.hi));
+  bd.appendChild(el('span','bd bd-cat', clean(raw.postType)||cat.hi));
+  const adv=clean(raw.advertisementNo); if(adv){ const a=el('span','bd'); a.style.background='#0f766e'; a.textContent='Adv: '+adv; bd.appendChild(a); }
+  const ofc=el('span','bd'); ofc.style.background='#16a34a'; ofc.textContent='✔ आधिकारिक स्रोत'; bd.appendChild(ofc);
   card.appendChild(bd);
   card.appendChild(el('h1',null,item.title||'सूचना'));
   const sub=el('div','sub');
-  if(item.dept) sub.appendChild(el('span',null,'विभाग: '+item.dept));
-  const pub=clean(raw.publishedAt)||fmtDate(item.ts);
-  if(pub) sub.appendChild(el('span',null,'प्रकाशित: '+pub));
+  const dept=clean(raw.department)||item.dept; if(dept) sub.appendChild(el('span',null,'विभाग: '+dept));
+  const pub=firstNonEmpty(raw.publishedAt, raw.lastVerifiedAt)||fmtDate(item.ts); if(pub) sub.appendChild(el('span',null,'प्रकाशित/अपडेट: '+pub));
   card.appendChild(sub);
+  card.appendChild(cmt('ad-slot: detail-top'));
 
-  // summary
-  const summary=firstNonEmpty(raw.ai_summary, raw.description);
-  if(summary){ const s=el('div','sec'); s.appendChild(el('h2',null,'📄 सारांश')); s.appendChild(el('div','summary',summary)); card.appendChild(s); }
+  const D=pickObj(raw.importantDates), F=pickObj(raw.applicationFee), A=pickObj(raw.ageLimit), E=pickObj(raw.eligibility), L=pickObj(raw.importantLinks);
+  const pdf0=item.pdf||safeUrl(firstNonEmpty(raw.officialPdf,raw.official_pdf,raw.pdf_url));
 
-  // important dates
-  const dates=el('div','dt');
-  [['अंतिम तिथि',firstNonEmpty(raw.last_date,raw.lastDate,raw.application_end_date),true],
-   ['फॉर्म शुरू',firstNonEmpty(raw.form_start_date,raw.startDate)],
-   ['परीक्षा तिथि',firstNonEmpty(raw.exam_date,raw.examDate,raw.exam_start_date)],
-   ['परिणाम तिथि',firstNonEmpty(raw.result_date,raw.resultDate)],
-   ['आपत्ति अंतिम',firstNonEmpty(raw.objection_end_date,raw.objectionEndDate)],
-   ['Admit Card से',clean(raw.admit_card_available_from)],
-   ['सुधार अंतिम',clean(raw.correction_end_date)]
-  ].forEach(([l,v,red])=>{ const r=row(l,v,red); if(r)dates.appendChild(r); });
-  if(dates.children.length){ const s=el('div','sec'); s.appendChild(el('h2',null,'📅 महत्वपूर्ण तिथियाँ')); s.appendChild(dates); card.appendChild(s); }
+  // 3. quick info
+  const q=gridFrom([
+    ['कुल पद', firstNonEmpty(raw.total_posts,raw.totalPosts)],
+    ['अंतिम तिथि', firstNonEmpty(D.lastDate,raw.last_date,raw.lastDate), true],
+    ['योग्यता', firstNonEmpty(item.qualification,E.education)],
+    ['आवेदन मोड', firstNonEmpty(raw.application_mode,raw.applicationMode)],
+    ['श्रेणी', clean(raw.postType)||cat.hi]
+  ],'qic');
+  if(q.children.length){ const s=secOf('⚡ त्वरित जानकारी'); s.appendChild(q); card.appendChild(s); }
 
-  // eligibility
-  const elig=el('div','dt');
-  [['योग्यता',item.qualification],['आयु (न्यूनतम)',clean(raw.age_min)],['आयु (अधिकतम)',clean(raw.age_max)],
-   ['कुल पद',clean(raw.total_posts)],['शुल्क (सामान्य)',firstNonEmpty(raw.fees_general,raw.fees)]
-  ].forEach(([l,v])=>{ const r=row(l,v); if(r)elig.appendChild(r); });
-  if(elig.children.length){ const s=el('div','sec'); s.appendChild(el('h2',null,'🎯 पात्रता / विवरण')); s.appendChild(elig); card.appendChild(s); }
+  // 4. summary (fallback per spec)
+  const summary=firstNonEmpty(raw.summary,raw.ai_summary,raw.description);
+  const ss=secOf('📄 सारांश'); ss.appendChild(summary?el('div','summary',summary):el('div','fallback','Official notification में उपलब्ध नहीं')); card.appendChild(ss);
 
-  // official links
-  const pdf=item.pdf, web=safeUrl(firstNonEmpty(raw.officialUrl,raw.official_url,raw.source)), apply=safeUrl(firstNonEmpty(raw.apply_link,raw.applyUrl,raw.answer_key_link,raw.admit_card_link));
-  const linkSec=el('div','sec'); linkSec.appendChild(el('h2',null,'🔗 आधिकारिक लिंक')); const btns=el('div','btns');
-  function lbtn(cls,txt,href,icn){ if(!href)return; const a=el('a','btn '+cls); a.setAttribute('href',href); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener noreferrer'); a.appendChild(ic(icn)); a.appendChild(el('span',null,txt)); btns.appendChild(a); }
-  lbtn('btn-pdf','आधिकारिक PDF',pdf,'fas fa-file-pdf');
-  lbtn('btn-web','आधिकारिक वेबसाइट',web,'fas fa-up-right-from-square');
-  lbtn('btn-out','आवेदन / Apply',apply,'fas fa-pen-to-square');
-  if(!btns.children.length) linkSec.appendChild(el('div','summary','आधिकारिक लिंक उपलब्ध नहीं — कृपया विभाग की वेबसाइट देखें।'));
-  else linkSec.appendChild(btns);
+  // 5. important dates (fallback per spec)
+  const dg=gridFrom([
+    ['अधिसूचना तिथि', firstNonEmpty(D.notificationDate,raw.notification_date)],
+    ['प्रारंभ तिथि', firstNonEmpty(D.startDate,raw.form_start_date,raw.startDate)],
+    ['अंतिम तिथि', firstNonEmpty(D.lastDate,raw.last_date,raw.lastDate), true],
+    ['शुल्क अंतिम तिथि', firstNonEmpty(D.feeLastDate,raw.fee_last_date)],
+    ['परीक्षा तिथि', firstNonEmpty(D.examDate,raw.exam_date,raw.examDate,raw.exam_start_date)],
+    ['Admit Card तिथि', firstNonEmpty(D.admitCardDate,raw.admit_card_available_from)],
+    ['Answer Key तिथि', firstNonEmpty(D.answerKeyDate,raw.objection_start_date)],
+    ['परिणाम तिथि', firstNonEmpty(D.resultDate,raw.result_date,raw.resultDate)]
+  ]);
+  const ds=secOf('📅 महत्वपूर्ण तिथियाँ'); ds.appendChild(dg.children.length?dg:el('div','fallback','Important dates official notification में उपलब्ध नहीं')); card.appendChild(ds);
+
+  // 6. application fee (only if exists)
+  const feeRows=[['सामान्य/General',firstNonEmpty(F.general,F.General,raw.fees_general)],['OBC',firstNonEmpty(F.obc,F.OBC)],['EWS',firstNonEmpty(F.ews,F.EWS)],['SC',firstNonEmpty(F.sc,F.SC,raw.fees_sc_st)],['ST',firstNonEmpty(F.st,F.ST)],['PwD',firstNonEmpty(F.pwd,F.PwD)],['महिला/Female',firstNonEmpty(F.female,F.Female)],['अन्य/Other',firstNonEmpty(F.other,F.Other)]].filter(r=>clean(r[1]));
+  if(feeRows.length){ const s=secOf('💳 आवेदन शुल्क'); s.appendChild(tbl(['श्रेणी','शुल्क'], feeRows.map(r=>[r[0], '₹'+clean(r[1])]))); card.appendChild(s); }
+
+  // 7. age limit (only if exists)
+  const ag=gridFrom([['न्यूनतम आयु',firstNonEmpty(A.min,A.minimum,raw.age_min)],['अधिकतम आयु',firstNonEmpty(A.max,A.maximum,raw.age_max)],['कट-ऑफ तिथि',firstNonEmpty(A.cutoffDate,A.cutoff)],['आयु छूट',firstNonEmpty(A.relaxation)]]);
+  if(ag.children.length){ const s=secOf('🎂 आयु सीमा'); s.appendChild(ag); card.appendChild(s); }
+
+  // 8. vacancy details
+  const vac=asArr(raw.vacancyDetails).filter(isObj);
+  if(vac.length){ const s=secOf('📋 रिक्ति विवरण'); s.appendChild(tbl(['पद','कुल पद','विभाग','Pay Level'], vac.map(v=>[gv(v,'postName','post_name','name'),gv(v,'totalPosts','total_posts','posts'),gv(v,'department','dept'),gv(v,'payLevel','pay_level')]))); card.appendChild(s); }
+  else if(clean(raw.post_name)&&clean(raw.total_posts)){ const s=secOf('📋 रिक्ति विवरण'); s.appendChild(tbl(['पद','कुल पद'],[[clean(raw.post_name),clean(raw.total_posts)]])); card.appendChild(s); }
+
+  // 9. eligibility (only if exists)
+  const eg=gridFrom([['शैक्षणिक योग्यता',firstNonEmpty(E.education,item.qualification)],['अनुभव',firstNonEmpty(E.experience)],['टाइपिंग',firstNonEmpty(E.typing)],['कौशल',firstNonEmpty(E.skill)],['शारीरिक मानक',firstNonEmpty(E.physical)]]);
+  if(eg.children.length){ const s=secOf('🎯 पात्रता'); s.appendChild(eg); card.appendChild(s); }
+
+  // 10. selection process
+  const sel=asArr(raw.selectionProcess).map(x=>clean(isObj(x)?gv(x,'name','step','title'):x)).filter(Boolean);
+  if(sel.length){ const s=secOf('🪜 चयन प्रक्रिया'); s.appendChild(chipsEl(sel)); card.appendChild(s); }
+
+  // 11. required documents (fallback per spec — no generic list)
+  const docs=asArr(raw.requiredDocuments).map(x=>clean(isObj(x)?gv(x,'name','title'):x)).filter(Boolean);
+  const ds2=secOf('📎 आवश्यक दस्तावेज़'); ds2.appendChild(docs.length?bulletsEl(docs):el('div','fallback','दस्तावेज़ों की जानकारी आधिकारिक नोटिफिकेशन में देखें।')); card.appendChild(ds2);
+
+  // 12. how to apply (fallback per spec — no generic steps)
+  const how=raw.howToApply;
+  const howArr=Array.isArray(how)?how.map(x=>clean(isObj(x)?gv(x,'step','text'):x)).filter(Boolean):[];
+  const hs=secOf('📝 आवेदन कैसे करें');
+  if(howArr.length) hs.appendChild(bulletsEl(howArr,true));
+  else if(clean(how)) hs.appendChild(el('div','summary',clean(how)));
+  else hs.appendChild(el('div','fallback','आवेदन प्रक्रिया की विस्तृत जानकारी आधिकारिक नोटिफिकेशन में उपलब्ध है।'));
+  card.appendChild(hs);
+
+  card.appendChild(cmt('ad-slot: detail-mid'));
+
+  // 13. important links (only available)
+  const linkDefs=[
+    ['btn-pdf','आधिकारिक PDF', firstNonEmpty(L.notification,L.pdf,pdf0), 'fas fa-file-pdf'],
+    ['btn-web','आधिकारिक वेबसाइट', firstNonEmpty(L.website,L.officialWebsite,raw.officialUrl,raw.official_url,raw.source), 'fas fa-up-right-from-square'],
+    ['btn-out','Apply Online', firstNonEmpty(L.applyOnline,L.apply,raw.apply_link,raw.applyUrl), 'fas fa-pen-to-square'],
+    ['btn-out','Login', firstNonEmpty(L.login), 'fas fa-right-to-bracket'],
+    ['btn-out','Correction Form', firstNonEmpty(L.correction,raw.correction_link), 'fas fa-pen'],
+    ['btn-out','Admit Card', firstNonEmpty(L.admitCard,raw.admit_card_link), 'fas fa-id-card'],
+    ['btn-out','Answer Key', firstNonEmpty(L.answerKey,raw.answer_key_link), 'fas fa-key'],
+    ['btn-out','Result', firstNonEmpty(L.result), 'fas fa-trophy'],
+    ['btn-out','Syllabus', firstNonEmpty(L.syllabus,raw.schedule_link), 'fas fa-book'],
+    ['btn-out','अन्य लिंक', firstNonEmpty(L.other), 'fas fa-link']
+  ];
+  const linkSec=secOf('🔗 महत्वपूर्ण लिंक'); const btns=el('div','btns');
+  linkDefs.forEach(d=>{ const h=safeUrl(d[2]); if(!h)return; const a=el('a','btn '+d[0]); a.setAttribute('href',h); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener noreferrer'); a.appendChild(ic(d[3])); a.appendChild(el('span',null,d[1])); btns.appendChild(a); });
+  linkSec.appendChild(btns.children.length?btns:el('div','fallback','आधिकारिक लिंक उपलब्ध नहीं — विभाग की वेबसाइट देखें।'));
   card.appendChild(linkSec);
+
+  // 14. FAQ (only if exists, max 5)
+  const faqs=asArr(raw.faqs).filter(isObj).slice(0,5);
+  if(faqs.length){ const s=secOf('❓ सामान्य प्रश्न (FAQ)'); faqs.forEach(f=>{ const fq=clean(gv(f,'question','q')), fa=clean(gv(f,'answer','a')); if(!fq)return; const fi=el('div','faq-i'); fi.appendChild(el('div','faq-q',fq)); if(fa)fi.appendChild(el('div','faq-a',fa)); s.appendChild(fi); }); card.appendChild(s); }
+
+  // 15. source verification box (only present fields; never fake confidence)
+  const vb=[];
+  const osrc=firstNonEmpty(raw.officialSource,raw.source,item.sourceLabel); if(osrc) vb.push(['आधिकारिक स्रोत',osrc]);
+  const conf=raw.aiConfidence; if(conf!=null&&clean(conf)!==''&&!isNaN(Number(conf))) vb.push(['AI confidence', Math.round(Number(conf)*(Number(conf)<=1?100:1))+'%']);
+  const vst=clean(raw.verificationStatus); if(vst) vb.push(['समीक्षा स्थिति',vst]);
+  const lv=clean(raw.lastVerifiedAt); if(lv) vb.push(['अंतिम सत्यापन',lv]);
+  if(vb.length){ const v=el('div','verify'); v.appendChild(el('h2',null,'🛡 स्रोत सत्यापन')); vb.forEach(r=>{ const x=el('div','vrow'); x.appendChild(el('b',null,r[0]+':')); x.appendChild(el('span',null,r[1])); v.appendChild(x); }); card.appendChild(v); }
 
   // actions
   const act=el('div','sec'); const ab=el('div','btns');
   const wa=el('a','btn btn-wa'); wa.setAttribute('href','https://wa.me/?text='+encodeURIComponent((item.title||'सूचना')+' — '+location.href)); wa.setAttribute('target','_blank'); wa.setAttribute('rel','noopener noreferrer'); wa.appendChild(ic('fab fa-whatsapp')); wa.appendChild(el('span',null,'WhatsApp शेयर')); ab.appendChild(wa);
+  const pr=el('button','btn btn-out'); pr.appendChild(ic('fas fa-print')); pr.appendChild(el('span',null,'प्रिंट')); pr.addEventListener('click',()=>window.print()); ab.appendChild(pr);
   const back=el('a','btn btn-out'); back.setAttribute('href','latest-alerts.html'); back.appendChild(ic('fas fa-arrow-left')); back.appendChild(el('span',null,'ताज़ा सूचनाएँ')); ab.appendChild(back);
   act.appendChild(ab); card.appendChild(act);
 
   // disclaimer
-  const d=el('div','disc'); d.appendChild(el('b',null,'⚠ अस्वीकरण: ')); d.appendChild(document.createTextNode('यह सूचना official source के आधार पर दी गई है। आवेदन/लाभ लेने से पहले official notification अवश्य पढ़ें।')); card.appendChild(d);
+  const dd=el('div','disc'); dd.appendChild(el('b',null,'⚠ अस्वीकरण: ')); dd.appendChild(document.createTextNode('यह जानकारी आधिकारिक नोटिफिकेशन/वेबसाइट के आधार पर दी गई है। आवेदन करने से पहले official notification जरूर पढ़ें।')); card.appendChild(dd);
+  card.appendChild(cmt('ad-slot: detail-bottom'));
 
   host.appendChild(card);
-
   setMeta(item.title+' | Laxmi Job Alert', (summary||(item.title+' — '+(item.sourceLabel||'')+' '+cat.hi+' सूचना। आधिकारिक लिंक के साथ।')).slice(0,160));
   jsonLd(item, raw);
   loadRelated(item);
