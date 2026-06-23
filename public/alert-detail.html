@@ -208,6 +208,9 @@ function detectPostType(raw,item,srcCol){
   if(cid==='answer')return'answer_key';
   if(cid==='jobs')return'recruitment';
   if(cid==='scholarship')return'scholarship';
+  if(cid==='exam')return'notification';
+  if(cid==='extension')return'notification';
+  if(cid==='other')return'generic';
   const srcM={ssc_jobs:'recruitment',rsmssb_jobs:'recruitment',rssb_jobs:'recruitment',scholarship_notices:'scholarship'};
   if(srcM[srcCol])return srcM[srcCol];
   const title=(item.title||clean(raw.title)||'').toLowerCase();
