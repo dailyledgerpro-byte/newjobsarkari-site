@@ -1,0 +1,173 @@
+{
+  "mode": "read-only normalization preview",
+  "collections": {
+    "ssc_jobs": {
+      "status": "readable",
+      "total": 12,
+      "safelyNormalizable": 12,
+      "mappedFields": {
+        "title": 12,
+        "department": 12,
+        "sourceLabel": 12,
+        "publishedDate": 12,
+        "summary": 12,
+        "officialPdfUrl": 12,
+        "postType": 12,
+        "importantLinks": 12,
+        "importantLinks.officialNotificationPdf": 12,
+        "importantLinks.answerKey": 1,
+        "importantDates": 11,
+        "importantDates.examDate": 6,
+        "totalPosts": 4,
+        "importantLinks.applyOnline": 4,
+        "importantDates.startDate": 4,
+        "importantDates.lastDate": 4,
+        "importantLinks.result": 5,
+        "importantDates.resultDate": 5
+      },
+      "postTypes": {
+        "answer_key": 1,
+        "exam_schedule": 2,
+        "recruitment": 4,
+        "result": 5
+      }
+    },
+    "rsmssb_jobs": {
+      "status": "readable",
+      "total": 11,
+      "safelyNormalizable": 11,
+      "mappedFields": {
+        "title": 11,
+        "department": 11,
+        "sourceLabel": 11,
+        "publishedDate": 11,
+        "summary": 11,
+        "officialPdfUrl": 11,
+        "postType": 11,
+        "importantLinks": 11,
+        "importantLinks.officialNotificationPdf": 11,
+        "importantLinks.answerKey": 7,
+        "importantDates": 4,
+        "importantDates.examDate": 3,
+        "importantLinks.result": 1,
+        "importantDates.resultDate": 1
+      },
+      "postTypes": {
+        "answer_key": 7,
+        "exam_schedule": 3,
+        "result": 1
+      }
+    },
+    "rssb_jobs": {
+      "status": "readable",
+      "total": 40,
+      "safelyNormalizable": 40,
+      "mappedFields": {
+        "title": 40,
+        "department": 40,
+        "sourceLabel": 40,
+        "publishedDate": 40,
+        "summary": 40,
+        "officialPdfUrl": 40,
+        "postType": 40,
+        "importantLinks": 40,
+        "importantLinks.officialNotificationPdf": 40,
+        "importantLinks.admitCard": 1,
+        "importantDates": 34,
+        "importantDates.examDate": 31,
+        "importantDates.admitCardDate": 1,
+        "totalPosts": 14,
+        "importantLinks.applyOnline": 14,
+        "importantDates.startDate": 14,
+        "importantDates.lastDate": 14,
+        "importantLinks.result": 3,
+        "importantDates.resultDate": 3
+      },
+      "postTypes": {
+        "admit_card": 1,
+        "correction": 6,
+        "exam_schedule": 16,
+        "recruitment": 14,
+        "result": 3
+      }
+    },
+    "scholarship_notices": {
+      "status": "readable",
+      "total": 14,
+      "safelyNormalizable": 14,
+      "mappedFields": {
+        "title": 14,
+        "department": 14,
+        "sourceLabel": 14,
+        "publishedDate": 14,
+        "summary": 14,
+        "officialPdfUrl": 14,
+        "postType": 14,
+        "importantLinks": 14,
+        "importantLinks.officialNotificationPdf": 14,
+        "importantLinks.applyOnline": 8,
+        "importantDates": 3,
+        "importantDates.startDate": 2,
+        "importantDates.lastDate": 2,
+        "importantLinks.result": 1,
+        "importantDates.resultDate": 1
+      },
+      "postTypes": {
+        "scholarship": 12,
+        "correction": 1,
+        "result": 1
+      }
+    },
+    "alerts": {
+      "status": "not_enumerable",
+      "total": null
+    }
+  },
+  "totals": {
+    "processed": 77,
+    "safelyNormalizable": 77
+  },
+  "fieldsStillMissingByPostType": {
+    "answer_key": {
+      "documents": 8,
+      "fields": {
+        "answerKeyDate": 8,
+        "objectionCorrectionLink": 8
+      }
+    },
+    "recruitment": {
+      "documents": 18,
+      "fields": {
+        "eligibility": 18,
+        "applicationFee": 18,
+        "ageLimit": 18
+      }
+    },
+    "result": {
+      "documents": 10,
+      "fields": {
+        "officialSourceUrl": 10
+      }
+    },
+    "admit_card": {
+      "documents": 1,
+      "fields": {
+        "officialSourceUrl": 1
+      }
+    },
+    "scholarship": {
+      "documents": 12,
+      "fields": {
+        "eligibility": 12,
+        "requiredDocuments": 12,
+        "officialSourceUrl": 12,
+        "lastDate": 10,
+        "applyOnline": 4
+      }
+    }
+  },
+  "alerts": {
+    "status": "not_enumerable",
+    "reason": "Public collection list reads are denied (403); no bypass attempted."
+  }
+}

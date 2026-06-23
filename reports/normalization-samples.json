@@ -1,0 +1,141 @@
+{
+  "answer_key": {
+    "source": {
+      "collection": "ssc_jobs",
+      "id": "ak-constable-driver-male-in-delhi-police-ex",
+      "detectionBasis": "postType/notice_type"
+    },
+    "normalized": {
+      "title": "Constable (Driver)-Male in Delhi Police Examination, 2025",
+      "department": "Staff Selection Commission",
+      "sourceLabel": "ssc.gov.in",
+      "publishedDate": "2026-06-07T12:46:43.357438Z",
+      "summary": "कर्मचारी चयन आयोग ने कांस्टेबल (ड्राइवर)-पुरुष, दिल्ली पुलिस परीक्षा, 2025 की अंतिम उत्तर कुंजी, प्रश्न पत्र, रिस्पांस शीट और अंक अपलोड कर दिए हैं। उम्मीदवार 26.05.2026 (शाम 18:00 बजे) से 09.06.2026 (शाम 18:00 बजे) तक अपने रोल नंबर और पासवर्ड का उपयोग करके इन्हें देख सकते हैं। यह सुविधा निर्धारित समय सीमा के बाद उपलब्ध नहीं होगी, और इस संबंध में भविष्य में कोई व्यक्तिगत अनुरोध स्वीकार नहीं किया जाएगा। चूंकि ये 'अंतिम' उत्तर कुंजी हैं, इसलिए आपत्ति दर्ज कराने का कोई विंडो या शुल्क उपलब्ध नहीं है।",
+      "officialPdfUrl": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/writeup_26052026.pdf",
+      "postType": "answer_key",
+      "importantLinks": {
+        "officialNotificationPdf": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/writeup_26052026.pdf",
+        "answerKey": "https://sscexams.cbexams.com/DPCD2025Finalsheetsedlandingpage/loginnew.aspx"
+      }
+    }
+  },
+  "exam_schedule": {
+    "source": {
+      "collection": "ssc_jobs",
+      "id": "exam-grade-c-stenographers-limited-department",
+      "detectionBasis": "postType/notice_type"
+    },
+    "normalized": {
+      "title": "Grade 'C' Stenographers Limited Departmental Competitive Examination, 2025",
+      "department": "Staff Selection Commission",
+      "sourceLabel": "ssc.gov.in",
+      "publishedDate": "2026-06-07T06:49:19.812797Z",
+      "summary": "कर्मचारी चयन आयोग ने ग्रेड 'सी' स्टेनोग्राफर लिमिटेड विभागीय प्रतियोगी परीक्षा 2025 की घोषणा की है, जो 4 जुलाई, 2026 को पार्ट-ए (CBE) मोड में आयोजित की जाएगी। सभी उम्मीदवारों को सलाह दी जाती है कि वे परीक्षा से संबंधित आगामी जानकारी और अपडेट के लिए नियमित रूप से आयोग की वेबसाइट देखते रहें।",
+      "officialPdfUrl": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Date Notice of Steno C LDCE, 2025.pdf",
+      "postType": "exam_schedule",
+      "importantLinks": {
+        "officialNotificationPdf": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Date Notice of Steno C LDCE, 2025.pdf"
+      },
+      "importantDates": {
+        "examDate": "04-07-2026"
+      }
+    }
+  },
+  "recruitment": {
+    "source": {
+      "collection": "ssc_jobs",
+      "id": "rec-empanelment-of-language-experts",
+      "detectionBasis": "postType/notice_type"
+    },
+    "normalized": {
+      "title": "Empanelment of Language Experts",
+      "department": "Staff Selection Commission",
+      "sourceLabel": "ssc.gov.in",
+      "publishedDate": "2026-06-07T06:50:43.478889Z",
+      "summary": "कर्मचारी चयन आयोग (SSC) ने विभिन्न क्षेत्रीय भाषाओं के लिए भाषा विशेषज्ञों के पैनल में शामिल होने हेतु आवेदन आमंत्रित किए हैं। इच्छुक उम्मीदवार जो फैकल्टी सदस्य, लेक्चरर या हाई स्कूल शिक्षक के रूप में कार्यरत या सेवानिवृत्त हैं और अंग्रेजी व हिंदी का ज्ञान रखते हैं, वे आवेदन कर सकते हैं। आवेदन ईमेल के माध्यम से 17 जून 2026 तक जमा किए जा सकते हैं। यह विशेषज्ञ पैनल अस्थायी और आवश्यकता आधारित होगा।",
+      "officialPdfUrl": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Empanlement of Language Experts.pdf",
+      "totalPosts": "उपलब्ध नहीं",
+      "postType": "recruitment",
+      "importantLinks": {
+        "officialNotificationPdf": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Empanlement of Language Experts.pdf",
+        "applyOnline": "उपलब्ध नहीं"
+      },
+      "importantDates": {
+        "startDate": "उपलब्ध नहीं",
+        "lastDate": "17-06-2026",
+        "examDate": "उपलब्ध नहीं"
+      }
+    }
+  },
+  "result": {
+    "source": {
+      "collection": "ssc_jobs",
+      "id": "res-constable-executive-male-and-female-in-d",
+      "detectionBasis": "postType/notice_type"
+    },
+    "normalized": {
+      "title": "Constable (Executive) Male and Female in Delhi Police Examination, 2025",
+      "department": "Staff Selection Commission",
+      "sourceLabel": "ssc.gov.in",
+      "publishedDate": "2026-06-20T10:04:23.187773Z",
+      "summary": "दिल्ली पुलिस परीक्षा, 2025 में कांस्टेबल (कार्यकारी) पुरुष और महिला के कंप्यूटर आधारित परीक्षा का परिणाम घोषित कर दिया गया है। कुल 66,076 उम्मीदवारों को शारीरिक सहनशक्ति और माप परीक्षण (PE&MT) तथा दस्तावेज सत्यापन (DV) के लिए शॉर्टलिस्ट किया गया है। PE&MT/DV का विस्तृत कार्यक्रम दिल्ली पुलिस की वेबसाइट पर सूचित किया जाएगा। कुछ उम्मीदवारों के परिणाम संदिग्ध कदाचार, रद्द करने या निषेध के कारण रोक दिए गए हैं या संसाधित नहीं किए गए हैं।",
+      "officialPdfUrl": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/writeup_dpce_19062026.pdf",
+      "postType": "result",
+      "importantLinks": {
+        "officialNotificationPdf": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/writeup_dpce_19062026.pdf",
+        "result": "उपलब्ध नहीं"
+      },
+      "importantDates": {
+        "resultDate": "19-06-2026"
+      }
+    }
+  },
+  "admit_card": {
+    "source": {
+      "collection": "rssb_jobs",
+      "id": "rssb-ac-agriculture-supervisor-direct-recru",
+      "detectionBasis": "postType/notice_type"
+    },
+    "normalized": {
+      "title": "Agriculture Supervisor Direct Recruitment Exam",
+      "department": "Rajasthan Staff Selection Board",
+      "sourceLabel": "rssb.rajasthan.gov.in",
+      "publishedDate": "2026-06-07T13:00:11.891273Z",
+      "summary": "राजस्थान कर्मचारी चयन बोर्ड ने कृषि पर्यवेक्षक सीधी भर्ती परीक्षा-2021 के लिए प्रवेश पत्र जारी कर दिए हैं। यह परीक्षा 18 सितंबर 2021 को सुबह 10:00 बजे से दोपहर 12:00 बजे तक आयोजित होगी। अभ्यर्थी अपने प्रोविजनल ई-प्रवेश पत्र 09 सितंबर 2021 से बोर्ड की आधिकारिक वेबसाइट www.rsmssb.rajasthan.gov.in से डाउनलोड कर सकते हैं। परीक्षा के दिन, अभ्यर्थियों को निर्धारित समय से 1.5 घंटे पहले केंद्र पर पहुंचना होगा, मास्क पहनना अनिवार्य है, और मूल फोटो पहचान पत्र, नवीनतम रंगीन फोटो व पारदर्शी बॉल पेन साथ लाना होगा। घड़ी, मोबाइल फोन, आभूषण, बैग जैसी कोई भी वर्जित सामग्री लाने की अनुमति नहीं होगी तथा निर्धारित ड्रेस कोड का पालन करना अनिवार्य है।",
+      "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1634719581.pdf",
+      "postType": "admit_card",
+      "importantLinks": {
+        "officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1634719581.pdf",
+        "admitCard": "https://www.rsmssb.rajasthan.gov.in"
+      },
+      "importantDates": {
+        "examDate": "18-09-2021",
+        "admitCardDate": "09-09-2021"
+      }
+    }
+  },
+  "scholarship": {
+    "source": {
+      "collection": "scholarship_notices",
+      "id": "sch-apply-mukhyamantri-sarvajan-uchch-sh-2606071829",
+      "detectionBasis": "source collection"
+    },
+    "normalized": {
+      "title": "Mukhyamantri Sarvajan Uchch Shiksha Uttar Matric Scholarship Scheme",
+      "department": "Social Justice and Empowerment Department, Government of Rajasthan",
+      "sourceLabel": "sjmsnew.rajasthan.gov.in",
+      "publishedDate": "2026-06-07T12:59:50.887682Z",
+      "summary": "यह मुख्यमंत्री सर्वजन उच्च शिक्षा उत्तर मैट्रिक छात्रवृति योजना 2024-25 के लिए आवेदन संबंधी निर्देश हैं। यह योजना राजस्थान के मूल निवासी अनुसूचित जाति, अनुसूचित जनजाति, अति पिछड़ा वर्ग, अन्य पिछड़ा वर्ग, आर्थिक पिछड़ा वर्ग, विमुक्त, घुमन्तु, अर्द्धघुमन्तु, मिरासी और भिश्ती समुदाय के छात्रों के लिए है। छात्रवृत्ति पोर्टल शीघ्र ही प्रारम्भ होने वाला है। पात्रता हेतु विद्यार्थियों को नियमित छात्र होना चाहिए, और उनका बैंक खाता आधार सीडेड, KYC पूर्ण, और माइनर या बंद नहीं होना चाहिए। आवेदन के लिए जनाधार, आधार, जाति प्रमाण पत्र, मूलनिवास प्रमाण पत्र और बैंक खाते का विवरण अद्यतन होना आवश्यक है।",
+      "officialPdfUrl": "https://sjmsnew.rajasthan.gov.in/Scholarship/Portal/Documents/a76ea894-72b7-4f41-a85a-3ddc2d427bf0.pdf",
+      "postType": "scholarship",
+      "importantLinks": {
+        "officialNotificationPdf": "https://sjmsnew.rajasthan.gov.in/Scholarship/Portal/Documents/a76ea894-72b7-4f41-a85a-3ddc2d427bf0.pdf",
+        "applyOnline": "उपलब्ध नहीं"
+      },
+      "importantDates": {
+        "startDate": "उपलब्ध नहीं",
+        "lastDate": "उपलब्ध नहीं"
+      }
+    }
+  }
+}
