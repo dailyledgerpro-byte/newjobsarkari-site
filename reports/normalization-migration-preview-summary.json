@@ -1,0 +1,230 @@
+{
+  "mode": "read-only migration preview",
+  "collections": {
+    "ssc_jobs": {
+      "status": "readable",
+      "scanned": 12,
+      "proposedUpdates": 12,
+      "skippedNoSafeUpdate": 0,
+      "proposedFields": {
+        "title": 12,
+        "sourceLabel": 12,
+        "postType": 12,
+        "publishedDate": 12,
+        "summary": 12,
+        "officialPdfUrl": 12,
+        "importantLinks.officialNotificationPdf": 12,
+        "importantLinks.answerKey": 1,
+        "totalPosts": 4,
+        "importantLinks.applyOnline": 4,
+        "importantDates.startDate": 4,
+        "importantDates.lastDate": 4,
+        "importantDates.examDate": 4,
+        "importantLinks.result": 5,
+        "importantDates.resultDate": 5
+      },
+      "proposedPostTypes": {
+        "answer_key": 1,
+        "exam_schedule": 2,
+        "recruitment": 4,
+        "result": 5
+      }
+    },
+    "rsmssb_jobs": {
+      "status": "readable",
+      "scanned": 11,
+      "proposedUpdates": 11,
+      "skippedNoSafeUpdate": 0,
+      "proposedFields": {
+        "title": 11,
+        "sourceLabel": 11,
+        "postType": 11,
+        "publishedDate": 11,
+        "summary": 11,
+        "officialPdfUrl": 11,
+        "importantLinks.officialNotificationPdf": 11,
+        "importantLinks.answerKey": 7,
+        "importantLinks.result": 1,
+        "importantDates.resultDate": 1
+      },
+      "proposedPostTypes": {
+        "answer_key": 7,
+        "exam_schedule": 3,
+        "result": 1
+      }
+    },
+    "rssb_jobs": {
+      "status": "readable",
+      "scanned": 40,
+      "proposedUpdates": 40,
+      "skippedNoSafeUpdate": 0,
+      "proposedFields": {
+        "title": 39,
+        "sourceLabel": 40,
+        "postType": 40,
+        "publishedDate": 40,
+        "summary": 40,
+        "officialPdfUrl": 40,
+        "importantLinks.officialNotificationPdf": 40,
+        "importantLinks.admitCard": 1,
+        "importantDates.examDate": 15,
+        "totalPosts": 14,
+        "importantLinks.applyOnline": 14,
+        "importantDates.startDate": 14,
+        "importantDates.lastDate": 14,
+        "importantLinks.result": 3,
+        "importantDates.resultDate": 3
+      },
+      "proposedPostTypes": {
+        "admit_card": 1,
+        "correction": 6,
+        "exam_schedule": 16,
+        "recruitment": 14,
+        "result": 3
+      }
+    },
+    "scholarship_notices": {
+      "status": "readable",
+      "scanned": 14,
+      "proposedUpdates": 14,
+      "skippedNoSafeUpdate": 0,
+      "proposedFields": {
+        "title": 11,
+        "sourceLabel": 14,
+        "postType": 14,
+        "publishedDate": 14,
+        "summary": 14,
+        "officialPdfUrl": 14,
+        "importantLinks.officialNotificationPdf": 14,
+        "importantLinks.applyOnline": 8,
+        "importantDates.startDate": 2,
+        "importantDates.lastDate": 2,
+        "importantLinks.result": 1,
+        "importantDates.resultDate": 1
+      },
+      "proposedPostTypes": {
+        "scholarship": 12,
+        "correction": 1,
+        "result": 1
+      }
+    },
+    "alerts": {
+      "status": "not_enumerable",
+      "total": null
+    }
+  },
+  "totals": {
+    "scanned": 77,
+    "proposedUpdates": 77,
+    "skippedNoSafeUpdate": 0
+  },
+  "proposedFieldsByPostType": {
+    "answer_key": {
+      "documents": 8,
+      "fields": {
+        "title": 8,
+        "sourceLabel": 8,
+        "postType": 8,
+        "publishedDate": 8,
+        "summary": 8,
+        "officialPdfUrl": 8,
+        "importantLinks.officialNotificationPdf": 8,
+        "importantLinks.answerKey": 8
+      }
+    },
+    "exam_schedule": {
+      "documents": 21,
+      "fields": {
+        "title": 20,
+        "sourceLabel": 21,
+        "postType": 21,
+        "publishedDate": 21,
+        "summary": 21,
+        "officialPdfUrl": 21,
+        "importantLinks.officialNotificationPdf": 21
+      }
+    },
+    "recruitment": {
+      "documents": 18,
+      "fields": {
+        "title": 18,
+        "sourceLabel": 18,
+        "postType": 18,
+        "publishedDate": 18,
+        "summary": 18,
+        "officialPdfUrl": 18,
+        "totalPosts": 18,
+        "importantLinks.officialNotificationPdf": 18,
+        "importantLinks.applyOnline": 18,
+        "importantDates.startDate": 18,
+        "importantDates.lastDate": 18,
+        "importantDates.examDate": 18
+      }
+    },
+    "result": {
+      "documents": 10,
+      "fields": {
+        "title": 10,
+        "sourceLabel": 10,
+        "postType": 10,
+        "publishedDate": 10,
+        "summary": 10,
+        "officialPdfUrl": 10,
+        "importantLinks.officialNotificationPdf": 10,
+        "importantLinks.result": 10,
+        "importantDates.resultDate": 10
+      }
+    },
+    "admit_card": {
+      "documents": 1,
+      "fields": {
+        "title": 1,
+        "sourceLabel": 1,
+        "postType": 1,
+        "publishedDate": 1,
+        "summary": 1,
+        "officialPdfUrl": 1,
+        "importantLinks.officialNotificationPdf": 1,
+        "importantLinks.admitCard": 1,
+        "importantDates.examDate": 1
+      }
+    },
+    "correction": {
+      "documents": 7,
+      "fields": {
+        "title": 7,
+        "sourceLabel": 7,
+        "postType": 7,
+        "publishedDate": 7,
+        "summary": 7,
+        "officialPdfUrl": 7,
+        "importantLinks.officialNotificationPdf": 7
+      }
+    },
+    "scholarship": {
+      "documents": 12,
+      "fields": {
+        "title": 9,
+        "sourceLabel": 12,
+        "postType": 12,
+        "publishedDate": 12,
+        "summary": 12,
+        "officialPdfUrl": 12,
+        "importantLinks.officialNotificationPdf": 12,
+        "importantLinks.applyOnline": 8,
+        "importantDates.startDate": 2,
+        "importantDates.lastDate": 2
+      }
+    }
+  },
+  "intentionallyNotMigrated": [
+    "applicationFee, ageLimit, vacancyDetails, eligibility, selectionProcess, requiredDocuments, howToApply, faqs, aiConfidence, and verificationStatus require existing structured data or future review.",
+    "objection_start_date is not mapped as answerKeyDate because it describes a different event.",
+    "source labels such as ssc.gov.in are not converted into URLs unless an explicit URL field is already URL-like.",
+    "No title or summary text is parsed for dates or other structured values."
+  ],
+  "alerts": {
+    "status": "not_enumerable",
+    "reason": "Public collection list reads are denied (403); no bypass attempted."
+  }
+}
