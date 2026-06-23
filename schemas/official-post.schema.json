@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://newjobsarkari.web.app/schemas/official-post.schema.json",
+  "title": "Laxmi Job Alert — Official Post (AI extraction canonical schema)",
+  "description": "Canonical structure for AI-extracted official Rajasthan/Govt notification data. Official-source-only. The extractor MUST NOT invent information; unknown fields are null / empty array. Not used for auto-publish.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "postId", "title", "postType", "sourceId", "officialSourceUrl"],
+  "properties": {
+    "_meta": { "type": ["object", "null"], "description": "Non-canonical metadata (e.g. sample marker). Ignored by the renderer." },
+    "schemaVersion": { "type": "string", "const": "1.0" },
+    "postId": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 3 },
+    "department": { "type": ["string", "null"] },
+    "advertisementNo": { "type": ["string", "null"] },
+    "postType": { "type": "string", "enum": ["recruitment", "result", "admit_card", "answer_key", "scholarship", "admission", "notification", "government_update"] },
+    "category": { "type": ["string", "null"] },
+    "sourceId": { "type": "string", "minLength": 1 },
+    "sourceLabel": { "type": ["string", "null"] },
+    "officialSourceUrl": { "type": ["string", "null"], "format": "uri" },
+    "officialPdfUrl": { "type": ["string", "null"], "format": "uri" },
+    "publishedDate": { "type": ["string", "null"] },
+    "updatedDate": { "type": ["string", "null"] },
+    "applicationMode": { "type": ["string", "null"], "description": "online | offline | both | null" },
+    "summary": { "type": ["string", "null"], "description": "Official-based, max ~150 words. null if not available." },
+
+    "importantDates": {
+      "type": ["object", "null"], "additionalProperties": false,
+      "properties": {
+        "notificationDate": { "type": ["string", "null"] },
+        "startDate": { "type": ["string", "null"] },
+        "lastDate": { "type": ["string", "null"] },
+        "feeLastDate": { "type": ["string", "null"] },
+        "examDate": { "type": ["string", "null"] },
+        "admitCardDate": { "type": ["string", "null"] },
+        "answerKeyDate": { "type": ["string", "null"] },
+        "resultDate": { "type": ["string", "null"] },
+        "correctionDate": { "type": ["string", "null"] },
+        "otherDates": { "type": "array", "items": { "type": "object", "properties": { "label": {"type":"string"}, "date": {"type":"string"} } } }
+      }
+    },
+
+    "applicationFee": {
+      "type": ["object", "null"], "additionalProperties": false,
+      "properties": {
+        "general": { "type": ["string", "null"] }, "obc": { "type": ["string", "null"] },
+        "ews": { "type": ["string", "null"] }, "sc": { "type": ["string", "null"] },
+        "st": { "type": ["string", "null"] }, "pwd": { "type": ["string", "null"] },
+        "female": { "type": ["string", "null"] }, "other": { "type": ["string", "null"] },
+        "paymentMode": { "type": ["string", "null"] }, "feeNote": { "type": ["string", "null"] }
+      }
+    },
+
+    "ageLimit": {
+      "type": ["object", "null"], "additionalProperties": false,
+      "properties": {
+        "minimumAge": { "type": ["string", "null"] }, "maximumAge": { "type": ["string", "null"] },
+        "cutoffDate": { "type": ["string", "null"] }, "relaxation": { "type": ["string", "null"] },
+        "ageNote": { "type": ["string", "null"] }
+      }
+    },
+
+    "vacancyDetails": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "properties": {
+          "postName": { "type": ["string", "null"] }, "totalPosts": { "type": ["string", "null"] },
+          "department": { "type": ["string", "null"] }, "payLevel": { "type": ["string", "null"] },
+          "categoryWisePosts": { "type": ["object", "null"] }, "vacancyNote": { "type": ["string", "null"] }
+        }
+      }
+    },
+
+    "eligibility": {
+      "type": ["object", "null"], "additionalProperties": false,
+      "properties": {
+        "educationQualification": { "type": ["string", "null"] }, "experienceRequired": { "type": ["string", "null"] },
+        "typingRequirement": { "type": ["string", "null"] }, "skillRequirement": { "type": ["string", "null"] },
+        "physicalStandard": { "type": ["string", "null"] }, "eligibilityNote": { "type": ["string", "null"] }
+      }
+    },
+
+    "selectionProcess": { "type": "array", "items": { "type": "string" }, "description": "Only official-mentioned steps." },
+
+    "requiredDocuments": { "type": "array", "items": { "type": "string" }, "description": "Empty unless official notification explicitly lists documents." },
+
+    "howToApply": {
+      "type": ["object", "null"], "additionalProperties": false,
+      "properties": {
+        "mode": { "type": ["string", "null"] },
+        "officialProcedureText": { "type": ["string", "null"] },
+        "steps": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "importantLinks": {
+      "type": ["object", "null"], "additionalProperties": false,
+      "properties": {
+        "officialNotificationPdf": { "type": ["string", "null"], "format": "uri" },
+        "officialWebsite": { "type": ["string", "null"], "format": "uri" },
+        "applyOnline": { "type": ["string", "null"], "format": "uri" },
+        "login": { "type": ["string", "null"], "format": "uri" },
+        "correctionForm": { "type": ["string", "null"], "format": "uri" },
+        "admitCard": { "type": ["string", "null"], "format": "uri" },
+        "answerKey": { "type": ["string", "null"], "format": "uri" },
+        "result": { "type": ["string", "null"], "format": "uri" },
+        "syllabus": { "type": ["string", "null"], "format": "uri" },
+        "otherOfficialLinks": { "type": "array", "items": { "type": "object", "properties": { "label": {"type":"string"}, "url": {"type":"string","format":"uri"} } } }
+      }
+    },
+
+    "faqs": {
+      "type": "array", "maxItems": 5,
+      "items": { "type": "object", "required": ["question", "answer"], "properties": { "question": { "type": "string" }, "answer": { "type": "string" } } },
+      "description": "Max 5. Only if source supports. Never invented."
+    },
+
+    "aiConfidence": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+    "confidenceBreakdown": { "type": ["object", "null"], "description": "Per-field confidence map." },
+    "verificationStatus": { "type": "string", "enum": ["pending_review", "reviewed", "approved", "rejected", "auto_low_confidence"] },
+    "manualReviewRequired": { "type": "boolean" },
+    "extractionWarnings": { "type": "array", "items": { "type": "string" } },
+    "sourceEvidence": { "type": ["string", "null"], "description": "Internal: official source pointer/snippet. Not for public render." },
+    "lastVerifiedAt": { "type": ["string", "null"] },
+    "reviewedBy": { "type": ["string", "null"] },
+    "reviewedAt": { "type": ["string", "null"] }
+  },
+  "$comment": "Verification rules (enforced by extractor/validator, not by JSON Schema alone): aiConfidence<90 => manualReviewRequired=true; conflicting/missing critical fields (dates, totalPosts, fee, ageLimit, eligibility, official links) => manualReviewRequired=true. Auto-publish is NOT permitted from this schema; admin review only."
+}

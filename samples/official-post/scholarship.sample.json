@@ -1,0 +1,59 @@
+{
+  "_meta": { "sample": true, "note": "SAMPLE / TEST DATA — illustrative only, not a real published post. Do not publish." },
+  "schemaVersion": "1.0",
+  "postId": "SAMPLE-sje-postmatric-2026",
+  "title": "Post-Matric Scholarship Scheme 2026-27 — Online Application",
+  "department": "Social Justice & Empowerment Department, Rajasthan",
+  "advertisementNo": null,
+  "postType": "scholarship",
+  "category": "SCHOLARSHIP",
+  "sourceId": "sje_dept",
+  "sourceLabel": "SJE Dept",
+  "officialSourceUrl": "https://sje.rajasthan.gov.in/",
+  "officialPdfUrl": "https://sje.rajasthan.gov.in/siteadmin/Uploads/SAMPLE-POSTMATRIC.pdf",
+  "publishedDate": "2026-06-10",
+  "updatedDate": "2026-06-12",
+  "applicationMode": "online",
+  "summary": "सामाजिक न्याय एवं अधिकारिता विभाग ने Post-Matric Scholarship 2026-27 हेतु ऑनलाइन आवेदन आमंत्रित किए हैं। पात्र SC/ST/OBC/EWS विद्यार्थी SSO पोर्टल से आवेदन कर सकते हैं। विस्तृत पात्रता हेतु official notification देखें।",
+  "importantDates": {
+    "notificationDate": "2026-06-10", "startDate": "2026-06-15", "lastDate": "2026-07-31",
+    "feeLastDate": null, "examDate": null, "admitCardDate": null, "answerKeyDate": null,
+    "resultDate": null, "correctionDate": null,
+    "otherDates": [{ "label": "दस्तावेज़ अंतिम तिथि", "date": "2026-08-07" }]
+  },
+  "applicationFee": null,
+  "ageLimit": null,
+  "vacancyDetails": [],
+  "eligibility": {
+    "educationQualification": "मान्यता प्राप्त संस्थान में Post-Matric पाठ्यक्रम में अध्ययनरत।",
+    "experienceRequired": null, "typingRequirement": null, "skillRequirement": null,
+    "physicalStandard": null, "eligibilityNote": "आय सीमा व श्रेणी हेतु official notification देखें।"
+  },
+  "selectionProcess": [],
+  "requiredDocuments": ["जन आधार", "आय प्रमाण पत्र", "जाति प्रमाण पत्र", "अध्ययन प्रमाण पत्र"],
+  "howToApply": {
+    "mode": "online",
+    "officialProcedureText": "SSO Rajasthan पोर्टल पर Scholarship सेवा से आवेदन करें।",
+    "steps": []
+  },
+  "importantLinks": {
+    "officialNotificationPdf": "https://sje.rajasthan.gov.in/siteadmin/Uploads/SAMPLE-POSTMATRIC.pdf",
+    "officialWebsite": "https://sje.rajasthan.gov.in/", "applyOnline": "https://sso.rajasthan.gov.in/",
+    "login": "https://sso.rajasthan.gov.in/", "correctionForm": null, "admitCard": null,
+    "answerKey": null, "result": null, "syllabus": null,
+    "otherOfficialLinks": [{ "label": "SJMS पोर्टल", "url": "https://sjmsnew.rajasthan.gov.in/" }]
+  },
+  "faqs": [
+    { "question": "आवेदन की अंतिम तिथि?", "answer": "31-07-2026 (official notification अनुसार)।" },
+    { "question": "आवेदन कहाँ करें?", "answer": "SSO Rajasthan पोर्टल पर।" }
+  ],
+  "aiConfidence": 92,
+  "confidenceBreakdown": { "dates": 93, "eligibility": 90, "documents": 91 },
+  "verificationStatus": "pending_review",
+  "manualReviewRequired": false,
+  "extractionWarnings": [],
+  "sourceEvidence": "official scholarship circular (sample reference)",
+  "lastVerifiedAt": "2026-06-12",
+  "reviewedBy": null,
+  "reviewedAt": null
+}

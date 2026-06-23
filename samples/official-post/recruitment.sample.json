@@ -1,0 +1,66 @@
+{
+  "_meta": { "sample": true, "note": "SAMPLE / TEST DATA — illustrative only, not a real published post. Do not publish." },
+  "schemaVersion": "1.0",
+  "postId": "SAMPLE-rpsc-asst-prof-2026",
+  "title": "Assistant Professor (College Education) Recruitment 2026",
+  "department": "College Education Department, Rajasthan",
+  "advertisementNo": "01/2026-27",
+  "postType": "recruitment",
+  "category": "RECRUITMENT",
+  "sourceId": "rpsc",
+  "sourceLabel": "RPSC",
+  "officialSourceUrl": "https://rpsc.rajasthan.gov.in/",
+  "officialPdfUrl": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/SAMPLE-ASSTPROF-2026.pdf",
+  "publishedDate": "2026-06-19",
+  "updatedDate": "2026-06-20",
+  "applicationMode": "online",
+  "summary": "Rajasthan Public Service Commission has invited online applications for Assistant Professor posts in College Education. Eligible candidates with a post-graduate degree and NET/SET may apply within the official window. Refer to the official notification PDF for full eligibility, reservation and procedure.",
+  "importantDates": {
+    "notificationDate": "2026-06-19", "startDate": "2026-06-25", "lastDate": "2026-07-24",
+    "feeLastDate": "2026-07-24", "examDate": null, "admitCardDate": null,
+    "answerKeyDate": null, "resultDate": null, "correctionDate": "2026-07-26", "otherDates": []
+  },
+  "applicationFee": {
+    "general": "600", "obc": "400", "ews": "400", "sc": "400", "st": "400",
+    "pwd": "400", "female": null, "other": null, "paymentMode": "online", "feeNote": "As per official notification."
+  },
+  "ageLimit": {
+    "minimumAge": "21", "maximumAge": "40", "cutoffDate": "2027-01-01",
+    "relaxation": "As per Rajasthan Govt rules.", "ageNote": null
+  },
+  "vacancyDetails": [
+    { "postName": "Assistant Professor — History", "totalPosts": "120", "department": "College Education", "payLevel": "L-12", "categoryWisePosts": { "general": "50", "obc": "30", "sc": "22", "st": "18" }, "vacancyNote": null }
+  ],
+  "eligibility": {
+    "educationQualification": "Post Graduate degree (55%) in relevant subject with NET/SET as per UGC norms.",
+    "experienceRequired": null, "typingRequirement": null, "skillRequirement": null,
+    "physicalStandard": null, "eligibilityNote": "Refer official notification for exact criteria."
+  },
+  "selectionProcess": ["Written Exam", "Interview", "Document Verification"],
+  "requiredDocuments": ["आधार कार्ड", "शैक्षणिक प्रमाण पत्र", "जाति प्रमाण पत्र (यदि लागू)"],
+  "howToApply": {
+    "mode": "online",
+    "officialProcedureText": "SSO Rajasthan portal के माध्यम से ऑनलाइन आवेदन करें।",
+    "steps": ["SSO ID से लॉगिन करें", "Recruitment Portal चुनें", "फॉर्म भरें व शुल्क जमा करें", "अंतिम सबमिट करें"]
+  },
+  "importantLinks": {
+    "officialNotificationPdf": "https://rpsc.rajasthan.gov.in/Static/RecruitmentAdvertisements/SAMPLE-ASSTPROF-2026.pdf",
+    "officialWebsite": "https://rpsc.rajasthan.gov.in/", "applyOnline": "https://sso.rajasthan.gov.in/",
+    "login": "https://sso.rajasthan.gov.in/", "correctionForm": null, "admitCard": null,
+    "answerKey": null, "result": null, "syllabus": "https://rpsc.rajasthan.gov.in/Static/Syllabus/SAMPLE.pdf",
+    "otherOfficialLinks": []
+  },
+  "faqs": [
+    { "question": "आवेदन की अंतिम तिथि क्या है?", "answer": "24-07-2026 (official notification के अनुसार)।" },
+    { "question": "आवेदन कैसे करें?", "answer": "SSO Rajasthan पोर्टल से ऑनलाइन।" }
+  ],
+  "aiConfidence": 94,
+  "confidenceBreakdown": { "dates": 96, "fee": 92, "eligibility": 90 },
+  "verificationStatus": "pending_review",
+  "manualReviewRequired": false,
+  "extractionWarnings": [],
+  "sourceEvidence": "official PDF page 1-2 (sample reference)",
+  "lastVerifiedAt": "2026-06-20",
+  "reviewedBy": null,
+  "reviewedAt": null
+}

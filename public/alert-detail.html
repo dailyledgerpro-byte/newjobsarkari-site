@@ -220,7 +220,7 @@ function render(item, raw){
   const ss=secOf('📄 सारांश'); ss.appendChild(summary?el('div','summary',summary):el('div','fallback','Official notification में उपलब्ध नहीं')); card.appendChild(ss);
 
   // 5. important dates (fallback per spec)
-  const dg=gridFrom([
+  const datePairs=[
     ['अधिसूचना तिथि', firstNonEmpty(D.notificationDate,raw.notification_date)],
     ['प्रारंभ तिथि', firstNonEmpty(D.startDate,raw.form_start_date,raw.startDate)],
     ['अंतिम तिथि', firstNonEmpty(D.lastDate,raw.last_date,raw.lastDate), true],
@@ -228,8 +228,11 @@ function render(item, raw){
     ['परीक्षा तिथि', firstNonEmpty(D.examDate,raw.exam_date,raw.examDate,raw.exam_start_date)],
     ['Admit Card तिथि', firstNonEmpty(D.admitCardDate,raw.admit_card_available_from)],
     ['Answer Key तिथि', firstNonEmpty(D.answerKeyDate,raw.objection_start_date)],
+    ['सुधार तिथि', firstNonEmpty(D.correctionDate,raw.correction_end_date)],
     ['परिणाम तिथि', firstNonEmpty(D.resultDate,raw.result_date,raw.resultDate)]
-  ]);
+  ];
+  asArr(D.otherDates).forEach(o=>{ if(isObj(o)) datePairs.push([clean(o.label)||'अन्य तिथि', clean(o.date)]); });
+  const dg=gridFrom(datePairs);
   const ds=secOf('📅 महत्वपूर्ण तिथियाँ'); ds.appendChild(dg.children.length?dg:el('div','fallback','Important dates official notification में उपलब्ध नहीं')); card.appendChild(ds);
 
   // 6. application fee (only if exists)
@@ -237,7 +240,7 @@ function render(item, raw){
   if(feeRows.length){ const s=secOf('💳 आवेदन शुल्क'); s.appendChild(tbl(['श्रेणी','शुल्क'], feeRows.map(r=>[r[0], '₹'+clean(r[1])]))); card.appendChild(s); }
 
   // 7. age limit (only if exists)
-  const ag=gridFrom([['न्यूनतम आयु',firstNonEmpty(A.min,A.minimum,raw.age_min)],['अधिकतम आयु',firstNonEmpty(A.max,A.maximum,raw.age_max)],['कट-ऑफ तिथि',firstNonEmpty(A.cutoffDate,A.cutoff)],['आयु छूट',firstNonEmpty(A.relaxation)]]);
+  const ag=gridFrom([['न्यूनतम आयु',firstNonEmpty(A.minimumAge,A.min,A.minimum,raw.age_min)],['अधिकतम आयु',firstNonEmpty(A.maximumAge,A.max,A.maximum,raw.age_max)],['कट-ऑफ तिथि',firstNonEmpty(A.cutoffDate,A.cutoff)],['आयु छूट',firstNonEmpty(A.relaxation)],['टिप्पणी',firstNonEmpty(A.ageNote)]]);
   if(ag.children.length){ const s=secOf('🎂 आयु सीमा'); s.appendChild(ag); card.appendChild(s); }
 
   // 8. vacancy details
@@ -246,7 +249,7 @@ function render(item, raw){
   else if(clean(raw.post_name)&&clean(raw.total_posts)){ const s=secOf('📋 रिक्ति विवरण'); s.appendChild(tbl(['पद','कुल पद'],[[clean(raw.post_name),clean(raw.total_posts)]])); card.appendChild(s); }
 
   // 9. eligibility (only if exists)
-  const eg=gridFrom([['शैक्षणिक योग्यता',firstNonEmpty(E.education,item.qualification)],['अनुभव',firstNonEmpty(E.experience)],['टाइपिंग',firstNonEmpty(E.typing)],['कौशल',firstNonEmpty(E.skill)],['शारीरिक मानक',firstNonEmpty(E.physical)]]);
+  const eg=gridFrom([['शैक्षणिक योग्यता',firstNonEmpty(E.educationQualification,E.education,item.qualification)],['अनुभव',firstNonEmpty(E.experienceRequired,E.experience)],['टाइपिंग',firstNonEmpty(E.typingRequirement,E.typing)],['कौशल',firstNonEmpty(E.skillRequirement,E.skill)],['शारीरिक मानक',firstNonEmpty(E.physicalStandard,E.physical)]]);
   if(eg.children.length){ const s=secOf('🎯 पात्रता'); s.appendChild(eg); card.appendChild(s); }
 
   // 10. selection process
@@ -259,22 +262,25 @@ function render(item, raw){
 
   // 12. how to apply (fallback per spec — no generic steps)
   const how=raw.howToApply;
-  const howArr=Array.isArray(how)?how.map(x=>clean(isObj(x)?gv(x,'step','text'):x)).filter(Boolean):[];
   const hs=secOf('📝 आवेदन कैसे करें');
-  if(howArr.length) hs.appendChild(bulletsEl(howArr,true));
-  else if(clean(how)) hs.appendChild(el('div','summary',clean(how)));
-  else hs.appendChild(el('div','fallback','आवेदन प्रक्रिया की विस्तृत जानकारी आधिकारिक नोटिफिकेशन में उपलब्ध है।'));
+  let howSteps=[], howText='';
+  if(isObj(how)){ howSteps=asArr(how.steps).map(x=>clean(isObj(x)?gv(x,'step','text'):x)).filter(Boolean); howText=clean(how.officialProcedureText); }
+  else if(Array.isArray(how)){ howSteps=how.map(x=>clean(isObj(x)?gv(x,'step','text'):x)).filter(Boolean); }
+  else { howText=clean(how); }
+  if(howText) hs.appendChild(el('div','summary',howText));
+  if(howSteps.length) hs.appendChild(bulletsEl(howSteps,true));
+  if(!howText && !howSteps.length) hs.appendChild(el('div','fallback','आवेदन प्रक्रिया की विस्तृत जानकारी आधिकारिक नोटिफिकेशन में उपलब्ध है।'));
   card.appendChild(hs);
 
   card.appendChild(cmt('ad-slot: detail-mid'));
 
   // 13. important links (only available)
   const linkDefs=[
-    ['btn-pdf','आधिकारिक PDF', firstNonEmpty(L.notification,L.pdf,pdf0), 'fas fa-file-pdf'],
+    ['btn-pdf','आधिकारिक PDF', firstNonEmpty(L.officialNotificationPdf,L.notification,L.pdf,pdf0), 'fas fa-file-pdf'],
     ['btn-web','आधिकारिक वेबसाइट', firstNonEmpty(L.website,L.officialWebsite,raw.officialUrl,raw.official_url,raw.source), 'fas fa-up-right-from-square'],
     ['btn-out','Apply Online', firstNonEmpty(L.applyOnline,L.apply,raw.apply_link,raw.applyUrl), 'fas fa-pen-to-square'],
     ['btn-out','Login', firstNonEmpty(L.login), 'fas fa-right-to-bracket'],
-    ['btn-out','Correction Form', firstNonEmpty(L.correction,raw.correction_link), 'fas fa-pen'],
+    ['btn-out','Correction Form', firstNonEmpty(L.correctionForm,L.correction,raw.correction_link), 'fas fa-pen'],
     ['btn-out','Admit Card', firstNonEmpty(L.admitCard,raw.admit_card_link), 'fas fa-id-card'],
     ['btn-out','Answer Key', firstNonEmpty(L.answerKey,raw.answer_key_link), 'fas fa-key'],
     ['btn-out','Result', firstNonEmpty(L.result), 'fas fa-trophy'],
@@ -283,6 +289,7 @@ function render(item, raw){
   ];
   const linkSec=secOf('🔗 महत्वपूर्ण लिंक'); const btns=el('div','btns');
   linkDefs.forEach(d=>{ const h=safeUrl(d[2]); if(!h)return; const a=el('a','btn '+d[0]); a.setAttribute('href',h); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener noreferrer'); a.appendChild(ic(d[3])); a.appendChild(el('span',null,d[1])); btns.appendChild(a); });
+  asArr(L.otherOfficialLinks).forEach(o=>{ if(!isObj(o))return; const h=safeUrl(o.url); if(!h)return; const a=el('a','btn btn-out'); a.setAttribute('href',h); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener noreferrer'); a.appendChild(ic('fas fa-link')); a.appendChild(el('span',null,clean(o.label)||'अन्य लिंक')); btns.appendChild(a); });
   linkSec.appendChild(btns.children.length?btns:el('div','fallback','आधिकारिक लिंक उपलब्ध नहीं — विभाग की वेबसाइट देखें।'));
   card.appendChild(linkSec);
 

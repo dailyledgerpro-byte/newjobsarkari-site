@@ -1,0 +1,50 @@
+{
+  "_meta": { "sample": true, "note": "SAMPLE / TEST DATA — illustrative only, not a real published post. Do not publish." },
+  "schemaVersion": "1.0",
+  "postId": "SAMPLE-rsmssb-answerkey-2026",
+  "title": "Librarian Grade-III — Model Answer Key 2026",
+  "department": "RSMSSB / Rajasthan Staff Selection Board",
+  "advertisementNo": null,
+  "postType": "answer_key",
+  "category": "ANSWER_KEY",
+  "sourceId": "rsmssb",
+  "sourceLabel": "RSMSSB",
+  "officialSourceUrl": "https://rsmssb.rajasthan.gov.in/",
+  "officialPdfUrl": "https://rsmssb.rajasthan.gov.in/Static/AnswerKeys/SAMPLE-LIBRARIAN-AK.pdf",
+  "publishedDate": "2026-06-14",
+  "updatedDate": "2026-06-14",
+  "applicationMode": null,
+  "summary": "Librarian Grade-III परीक्षा की model answer key जारी की गई है। अभ्यर्थी निर्धारित तिथि तक official portal पर आपत्ति (objection) दर्ज कर सकते हैं। विस्तृत जानकारी हेतु official notice देखें।",
+  "importantDates": {
+    "notificationDate": null, "startDate": null, "lastDate": null, "feeLastDate": null,
+    "examDate": "2026-05-30", "admitCardDate": null, "answerKeyDate": "2026-06-14",
+    "resultDate": null, "correctionDate": null,
+    "otherDates": [{ "label": "आपत्ति अंतिम तिथि", "date": "2026-06-20" }]
+  },
+  "applicationFee": null,
+  "ageLimit": null,
+  "vacancyDetails": [],
+  "eligibility": null,
+  "selectionProcess": [],
+  "requiredDocuments": [],
+  "howToApply": null,
+  "importantLinks": {
+    "officialNotificationPdf": "https://rsmssb.rajasthan.gov.in/Static/AnswerKeys/SAMPLE-LIBRARIAN-AK.pdf",
+    "officialWebsite": "https://rsmssb.rajasthan.gov.in/", "applyOnline": null,
+    "login": "https://sso.rajasthan.gov.in/", "correctionForm": null, "admitCard": null,
+    "answerKey": "https://rsmssb.rajasthan.gov.in/Static/AnswerKeys/SAMPLE-LIBRARIAN-AK.pdf",
+    "result": null, "syllabus": null, "otherOfficialLinks": []
+  },
+  "faqs": [
+    { "question": "आपत्ति कैसे दर्ज करें?", "answer": "SSO पोर्टल से निर्धारित शुल्क के साथ ऑनलाइन।" }
+  ],
+  "aiConfidence": 89,
+  "confidenceBreakdown": { "dates": 90, "objection": 88 },
+  "verificationStatus": "pending_review",
+  "manualReviewRequired": true,
+  "extractionWarnings": ["aiConfidence below 90 — manual review required"],
+  "sourceEvidence": "official answer-key notice (sample reference)",
+  "lastVerifiedAt": "2026-06-14",
+  "reviewedBy": null,
+  "reviewedAt": null
+}
