@@ -1,0 +1,610 @@
+{
+  "mode": "read-only clean payload set",
+  "payloads": [
+    {
+      "collection": "ssc_jobs",
+      "id": "ak-constable-driver-male-in-delhi-police-ex",
+      "postType": "answer_key",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Constable (Driver)-Male in Delhi Police Examination, 2025",
+        "sourceLabel": "ssc.gov.in",
+        "postType": "answer_key",
+        "publishedDate": "2026-06-07T12:46:43.357438Z",
+        "summary": "कर्मचारी चयन आयोग ने कांस्टेबल (ड्राइवर)-पुरुष, दिल्ली पुलिस परीक्षा, 2025 की अंतिम उत्तर कुंजी, प्रश्न पत्र, रिस्पांस शीट और अंक अपलोड कर दिए हैं। उम्मीदवार 26.05.2026 (शाम 18:00 बजे) से 09.06.2026 (शाम 18:00 बजे) तक अपने रोल नंबर और पासवर्ड का उपयोग करके इन्हें देख सकते हैं। यह सुविधा निर्धारित समय सीमा के बाद उपलब्ध नहीं होगी, और इस संबंध में भविष्य में कोई व्यक्तिगत अनुरोध स्वीकार नहीं किया जाएगा। चूंकि ये 'अंतिम' उत्तर कुंजी हैं, इसलिए आपत्ति दर्ज कराने का कोई विंडो या शुल्क उपलब्ध नहीं है।",
+        "officialPdfUrl": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/writeup_26052026.pdf",
+        "importantLinks.officialNotificationPdf": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/writeup_26052026.pdf",
+        "importantLinks.answerKey": "https://sscexams.cbexams.com/DPCD2025Finalsheetsedlandingpage/loginnew.aspx"
+      }
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "exam-grade-c-stenographers-limited-department",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Grade 'C' Stenographers Limited Departmental Competitive Examination, 2025",
+        "sourceLabel": "ssc.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T06:49:19.812797Z",
+        "summary": "कर्मचारी चयन आयोग ने ग्रेड 'सी' स्टेनोग्राफर लिमिटेड विभागीय प्रतियोगी परीक्षा 2025 की घोषणा की है, जो 4 जुलाई, 2026 को पार्ट-ए (CBE) मोड में आयोजित की जाएगी। सभी उम्मीदवारों को सलाह दी जाती है कि वे परीक्षा से संबंधित आगामी जानकारी और अपडेट के लिए नियमित रूप से आयोग की वेबसाइट देखते रहें।",
+        "officialPdfUrl": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Date Notice of Steno C LDCE, 2025.pdf",
+        "importantLinks.officialNotificationPdf": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Date Notice of Steno C LDCE, 2025.pdf"
+      }
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "exam-sasraicpd-i-ii-iii-examination-01-of-202",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "SAS/RA/I/CPD-I, II, III Examination-01 of 2026",
+        "sourceLabel": "ssc.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:46:05.658480Z",
+        "summary": "कर्मचारी चयन आयोग ने SAS/RA/I/CPD-I, II, III परीक्षा-01, 2026 का कार्यक्रम घोषित किया है। यह कंप्यूटर आधारित परीक्षा (CBE) मोड में 22 जून, 2026 से 27 जून, 2026 तक आयोजित की जाएगी। सभी अभ्यर्थियों को नवीनतम जानकारी और अपडेट के लिए आयोग की आधिकारिक वेबसाइट पर नियमित रूप से विजिट करने की सलाह दी गई है।",
+        "officialPdfUrl": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Date Notice CAG_2025.pdf",
+        "importantLinks.officialNotificationPdf": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Date Notice CAG_2025.pdf"
+      }
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-ak-agriculture-supervisor-direct-recru",
+      "postType": "answer_key",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Agriculture Supervisor Direct Recruitment-2023",
+        "sourceLabel": "rsmssb.rajasthan.gov.in",
+        "postType": "answer_key",
+        "publishedDate": "2026-06-07T12:54:10.598161Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड ने कृषि पर्यवेक्षक सीधी भर्ती-2023 (परीक्षा कोड-77) की मास्टर प्रश्न पत्र और प्रारंभिक उत्तर कुंजी अपनी वेबसाइट पर जारी कर दी है। परीक्षार्थी 20 फरवरी 2024 (मध्य रात्रि 00:01 बजे) से 22 फरवरी 2024 (मध्य रात्रि 23:59 बजे) तक ऑनलाइन आपत्ति दर्ज करा सकते हैं। प्रत्येक आपत्ति के लिए ₹100 का शुल्क निर्धारित है। परीक्षार्थियों को मास्टर प्रश्न पत्र के प्रश्न संख्या और उत्तर विकल्पों के क्रम के आधार पर ही आपत्तियाँ दर्ज करनी होंगी।",
+        "officialPdfUrl": "http://rsmssb.rajasthan.gov.in/link_to_external_file/AgriSupervisor2023_PressNote15022024.pdf",
+        "importantLinks.officialNotificationPdf": "http://rsmssb.rajasthan.gov.in/link_to_external_file/AgriSupervisor2023_PressNote15022024.pdf",
+        "importantLinks.answerKey": "https://www.rsmssb.rajasthan.gov.in"
+      }
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-exam-common-eligibility-test-graduation-",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Common Eligibility Test (Graduation Level) - 2024",
+        "sourceLabel": "rsmssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T06:47:16.920267Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड ने समान पात्रता परीक्षा (स्नातक स्तर) - 2024 का कार्यक्रम जारी कर दिया है। यह परीक्षा 27 और 28 सितंबर 2024 को चार चरणों में आयोजित की जाएगी। प्रतिदिन दो पारियों में परीक्षा होगी, सुबह 9 बजे से दोपहर 12 बजे तक और दोपहर 3 बजे से शाम 6 बजे तक।",
+        "officialPdfUrl": "http://rsmssb.rajasthan.gov.in/link_to_external_file/CET_Grdut2024_examdateschedule.pdf",
+        "importantLinks.officialNotificationPdf": "http://rsmssb.rajasthan.gov.in/link_to_external_file/CET_Grdut2024_examdateschedule.pdf"
+      }
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-exam-community-health-officer-contract-r",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Community Health Officer (Contract) Recruitment Exam 2022",
+        "sourceLabel": "rsmssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:54:42.719079Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड ने सामुदायिक स्वास्थ्य अधिकारी (संविदा) भर्ती परीक्षा 2022 को रद्द कर दिया है। यह परीक्षा पहले 19 फरवरी 2023 को आयोजित की गई थी, लेकिन प्रश्नपत्र सोशल मीडिया पर वायरल होने के कारण एस.ओ.जी. द्वारा जाँच के बाद इसे निरस्त कर दिया गया। अब यह परीक्षा 03 मार्च 2024 को शाम की पाली में पुनः आयोजित की जाएगी। परीक्षार्थियों को इस नई परीक्षा तिथि पर ध्यान देना चाहिए।",
+        "officialPdfUrl": "http://rsmssb.rajasthan.gov.in/link_to_external_file/Press_Note_CHO_29122023.pdf",
+        "importantLinks.officialNotificationPdf": "http://rsmssb.rajasthan.gov.in/link_to_external_file/Press_Note_CHO_29122023.pdf"
+      }
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-exam-jr-instructor-direct-recruitment-ex",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Jr. Instructor Direct Recruitment Exams 2024 (Refrigeration and AC Technician, Fitter, Electrician)",
+        "sourceLabel": "rsmssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T06:47:51.977598Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड ने कनिष्ठ अनुदेशक सीधी भर्ती परीक्षा 2024 (रेफ्रिजरेशन एण्ड एयर कण्डीशनर टेक्नीशियन, फिटर और इलेक्ट्रीशियन) की नई तिथियां घोषित की हैं। ये परीक्षाएं अब 24 नवंबर 2024 से 27 नवंबर 2024 (रविवार से बुधवार) तक आयोजित की जाएंगी। पूर्व में जून 2024 में निर्धारित इन परीक्षाओं को अपरिहार्य कारणों से स्थगित कर दिया गया था। सभी संबंधित परीक्षार्थी इन नई तिथियों को ध्यान में रखें।",
+        "officialPdfUrl": "http://rsmssb.rajasthan.gov.in/link_to_external_file/JrInst2024_exam15072024.pdf",
+        "importantLinks.officialNotificationPdf": "http://rsmssb.rajasthan.gov.in/link_to_external_file/JrInst2024_exam15072024.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-ac-agriculture-supervisor-direct-recru",
+      "postType": "admit_card",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Agriculture Supervisor Direct Recruitment Exam",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "admit_card",
+        "publishedDate": "2026-06-07T13:00:11.891273Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड ने कृषि पर्यवेक्षक सीधी भर्ती परीक्षा-2021 के लिए प्रवेश पत्र जारी कर दिए हैं। यह परीक्षा 18 सितंबर 2021 को सुबह 10:00 बजे से दोपहर 12:00 बजे तक आयोजित होगी। अभ्यर्थी अपने प्रोविजनल ई-प्रवेश पत्र 09 सितंबर 2021 से बोर्ड की आधिकारिक वेबसाइट www.rsmssb.rajasthan.gov.in से डाउनलोड कर सकते हैं। परीक्षा के दिन, अभ्यर्थियों को निर्धारित समय से 1.5 घंटे पहले केंद्र पर पहुंचना होगा, मास्क पहनना अनिवार्य है, और मूल फोटो पहचान पत्र, नवीनतम रंगीन फोटो व पारदर्शी बॉल पेन साथ लाना होगा। घड़ी, मोबाइल फोन, आभूषण, बैग जैसी कोई भी वर्जित सामग्री लाने की अनुमति नहीं होगी तथा निर्धारित ड्रेस कोड का पालन करना अनिवार्य है।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1634719581.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1634719581.pdf",
+        "importantLinks.admitCard": "https://www.rsmssb.rajasthan.gov.in",
+        "importantDates.examDate": "18-09-2021"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-cor-clerk-grade-iijunior-assistant-comb",
+      "postType": "correction",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Clerk Grade-II/Junior Assistant Combined Direct Recruitment-2026",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "correction",
+        "publishedDate": "2026-06-07T12:52:38.473633Z",
+        "summary": "यह राजस्थान कर्मचारी चयन बोर्ड द्वारा लिपिक ग्रेड-।।/कनिष्ठ सहायक संयुक्त सीधी भर्ती-2026 के लिए जारी संशोधित विज्ञप्ति है। बोर्ड ने दिनांक 12.01.2026 को जारी मूल विज्ञापन में उच्चतम आयु सीमा में छूट संबंधी बिन्दुओं को शामिल किया है। इसके अनुसार, राजस्थान के मूल निवासी आर्थिक रूप से कमजोर वर्ग (EWS) के पुरुष अभ्यर्थियों को अधिकतम आयु सीमा में 5 वर्ष की छूट दी जाएगी। वहीं, राजस्थान की मूल निवासी आर्थिक रूप से कमजोर वर्ग (EWS) की महिला अभ्यर्थियों को अधिकतम आयु सीमा में 10 वर्ष की छूट मिलेगी। इस विज्ञप्ति में अभ्यर्थियों द्वारा आवेदन में किसी सुधार या वापसी का उल्लेख नहीं है। पूर्व में जारी विज्ञप्ति संख्या 04/2026 दिनांक 12.01.2026 की शेष सभी शर्तें यथावत रहेंगी।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1768541809.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1768541809.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-cor-jamadar-grade-ii-recruitment",
+      "postType": "correction",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Jamadar Grade-II Recruitment",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "correction",
+        "publishedDate": "2026-06-07T06:58:56.501638Z",
+        "summary": "यह संशोधित विज्ञप्ति राजस्थान कर्मचारी चयन बोर्ड द्वारा जमादार ग्रेड-II भर्ती-2025 के लिए जारी की गई है। पूर्व में 72 पदों (गैर अनुसूचित क्षेत्र 64, अनुसूचित क्षेत्र 08) के लिए जारी विज्ञापन को संशोधित किया गया है। अब कुल पदों की संख्या बढ़ाकर 89 (गैर अनुसूचित क्षेत्र 80, अनुसूचित क्षेत्र 09) कर दी गई है। यह संशोधन राजस्थान आबकारी विभाग की ओर से प्राप्त अर्थना के आधार पर किया गया है। इस विज्ञप्ति में आवेदन पत्रों में सुधार या वापसी से संबंधित कोई जानकारी उपलब्ध नहीं है, न ही कोई सुधार की अंतिम तिथि दी गई है। विज्ञापन की अन्य सभी शर्तें पहले की तरह ही लागू रहेंगी।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1766461543.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1766461543.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-cor-jamadar-grade-ii-recruitment-2025",
+      "postType": "correction",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Jamadar Grade-II Recruitment-2025",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "correction",
+        "publishedDate": "2026-06-07T06:59:40.386654Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड ने जमादार ग्रेड़-।। भर्ती के नाम में सुधार किया है। पूर्व में जारी विज्ञापन संख्या 07/2025 दिनांक 16.10.2025 में भर्ती का नाम गलती से \"जमादार ग्रेड़-।। भर्ती-2024\" अंकित हो गया था, जिसे अब \"जमादार ग्रेड़-।। भर्ती-2025\" पढ़ा जाएगा। इस भर्ती के लिए ऑनलाइन आवेदन 17.10.2025 से 15.11.2025 तक आमंत्रित किए गए थे। ऑनलाइन आवेदन में संशोधन और आवेदन वापसी हेतु एक विज्ञप्ति 18.11.2025 को जारी की गई थी। इस संशोधित विज्ञप्ति के अतिरिक्त, मूल विज्ञापन संख्या 07/2025 की सभी अन्य शर्तें यथावत रहेंगी।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1764046270.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1764046270.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-cor-laboratory-assistant-and-junior-lab",
+      "postType": "correction",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Laboratory Assistant and Junior Laboratory Assistant Combined Direct Recruitment-2026",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "correction",
+        "publishedDate": "2026-06-07T06:51:24.374724Z",
+        "summary": "यह विज्ञप्ति राजस्थान कर्मचारी चयन बोर्ड द्वारा प्रयोगशाला सहायक एवं कनिष्ठ प्रयोगशाला सहायक संयुक्त सीधी भर्ती-2026 के संबंध में जारी की गई है। इस भर्ती के लिए आवेदन करने वाले अभ्यर्थी अपने ऑनलाइन आवेदन फॉर्म में संशोधन कर सकते हैं। संशोधन की अवधि 15 मई 2026 से 21 मई 2026 (रात 11:59 बजे) तक है। अभ्यर्थी श्रेणी, उप श्रेणी, लिंग और वैवाहिक स्थिति में 300/- रुपये का ऑनलाइन शुल्क भुगतान कर बदलाव कर सकेंगे। इसके अतिरिक्त अन्य कोई जानकारी परिवर्तित नहीं की जा सकेगी। निर्धारित समय सीमा के बाद कोई भी संशोधन स्वीकार नहीं किया जाएगा।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/news_item/1778819370.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/news_item/1778819370.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-cor-primary-school-teacher-general-sans",
+      "postType": "correction",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Primary School Teacher (General / Sanskrit Education) (Level-I, Class 1 to 5) Direct Recruitment-2025",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "correction",
+        "publishedDate": "2026-06-07T07:00:02.219868Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड, जयपुर ने प्राथमिक विद्यालय अध्यापक (सामान्य / संस्कृत शिक्षा) (लेवल-प्रथम, कक्षा 1 से 5 तक) सीधी भर्ती-2025 के लिए एक संशोधित विज्ञप्ति जारी की है। यह संशोधन 06.11.2025 को जारी विस्तृत विज्ञप्ति के कुछ बिंदुओं को स्पष्ट करता है। संशोधित प्रावधानों में संस्कृत शिक्षा विभाग के पदों के लिए न्यूनतम 40% उत्तीर्णांक (अनुसूचित जाति एवं जनजाति के लिए 5% की शिथिलता) अनिवार्य किया गया है, जबकि प्रारम्भिक शिक्षा विभाग के पदों के लिए न्यूनतम उत्तीर्णांक की बाध्यता नहीं होगी। इसके अतिरिक्त, प्रारम्भिक शिक्षा विभाग के पदों का जिलेवार एवं वर्गवार विस्तृत विवरण पुनः जारी किया गया है। यह विज्ञप्ति उम्मीदवारों को अपने ऑनलाइन आवेदन पत्रों में संशोधन या वापसी के लिए कोई विशिष्ट तिथि या लिंक प्रदान नहीं करती है।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1763114803.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1763114803.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-cor-upper-primary-school-teacher-sanskr",
+      "postType": "correction",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Upper Primary School Teacher (Sanskrit Education) (Level-II, Class 6 to 8) Direct Recruitment-2025",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "correction",
+        "publishedDate": "2026-06-07T07:00:20.210749Z",
+        "summary": "यह विज्ञप्ति राजस्थान कर्मचारी चयन बोर्ड, जयपुर द्वारा 'उच्च प्राथमिक विद्यालय अध्यापक (संस्कृत शिक्षा) (लेवल-द्वितीय, कक्षा 6 से 8 तक) सीधी भर्ती-2025' के लिए एक संशोधित सूचना है। इसमें पूर्व में जारी विज्ञप्ति के बिन्दु संख्या 23 के तहत गणित और विज्ञान विषय के पाठ्यक्रम को विस्तारित किया गया है। इसके अतिरिक्त, बिन्दु संख्या 6.1 एवं 6.2 में संस्कृत एवं अन्य विषयों के लिए निर्धारित न्यूनतम शैक्षणिक एवं प्रशैक्षणिक योग्यताओं को संशोधित किया गया है। ये संशोधन संस्कृत शिक्षा विभाग के पत्रों तथा राष्ट्रीय अध्यापक शिक्षा परिषद् की अधिसूचना के आधार पर किए गए हैं। आवेदक इन संशोधित प्रावधानों को ध्यान में रखते हुए अपनी आवेदन प्रक्रिया पूर्ण करें। यह आवेदन पत्रों में सुधार या वापसी के संबंध में कोई सूचना नहीं है, बल्कि भर्ती के नियमों में बदलाव की जानकारी है।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1763116184.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1763116184.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-clerk-grade-ii-junior-assistant-com",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Clerk Grade-II / Junior Assistant Combined Direct Recruitment Exam 2026",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:49:50.930684Z",
+        "summary": "यह दस्तावेज़ लिपिक ग्रेड-II/कनिष्ठ सहायक संयुक्त सीधी भर्ती परीक्षा 2026 से संबंधित है। इसमें परीक्षा के संभावित जिलों की एक विस्तृत सूची दी गई है, जिसमें कुल 38 जिले शामिल हैं। परीक्षार्थी इस सूची का उपयोग अपने परीक्षा केंद्र के लिए संभावित जिलों की जानकारी प्राप्त करने हेतु कर सकते हैं। हालांकि, इस दस्तावेज़ में परीक्षा की कोई निश्चित तिथि, समय, या परीक्षार्थियों के लिए आवश्यक निर्देशों का उल्लेख नहीं है। यह केवल परीक्षा से संबंधित जिलावार सूची को दर्शाता है।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/news_item/1779882683.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/news_item/1779882683.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-computer-direct-recruitment-exam-20",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Computer Direct Recruitment Exam 2021",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:58:35.152692Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड, जयपुर द्वारा 'संगणक सीधी भर्ती परीक्षा-2021' का आयोजन 19 दिसंबर 2021 (रविवार) को सुबह 10:00 बजे से दोपहर 12:00 बजे तक राज्य के जिला मुख्यालयों पर स्थित परीक्षा केंद्रों पर किया जाएगा। अभ्यर्थियों को 13 दिसंबर 2021 से बोर्ड की वेबसाइट www.rsmssb.rajasthan.gov.in से अपना 'प्रोविजनल ई-प्रवेश पत्र' डाउनलोड कर लेना चाहिए। परीक्षार्थियों को परीक्षा केंद्र पर 1.5 घंटे पूर्व पहुंचना होगा और कोविड-19 प्रोटोकॉल जैसे मास्क पहनना और सामाजिक दूरी बनाए रखना अनिवार्य है। परीक्षा केंद्र पर घड़ी, इलेक्ट्रॉनिक उपकरण, गहने और अन्य निषिद्ध वस्तुएं ले जाने की अनुमति नहीं होगी। नवीनतम सूचनाओं के लिए बोर्ड की वेबसाइट का नियमित रूप से अवलोकन करें।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1641447267.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1641447267.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-contract-nurse-gnm-contract-female-",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Contract Nurse (GNM), Contract Female Health Worker (ANM), and Agriculture Supervisor Direct Recruitment Exams 2023",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:54:47.341311Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड ने संविदा नर्स (GNM), संविदा महिला स्वास्थ्य कार्यकर्ता (ANM) और कृषि पर्यवेक्षक सीधी भर्ती परीक्षा 2023 की तिथियां घोषित कर दी हैं। ये परीक्षाएं 03 और 04 फरवरी 2024 को विभिन्न पालियों में आयोजित होंगी। अभ्यर्थी 25.01.2024 से अपने ई-प्रवेश पत्र मोबाइल पर या 27.01.2024 से बोर्ड की वेबसाइट www.rsmssb.rajasthan.gov.in और SSO ID के माध्यम से डाउनलोड कर सकते हैं। परीक्षार्थियों को परीक्षा केंद्र पर 1.5 घंटे पहले पहुंचना होगा और प्रवेश परीक्षा शुरू होने से 1 घंटे पहले बंद कर दिया जाएगा। उन्हें मूल फोटो पहचान पत्र, नवीनतम रंगीन फोटो और पारदर्शी नीला बॉल पेन लाना होगा, तथा घड़ी, मोबाइल फोन जैसी वस्तुएं वर्जित हैं। ड्रेस कोड का सख्ती से पालन करना होगा, जिसमें सिक्ख धर्म के प्रतीकों के लिए विशेष प्रावधान हैं। नकल और अनुचित साधनों के प्रयोग पर भारी जुर्माना, जेल और परीक्षा से वंचित करने सहित कठोर कानूनी कार्यवाही की जाएगी। नवीनतम अपडेट्स के लिए बोर्ड की आधिकारिक वेबसाइट देखने की सलाह दी गई है।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1706183187.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1706183187.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-contractual-junior-technical-assist",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Contractual Junior Technical Assistant Direct Recruitment 2024",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T07:03:04.302041Z",
+        "summary": "यह विज्ञप्ति राजस्थान कर्मचारी चयन बोर्ड द्वारा संविदा कनिष्ठ तकनीकी सहायक सीधी भर्ती-2024 के लिए परीक्षा कार्यक्रम की घोषणा करती है। परीक्षा 18 मई 2025 को प्रातः 10:00 बजे से दोपहर 01:00 बजे तक आयोजित की जाएगी। अभ्यर्थी 12 मई 2025 से अपने SSO ID के माध्यम से परीक्षा केंद्र आवंटित जिले की जानकारी देख सकते हैं और ई-प्रवेश पत्र 15 मई 2025 से डाउनलोड कर सकेंगे। परीक्षार्थियों को परीक्षा केंद्र पर परीक्षा समय से 2 घंटे पूर्व पहुंचना होगा और प्रवेश परीक्षा शुरू होने से 1 घंटे पहले बंद हो जाएगा। सख्त ड्रेस कोड का पालन करना अनिवार्य है तथा कोई भी इलेक्ट्रॉनिक उपकरण या अन्य प्रतिबंधित वस्तुएं ले जाने की अनुमति नहीं है। नकल या अनुचित साधनों के प्रयोग पर कठोर दंड का प्रावधान है।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1747305497.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1747305497.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-contractual-nurse-gnm-recruitment-e",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:55:39.441619Z",
+        "summary": "यह विज्ञप्ति राजस्थान कर्मचारी चयन बोर्ड द्वारा संविदा नर्स (GNM), संविदा महिला स्वास्थ्य कार्यकर्ता (ANM) और कृषि पर्यवेक्षक सीधी भर्ती परीक्षा 2023 के लिए परीक्षा कार्यक्रम की घोषणा करती है। परीक्षाएं 3 और 4 फरवरी 2024 को आयोजित की जाएंगी। परीक्षार्थी अपने ई-प्रवेश पत्र बोर्ड की वेबसाइट www.rsmssb.rajasthan.gov.in से 27 जनवरी 2024 से डाउनलोड कर सकते हैं। परीक्षा केंद्र पर 1½ घंटे पहले पहुंचना अनिवार्य है, क्योंकि प्रवेश परीक्षा शुरू होने के 1 घंटे पूर्व बंद कर दिया जाएगा। परीक्षार्थियों को नवीनतम रंगीन फोटो, पारदर्शी बाल पैन और मूल फोटो पहचान-पत्र लाना होगा, साथ ही सख्त ड्रेस कोड और निषिद्ध वस्तुओं के नियमों का पालन करना होगा।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1706183231.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1706183231.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-direct-recruitment-exam-2025-for-va",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Direct Recruitment Exam 2025 for various contractual posts under National Health Mission and Rajasthan Medical Education Society",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T07:02:33.389280Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड, जयपुर ने राष्ट्रीय स्वास्थ्य मिशन और राजस्थान मेडिकल एज्युकेशन सोसायटी के विभिन्न संविदा पदों पर सीधी भर्ती 2025 की परीक्षाओं का कार्यक्रम जारी किया है। परीक्षाएं 02 जून 2025 से 06 जून 2025 तक दो पालियों (सुबह 09:30 से 12:00 और दोपहर 03:00 से 05:30 बजे) में आयोजित होंगी। परीक्षा केंद्र हेतु आवंटित जिले की सूचना 27 मई 2025 से SSO ID पर उपलब्ध होगी और ई-प्रवेश पत्र 30 मई 2025 से डाउनलोड किए जा सकेंगे। परीक्षार्थियों को निर्धारित समय से पहले केंद्र पहुंचना, उचित पहचान पत्र, नवीनतम फोटो और पारदर्शी बॉल पैन लाना अनिवार्य है, साथ ही सख्त ड्रेस कोड का पालन करना होगा। किसी भी अनुचित साधन के प्रयोग पर कड़ी कानूनी कार्रवाई की जाएगी।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1748406275.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1748406275.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-forest-guard-direct-recruitment-exa",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Forest Guard Direct Recruitment Examination-2026",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T06:48:00.660133Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड द्वारा वनपाल सीधी भर्ती परीक्षा-2026 का आयोजन 28 जून 2026 (रविवार) को प्रातः 11.00 बजे से दोपहर 01.00 बजे तक किया जाएगा। परीक्षार्थियों को अपनी पात्रता सुनिश्चित करनी होगी और पहचान पत्र में 3 वर्ष से अधिक पुरानी फोटो को अपडेट कराना अनिवार्य होगा। परीक्षा में प्रत्येक प्रश्न के पांच विकल्प होंगे, जिनमें से एक को नीले बॉल पॉइन्ट पेन से गहरा करना होगा; यदि उत्तर नहीं देना हो तो 'E' विकल्प को गहरा करना होगा, अन्यथा नकारात्मक अंकन होगा। प्रोविजनल ई-प्रवेश पत्र बोर्ड की वेबसाइट पर यथासमय जारी किए जाएंगे, डाक द्वारा कोई प्रवेश पत्र नहीं भेजा जाएगा। अभ्यर्थियों को सोशल मीडिया पर फैल रही भ्रामक खबरों से सावधान रहने और केवल बोर्ड की आधिकारिक वेबसाइट एवं प्रतिष्ठित समाचार पत्रों से प्राप्त जानकारी पर ही विश्वास करने की सलाह दी गई है।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/news_item/1779881379.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/news_item/1779881379.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-forester-direct-recruitment-2026",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Forester Direct Recruitment - 2026",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T06:49:16.360008Z",
+        "summary": "यह विज्ञप्ति राजस्थान कर्मचारी चयन बोर्ड (RSSB) द्वारा वनपाल (Forester) सीधी भर्ती-2026 से संबंधित है। बोर्ड ने विज्ञापन संख्या 01/2026 के तहत ऑनलाइन आवेदन आमंत्रित किए थे। ऐसे अभ्यर्थी जो निर्धारित शैक्षणिक योग्यता नहीं रखते थे या परीक्षा में शामिल नहीं होना चाहते थे, उन्हें 14.05.2026 से 16.05.2026 तक ऑनलाइन आवेदन वापस लेने का अवसर दिया गया था। कुल 5739 अभ्यर्थियों ने अपने आवेदन पत्र वापस ले लिए हैं। इन आवेदन पत्रों को निरस्त कर दिया गया है और उन्हें भर्ती परीक्षा की समस्त प्रक्रिया से बाहर कर दिया गया है। इस विज्ञप्ति में परीक्षा की तिथियों या परीक्षा केंद्रों के बारे में कोई जानकारी उपलब्ध नहीं है।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/news_item/1779344530.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/news_item/1779344530.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-information-assistant-direct-recrui",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Information Assistant Direct Recruitment Exam 2023",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:57:44.123661Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड द्वारा सूचना सहायक सीधी भर्ती परीक्षा 2023 का आयोजन 21 जनवरी 2024 को प्रातः 10:00 बजे से दोपहर 01:00 बजे तक किया जाएगा। परीक्षार्थी अपने प्रोविजनल ई-प्रवेश पत्र 14 जनवरी 2024 को शाम 07:00 बजे से बोर्ड की वेबसाइट www.rsmssb.rajasthan.gov.in से डाउनलोड कर सकते हैं। परीक्षा केंद्र पर डेढ़ घंटे पूर्व पहुंचना अनिवार्य है, और एक घंटे पहले प्रवेश द्वार बंद कर दिया जाएगा। परीक्षार्थियों को मूल फोटो पहचान पत्र, नवीनतम रंगीन फोटो और पारदर्शी बॉल पेन साथ लाना होगा, जबकि घड़ी, मोबाइल फोन जैसे इलेक्ट्रॉनिक गैजेट्स और कुछ विशेष ड्रेस कोड वस्तुएं प्रतिबंधित हैं। अनुचित साधनों के प्रयोग पर कठोर कानूनी कार्यवाही की जाएगी। नवीनतम अपडेट्स के लिए बोर्ड की वेबसाइट नियमित रूप से देखें।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1705243081.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1705243081.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-junior-accountant-and-tehsil-revenu",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Junior Accountant and Tehsil Revenue Accountant Combined Direct Recruitment Examination-2023",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:54:08.553094Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड द्वारा कनिष्ठ लेखाकार एवं तहसील राजस्व लेखाकार संयुक्त सीधी भर्ती परीक्षा-2023 का आयोजन 11 फरवरी 2024 (रविवार) को दो पारियों में किया जाएगा। पहली पारी प्रातः 10:00 बजे से अपरान्ह 12.30 बजे तक और दूसरी पारी अपरान्ह 03.00 बजे से 05.30 बजे तक होगी। परीक्षार्थी अपने ई-प्रवेश पत्र 05 फरवरी 2024 को शाम 6 बजे से डाउनलोड कर सकते हैं। परीक्षा केंद्र पर प्रवेश के लिए 1.5 घंटे पहले पहुंचना अनिवार्य है और गेट 1 घंटे पहले बंद हो जाएंगे। उम्मीदवारों को प्रवेश पत्र, मूल फोटो आईडी, नवीनतम फोटो और पारदर्शी नीला बॉल पेन लाना होगा, जबकि घड़ी, मोबाइल, आभूषण और अन्य इलेक्ट्रॉनिक गैजेट्स वर्जित हैं।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1707133187.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1707133187.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-ldc-grade-ii-junior-assistant-combi",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "LDC Grade II / Junior Assistant Combined Direct Recruitment – 2026",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:50:25.064937Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड (RSSB) द्वारा लिपिक ग्रेड-।।/कनिष्ठ सहायक संयुक्त सीधी भर्ती–2026 की परीक्षा 05 जुलाई 2026 को आयोजित की जानी प्रस्तावित है। यह परीक्षा राजस्थान के 38 जिलों में करवाई जाएगी, जिसकी विस्तृत सूची परिशिष्ट-01 में संलग्न होगी। अभ्यर्थी जो निर्धारित शैक्षणिक योग्यता नहीं रखते या परीक्षा में शामिल नहीं होना चाहते, वे अपने ऑनलाइन आवेदन को 28 मई 2026 से 30 मई 2026 तक SSO पोर्टल के माध्यम से प्रत्याहरित (Withdraw) कर सकते हैं। अभ्यर्थियों को सलाह दी जाती है कि वे सावधानीपूर्वक आवेदन वापस लें, क्योंकि एक बार प्रत्याहरित आवेदन दोबारा स्वीकार नहीं किए जाएंगे। आवेदन संशोधन के लिए अंतिम अवसर 09 जुलाई 2026 से 15 जुलाई 2026 तक परीक्षा के बाद प्रदान किया जाएगा।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/news_item/1779879386.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/news_item/1779879386.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-multiple-recruitment-exams-2023-gnm",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Multiple Recruitment Exams 2023 (GNM, ANM, Agriculture Supervisor)",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:57:16.844845Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड (RSSB) ने संविदा नर्स (GNM), संविदा महिला स्वास्थ्य कार्यकर्ता (ANM) और कृषि पर्यवेक्षक सीधी भर्ती परीक्षा 2023 की तिथियां घोषित कर दी हैं। परीक्षाएं 03 और 04 फरवरी 2024 को विभिन्न पालियों में आयोजित की जाएंगी। ई-प्रवेश पत्र 25.01.2024 से डाउनलोड के लिए उपलब्ध होंगे। परीक्षार्थियों को परीक्षा केंद्र पर 1.5 घंटे पहले पहुंचना होगा, क्योंकि प्रवेश परीक्षा शुरू होने से 1 घंटे पूर्व बंद हो जाएगा। पहचान के लिए मूल फोटो आईडी (आधार कार्ड) और नवीनतम रंगीन फोटो साथ लाना अनिवार्य है। मोबाइल फोन, घड़ियों और गहनों जैसे कई सामानों पर प्रतिबंध रहेगा, और सख्त ड्रेस कोड का पालन करना होगा।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1706183249.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1706183249.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-patwar-direct-recruitment-2021",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Patwar Direct Recruitment 2021",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:58:58.350982Z",
+        "summary": "यह प्रेस विज्ञप्ति पटवार भर्ती परीक्षा 2021 से संबंधित है, जिसकी परीक्षा 24 अक्टूबर 2021 को द्वितीय पारी में आयोजित होगी। उन अभ्यर्थियों के लिए महत्वपूर्ण सूचना है जिन्होंने 14 अक्टूबर 2021 को प्रवेश पत्र डाउनलोड किया था, क्योंकि उनके कुछ परीक्षा केंद्रों में संशोधन किया गया है। अभ्यर्थियों को सलाह दी जाती है कि वे अपना नया प्रवेश पत्र ऑनलाइन जांच लें और नवीन जारी प्रवेश पत्र को ही मान्य मानते हुए परीक्षा केंद्र पर उपस्थित हों। पूर्व के प्रवेश पत्र निरस्त कर दिए गए हैं। संशोधित परीक्षा केंद्रों की कोड संख्या और नाम की सूची बोर्ड की वेबसाइट पर उपलब्ध है और संलग्न भी है। सभी संबंधित अभ्यर्थियों को ईमेल और एसएमएस के माध्यम से भी सूचित किया गया है।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1666005529.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1666005529.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-patwar-direct-recruitment-exam-2021",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Patwar Direct Recruitment Exam 2021",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:59:24.070619Z",
+        "summary": "यह विज्ञप्ति राजस्थान कर्मचारी चयन बोर्ड द्वारा पटवार सीधी भर्ती परीक्षा 2021 के संबंध में है। परीक्षा 23 अक्टूबर 2021 (शनिवार) और 24 अक्टूबर 2021 (रविवार) को चार चरणों में आयोजित की जाएगी, जिसमें सुबह और दोपहर की शिफ्टें होंगी। परीक्षार्थी 14 अक्टूबर 2021 से अपनी ई-प्रवेश पत्र बोर्ड की वेबसाइट www.rsmssb.rajasthan.gov.in से डाउनलोड कर सकते हैं। अभ्यर्थियों को परीक्षा केंद्र पर 1.5 घंटे पहले पहुंचना होगा, मास्क पहनना और कोविड-19 दिशानिर्देशों का पालन करना अनिवार्य है। उन्हें अपना ई-प्रवेश पत्र, मूल फोटो पहचान पत्र, एक नवीनतम रंगीन फोटो और पारदर्शी बॉल पेन साथ लाना होगा। नकल और अनुचित सामग्री से बचें तथा निर्धारित ड्रेस कोड का पालन करें।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1634717600.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1634717600.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-stenographer-combined-direct-recrui",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Stenographer Combined Direct Recruitment Examination-2018 Phase-II (English / Hindi Shorthand Test)",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T12:59:43.302484Z",
+        "summary": "यह विज्ञप्ति राजस्थान कर्मचारी चयन बोर्ड द्वारा शीघ्रलिपिक संयुक्त सीधी भर्ती परीक्षा-2018 के द्वितीय चरण के संबंध में जारी की गई है। 'अंग्रेजी / हिंदी आशुलिपि परीक्षण' दिनांक 29.10.2021 से 31.10.2021 तक ऑनलाइन आयोजित किया जाएगा। परीक्षार्थियों को सलाह दी जाती है कि वे बोर्ड की वेबसाइट पर उपलब्ध विस्तृत दिशा-निर्देशों और मॉक टेस्ट का उपयोग करें। परीक्षा के लिए कंप्यूटर बोर्ड द्वारा उपलब्ध कराया जाएगा, जिसके लिए अभ्यर्थियों को श्रेणीवार शुल्क (₹450/-, ₹350/-, ₹250/-) दिनांक 22.10.2021 तक ऑनलाइन जमा करना होगा। शुल्क जमा न करने पर ई-प्रवेश पत्र डाउनलोड नहीं किया जा सकेगा।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1638342461.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1638342461.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-exam-surveyor-and-mining-foreman-grade-i",
+      "postType": "exam_schedule",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Surveyor and Mining Foreman (Grade-II) Direct Recruitment Exam 2024",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "exam_schedule",
+        "publishedDate": "2026-06-07T07:03:32.837323Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड द्वारा सर्वेयर एवं खनि कार्यदेशक (श्रेणी-द्वितीय) सीधी भर्ती-2024 की परीक्षा 23 फरवरी 2025 को आयोजित की जाएगी। खनि कार्यदेशक परीक्षा सुबह 10:00 बजे से दोपहर 12:30 बजे तक और सर्वेयर परीक्षा दोपहर 3:30 बजे से शाम 6:00 बजे तक होगी। अभ्यर्थी अपने ई-प्रवेश पत्र 19 फरवरी 2025 से SSO ID या बोर्ड की वेबसाइट से डाउनलोड कर सकते हैं, जबकि आवंटित जिले की सूचना 17 फरवरी 2025 को उपलब्ध होगी। परीक्षार्थियों को परीक्षा केंद्र पर 2 घंटे पहले पहुंचना अनिवार्य है, और प्रवेश परीक्षा शुरू होने से 1 घंटे पहले बंद हो जाएगा। परीक्षा में प्रोविजनल ई-प्रवेश पत्र, मूल फोटो पहचान पत्र, नवीनतम फोटो और केवल नीले पारदर्शी बॉल पेन साथ लाना आवश्यक है, साथ ही सख्त ड्रेस कोड का पालन करना होगा।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1739788150.pdf",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/admitcard_item/1739788150.pdf"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-agriculture-supervisor",
+      "postType": "recruitment",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Agriculture Supervisor",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "recruitment",
+        "publishedDate": "2026-06-07T06:57:26.027665Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड, जयपुर ने कृषि विभाग में कृषि पर्यवेक्षक के कुल 1100 पदों पर सीधी भर्ती के लिए विज्ञापन जारी किया है। इन पदों के लिए ऑनलाइन आवेदन 13 जनवरी 2026 से शुरू होकर 11 फरवरी 2026 को समाप्त होंगे। आवेदक की न्यूनतम आयु 18 वर्ष और अधिकतम 40 वर्ष होनी चाहिए, जिसमें आरक्षित श्रेणियों को नियमानुसार छूट मिलेगी। शैक्षणिक योग्यता कृषि में बीएससी ऑनर्स या 10+2 कृषि विषय के साथ सीनियर सेकेंडरी है। सामान्य वर्ग के लिए आवेदन शुल्क ₹600 और आरक्षित वर्गों के लिए ₹400 है। चयन प्रक्रिया में 18 अप्रैल 2026 को होने वाली ऑफलाइन परीक्षा और दस्तावेज सत्यापन शामिल है। इच्छुक और योग्य अभ्यर्थी विस्तृत विज्ञापन पढ़कर एसएसओ पोर्टल के माध्यम से आवेदन कर सकते हैं।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1767702152.pdf",
+        "totalPosts": "1100",
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1767702152.pdf",
+        "importantLinks.applyOnline": "http://sso.rajasthan.gov.in",
+        "importantDates.startDate": "13-01-2026",
+        "importantDates.lastDate": "11-02-2026",
+        "importantDates.examDate": "18-04-2026"
+      }
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-supervisor-female-direct-recruitmen",
+      "postType": "recruitment",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Supervisor (Female) Direct Recruitment-2026",
+        "sourceLabel": "rssb.rajasthan.gov.in",
+        "postType": "recruitment",
+        "publishedDate": "2026-06-07T06:58:04.399883Z",
+        "summary": "राजस्थान कर्मचारी चयन बोर्ड, जयपुर द्वारा समेकित बाल विकास सेवाऐं (महिला एवं बाल विकास विभाग) राजस्थान में पर्यवेक्षक (महिला) के 72 पदों पर सीधी भर्ती के लिए विस्तृत विज्ञापन जारी किया गया है। इन पदों के लिए वे महिला अभ्यर्थी आवेदन कर सकती हैं जिन्होंने समान पात्रता परीक्षा (स्नातक स्तर)-2024 उत्तीर्ण की है, स्नातक की डिग्री धारक हैं, और कंप्यूटर शिक्षा में निर्धारित योग्यता रखती हैं। आवेदन शुल्क सामान्य वर्ग के लिए ₹600 तथा अन्य आरक्षित श्रेणियों के लिए ₹400 निर्धारित है। अभ्यर्थी 07 जनवरी 2026 से 05 फरवरी 2026 तक ऑनलाइन आवेदन कर सकते हैं। परीक्षा की संभावित तिथि 18 जून 2026 है, जो ओएमआर आधारित होगी।",
+        "officialPdfUrl": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1767701401.pdf",
+        "totalPosts": 72,
+        "importantLinks.officialNotificationPdf": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1767701401.pdf",
+        "importantLinks.applyOnline": "http://sso.rajasthan.gov.in",
+        "importantDates.startDate": "07-01-2026",
+        "importantDates.lastDate": "05-02-2026",
+        "importantDates.examDate": "18-06-2026"
+      }
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-cor-scholarship-scheme-2606071828",
+      "postType": "correction",
+      "detectionBasis": "postType/notice_type",
+      "merge": true,
+      "updateFields": {
+        "title": "Scholarship Scheme",
+        "sourceLabel": "sje.rajasthan.gov.in",
+        "postType": "correction",
+        "publishedDate": "2026-06-07T12:58:08.105182Z",
+        "summary": "यह स्व-प्रमाणित शपथ पत्र छात्रवृत्ति आवेदन हेतु विद्यार्थी के पिता/पति/संरक्षक द्वारा प्रस्तुत किया जाता है। इसका मुख्य उद्देश्य जन आधार कार्ड या छात्रवृत्ति आवेदन पत्र में दर्ज पारिवारिक आय को सही करना या '0' (शून्य) आय के सही होने की पुष्टि करना है। शपथकर्ता घोषणा करता है कि दी गई सभी जानकारी उसकी निजी जानकारी में सही और असत्य नहीं है। गलत या झूठी जानकारी देने पर भारतीय दण्ड संहिता के तहत कानूनी कार्यवाही और कारावास का प्रावधान है।",
+        "officialPdfUrl": "https://sje.rajasthan.gov.in/siteadmin/Uploads/202603171733023138.pdf",
+        "importantLinks.officialNotificationPdf": "https://sje.rajasthan.gov.in/siteadmin/Uploads/202603171733023138.pdf"
+      }
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-gen-pm-young-achievers-scholarship-2606231223",
+      "postType": "scholarship",
+      "detectionBasis": "source collection",
+      "merge": true,
+      "updateFields": {
+        "title": "PM YOUNG ACHIEVERS SCHOLARSHIP AWARD SCHEME FOR VIBRANT INDIA FOR OBCS AND OTHERS (PM-YASASVI)",
+        "sourceLabel": "sje.rajasthan.gov.in",
+        "postType": "scholarship",
+        "publishedDate": "2026-06-23T12:23:50.266183Z",
+        "summary": "यह भारत सरकार के सामाजिक न्याय और अधिकारिता मंत्रालय द्वारा पीएम युवा अचीवर्स स्कॉलरशिप अवार्ड स्कीम (पीएम-यशस्वी) के विस्तृत दिशानिर्देश हैं। यह योजना ओबीसी, ईबीसी और डीएनटी श्रेणियों के छात्रों को प्री-मैट्रिक और पोस्ट-मैट्रिक छात्रवृत्तियां, टॉप क्लास स्कूल/कॉलेज शिक्षा और छात्रावास सुविधाएं प्रदान करती है। छात्रवृत्ति के लिए पारिवारिक आय की ऊपरी सीमा ₹2,50,000 प्रति वर्ष है। सभी आवेदन ऑनलाइन पोर्टल के माध्यम से किए जाएंगे और छात्रवृत्ति का भुगतान सीधे डीबीटी द्वारा छात्रों/अभिभावकों के खातों में होगा। योजना में लड़कियों और दिव्यांग छात्रों के लिए विशेष आरक्षण है।",
+        "officialPdfUrl": "https://sje.rajasthan.gov.in/siteadmin/Uploads/202402081254332691.pdf",
+        "importantLinks.officialNotificationPdf": "https://sje.rajasthan.gov.in/siteadmin/Uploads/202402081254332691.pdf"
+      }
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-gen-post-matric-scholarship-centra-2606231224",
+      "postType": "scholarship",
+      "detectionBasis": "source collection",
+      "merge": true,
+      "updateFields": {
+        "title": "POST MATRIC SCHOLARSHIP (CENTRALLY SPONSORED SCHEME)",
+        "sourceLabel": "sje.rajasthan.gov.in",
+        "postType": "scholarship",
+        "publishedDate": "2026-06-23T12:24:28.565153Z",
+        "summary": "यह सूचना जनजातीय कार्य मंत्रालय द्वारा अनुसूचित जनजाति के छात्रों के लिए पोस्ट मैट्रिक छात्रवृत्ति योजना के नियमों के बारे में है, जो 01-04-2022 से लागू है। इस योजना के तहत, 2.50 लाख रुपये प्रति वर्ष से कम पारिवारिक आय वाले छात्र भारत में कक्षा XI से स्नातकोत्तर पाठ्यक्रमों तक की पढ़ाई के लिए छात्रवृत्ति प्राप्त कर सकते हैं। छात्रों को राज्य या राष्ट्रीय छात्रवृत्ति पोर्टल के माध्यम से ऑनलाइन आवेदन करना होगा, और यह सुनिश्चित करना होगा कि उनका बैंक खाता आधार से लिंक हो। आवेदन के लिए सुझाही गई अंतिम तिथि 30 सितंबर है।",
+        "officialPdfUrl": "https://sje.rajasthan.gov.in/siteadmin/Uploads/202402081254549787.pdf",
+        "importantLinks.officialNotificationPdf": "https://sje.rajasthan.gov.in/siteadmin/Uploads/202402081254549787.pdf"
+      }
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-gen-post-matric-scholarship-scheme-2606071829",
+      "postType": "scholarship",
+      "detectionBasis": "source collection",
+      "merge": true,
+      "updateFields": {
+        "title": "Post-Matric Scholarship Scheme",
+        "sourceLabel": "sjmsnew.rajasthan.gov.in",
+        "postType": "scholarship",
+        "publishedDate": "2026-06-07T12:59:19.690112Z",
+        "summary": "राजस्थान सरकार के सामाजिक न्याय एवं अधिकारिता विभाग ने उत्तर मैट्रिक छात्रवृत्ति योजना 2024 के लिए नई मानक संचालन प्रक्रिया (SOP) जारी की है, जो 2024-25 सत्र से पूरे राज्य में प्रभावी होगी। विद्यार्थी अब आधार-आधारित बायोमेट्रिक प्रमाणीकरण के साथ ऑनलाइन आवेदन कर सकेंगे। छात्रवृत्ति राशि सीधे आधार-लिंक्ड बैंक खातों में डीबीटी के माध्यम से हस्तांतरित की जाएगी, और लाभ के लिए 75% उपस्थिति अनिवार्य है। पात्र विद्यार्थी फ्री-शिप कार्ड के लिए भी आवेदन कर सकते हैं, जिससे उन्हें बिना शुल्क के प्रवेश मिल सकेगा।",
+        "officialPdfUrl": "https://sjmsnew.rajasthan.gov.in/Scholarship/Portal/Documents/c365ee94-86b6-41bb-a84b-8a2d151ee458.pdf",
+        "importantLinks.officialNotificationPdf": "https://sjmsnew.rajasthan.gov.in/Scholarship/Portal/Documents/c365ee94-86b6-41bb-a84b-8a2d151ee458.pdf"
+      }
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-gen-rajasthan-scholarship-schemes-2606071719",
+      "postType": "scholarship",
+      "detectionBasis": "source collection",
+      "merge": true,
+      "updateFields": {
+        "title": "Rajasthan Scholarship Schemes",
+        "sourceLabel": "sje.rajasthan.gov.in",
+        "postType": "scholarship",
+        "publishedDate": "2026-06-07T11:49:27.180047Z",
+        "summary": "यह राजस्थान सरकार के सामाजिक न्याय एवं अधिकारिता विभाग द्वारा जारी नागरिक अधिकार पत्र है। इसमें सामाजिक सुरक्षा, शैक्षणिक उत्थान, महिला एवं बाल कल्याण, विशेष योग्यजन कल्याण और आर्थिक उत्थान से संबंधित विभिन्न योजनाओं की विस्तृत जानकारी दी गई है। प्रत्येक योजना के लिए पात्रता मानदंड, नोडल अधिकारी और निस्तारण की समय-सीमा बताई गई है। इस पत्र का मुख्य उद्देश्य समाज के वंचित एवं कमजोर वर्गों को सामाजिक न्याय प्रदान कर सशक्त बनाना है।",
+        "officialPdfUrl": "https://sje.rajasthan.gov.in/siteadmin/Uploads/202406271148090737.pdf",
+        "importantLinks.officialNotificationPdf": "https://sje.rajasthan.gov.in/siteadmin/Uploads/202406271148090737.pdf"
+      }
+    }
+  ]
+}

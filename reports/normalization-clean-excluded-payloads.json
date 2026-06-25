@@ -1,0 +1,549 @@
+{
+  "mode": "read-only excluded payload set",
+  "payloads": [
+    {
+      "collection": "ssc_jobs",
+      "id": "rec-empanelment-of-language-experts",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "totalPosts",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.startDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.examDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "rec-junior-secretariat-assistant-lower-divis",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantDates.examDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "rec-senior-secretariat-assistant-upper-divis",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantDates.examDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "rec-stenographer-grade-c-d",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.startDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.lastDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.examDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "res-constable-executive-male-and-female-in-d",
+      "postType": "result",
+      "reasons": [
+        {
+          "field": "importantLinks.result",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "res-head-constable-assistant-wireless-operat",
+      "postType": "result",
+      "reasons": [
+        {
+          "field": "importantLinks.result",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "res-head-constable-ministerial-in-delhi-poli",
+      "postType": "result",
+      "reasons": [
+        {
+          "field": "importantLinks.result",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "res-stenographer-grade-c-d-examination-2025",
+      "postType": "result",
+      "reasons": [
+        {
+          "field": "importantLinks.result",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.resultDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "res-sub-inspector-hindi-translator",
+      "postType": "result",
+      "reasons": [
+        {
+          "field": "importantLinks.result",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-ak-common-eligibility-test-cet-senior-",
+      "postType": "answer_key",
+      "reasons": [
+        {
+          "field": "importantLinks.answerKey",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-ak-community-health-officer-contract-r",
+      "postType": "answer_key",
+      "reasons": [
+        {
+          "field": "importantLinks.answerKey",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-ak-computer-direct-recruitment-2023",
+      "postType": "answer_key",
+      "reasons": [
+        {
+          "field": "importantLinks.answerKey",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-ak-forest-guard-direct-recruitment-exa",
+      "postType": "answer_key",
+      "reasons": [
+        {
+          "field": "importantLinks.answerKey",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-ak-hostel-superintendent-grade-ii-dire",
+      "postType": "answer_key",
+      "reasons": [
+        {
+          "field": "importantLinks.answerKey",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-ak-stenographerprivate-secretary-grade",
+      "postType": "answer_key",
+      "reasons": [
+        {
+          "field": "importantLinks.answerKey",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-res-information-assistant-recruitment-e",
+      "postType": "result",
+      "reasons": [
+        {
+          "field": "importantLinks.result",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-class-iv-employee-direct-recruitmen",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "totalPosts",
+          "reason": "non_numeric_total"
+        },
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.startDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.lastDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.examDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-direct-recruitment-for-various-cont",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.startDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.lastDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.examDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-forester-direct-recruitment-2026",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantDates.examDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-laboratory-assistant-and-junior-lab",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.examDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-laboratory-assistant-junior-laborat",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantDates.examDate",
+          "reason": "non_date_value"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-ldc-grade-iijunior-assistant-combin",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantDates.examDate",
+          "reason": "non_date_value"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-librarian-grade-iii-direct-recruitm",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.startDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.lastDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.examDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-primary-school-teacher-generalsansk",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantDates.examDate",
+          "reason": "non_date_value"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-primary-school-teacher-level-1-dire",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.startDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.lastDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.examDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-senior-computer-instructor-and-basi",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantDates.examDate",
+          "reason": "non_date_value"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-teaching-associate-2026",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantDates.examDate",
+          "reason": "non_date_value"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-rec-upper-primary-school-teacher-sanskr",
+      "postType": "recruitment",
+      "reasons": [
+        {
+          "field": "importantDates.examDate",
+          "reason": "non_date_value"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-res-direct-recruitment-of-stenographer-",
+      "postType": "result",
+      "reasons": [
+        {
+          "field": "importantLinks.result",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.resultDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-res-stenographer-personal-assistant-gra",
+      "postType": "result",
+      "reasons": [
+        {
+          "field": "importantLinks.result",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.resultDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-res-stenographerpersonal-assistant-grad",
+      "postType": "result",
+      "reasons": [
+        {
+          "field": "importantLinks.result",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-apply-mukhyamantri-sarvajan-uchch-sh-2606071829",
+      "postType": "scholarship",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.startDate",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.lastDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-apply-various-scholarship-schemes-in-2606071722",
+      "postType": "scholarship",
+      "reasons": [
+        {
+          "field": "importantDates.startDate",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-ext-post-matric-scholarship-scheme-2606071719",
+      "postType": "scholarship",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-ext-post-matric-scholarship-scheme-2606071721",
+      "postType": "scholarship",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-ext-post-matric-scholarship-scheme-2606071827",
+      "postType": "scholarship",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-ext-post-matric-scholarship-scheme-2606210921",
+      "postType": "scholarship",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-ext-post-matric-scholarship-scheme-2606210922",
+      "postType": "scholarship",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-ext-scholarship-scheme-2606221813",
+      "postType": "scholarship",
+      "reasons": [
+        {
+          "field": "importantLinks.applyOnline",
+          "reason": "placeholder"
+        }
+      ]
+    },
+    {
+      "collection": "scholarship_notices",
+      "id": "sch-res-post-matric-scholarship-scheme-2606221813",
+      "postType": "result",
+      "reasons": [
+        {
+          "field": "importantLinks.result",
+          "reason": "placeholder"
+        },
+        {
+          "field": "importantDates.resultDate",
+          "reason": "placeholder"
+        }
+      ]
+    }
+  ]
+}

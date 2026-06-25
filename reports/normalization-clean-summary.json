@@ -1,0 +1,94 @@
+{
+  "mode": "read-only cleaned normalization payload review",
+  "totalOriginalPayloads": 77,
+  "validPayloads": 37,
+  "excludedPayloads": 40,
+  "exclusionsByReason": {
+    "placeholder": 59,
+    "non_numeric_total": 1,
+    "non_date_value": 6
+  },
+  "exclusionsByField": {
+    "totalPosts": 2,
+    "importantLinks.applyOnline": 14,
+    "importantDates.startDate": 8,
+    "importantDates.examDate": 16,
+    "importantDates.lastDate": 6,
+    "importantLinks.result": 10,
+    "importantDates.resultDate": 4,
+    "importantLinks.answerKey": 6
+  },
+  "validPayloadsByCollection": {
+    "ssc_jobs": 3,
+    "rsmssb_jobs": 4,
+    "rssb_jobs": 25,
+    "scholarship_notices": 5
+  },
+  "validPayloadsByPostType": {
+    "answer_key": 2,
+    "exam_schedule": 21,
+    "admit_card": 1,
+    "correction": 7,
+    "recruitment": 2,
+    "scholarship": 4
+  },
+  "firstTenValidDocumentIds": [
+    {
+      "collection": "ssc_jobs",
+      "id": "ak-constable-driver-male-in-delhi-police-ex",
+      "postType": "answer_key"
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "exam-grade-c-stenographers-limited-department",
+      "postType": "exam_schedule"
+    },
+    {
+      "collection": "ssc_jobs",
+      "id": "exam-sasraicpd-i-ii-iii-examination-01-of-202",
+      "postType": "exam_schedule"
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-ak-agriculture-supervisor-direct-recru",
+      "postType": "answer_key"
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-exam-common-eligibility-test-graduation-",
+      "postType": "exam_schedule"
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-exam-community-health-officer-contract-r",
+      "postType": "exam_schedule"
+    },
+    {
+      "collection": "rsmssb_jobs",
+      "id": "rsmssb-exam-jr-instructor-direct-recruitment-ex",
+      "postType": "exam_schedule"
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-ac-agriculture-supervisor-direct-recru",
+      "postType": "admit_card"
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-cor-clerk-grade-iijunior-assistant-comb",
+      "postType": "correction"
+    },
+    {
+      "collection": "rssb_jobs",
+      "id": "rssb-cor-jamadar-grade-ii-recruitment",
+      "postType": "correction"
+    }
+  ],
+  "alertsIncluded": false,
+  "payloadsModified": false,
+  "authorizedWritePlan": {
+    "publicClientWrite": "not permitted; prior PATCH returned 403",
+    "recommendedOption": "Local Firebase Admin SDK runner using already configured secure credentials",
+    "alternativeOption": "Temporary super-admin-only callable Cloud Function, disabled or removed after migration"
+  }
+}
